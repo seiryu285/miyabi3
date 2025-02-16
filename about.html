@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MIYABI</title>
+  <style>
+    @font-face {
+      font-family: 'YuMincho';
+      src: url('/api/placeholder/font') format('opentype');
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    :root {
+      --nav-height: 4rem;
+      --content-padding: 2rem;
+      --title-size: 4.5rem;
+      --desc-size: 1.2rem;
+      --nav-font-size: 0.9rem;
+    }
+    
+    body {
+      font-family: "YuMincho", "游明朝", "Yu Mincho", serif;
+      background-color: #fcfcfc;
+      color: #000;
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    #canvas-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: 1;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      z-index: 3;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 var(--content-padding);
+      gap: 2rem;
+      mix-blend-mode: difference;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
+    }
+
+    .nav a, .nav button {
+      color: #fff;
+      text-decoration: none;
+      font-size: var(--nav-font-size);
+      letter-spacing: 0.2em;
+      background: none;
+      border: none;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 0.5rem;
+      opacity: 0.7;
+      transition: all 0.5s ease;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .nav a::after, .nav button::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 1px;
+      background: #fff;
+      transition: all 0.5s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav a:hover::after, .nav button:hover::after {
+      width: 100%;
+    }
+
+    .nav a:hover, .nav button:hover, .nav .active {
+      opacity: 1;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      color: #fff;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 4;
+    }
+
+    .content {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+      width: 100%;
+      max-width: 800px;
+      padding: var(--content-padding);
+    }
+
+    .title {
+      font-size: var(--title-size);
+      font-weight: normal;
+      letter-spacing: 0.4em;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .description {
+      font-size: var(--desc-size);
+      line-height: 2.4;
+      letter-spacing: 0.25em;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      :root {
+        --nav-height: 3.5rem;
+        --content-padding: 1.5rem;
+        --title-size: 2.5rem;
+        --desc-size: 1rem;
+        --nav-font-size: 0.8rem;
+      }
+
+      .nav {
+        justify-content: center;
+        background: rgba(0,0,0,0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .nav.open {
+        transform: translateY(0);
+      }
+
+      .mobile-menu-btn {
+        display: block;
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+      }
+
+      .title {
+        margin-top: var(--nav-height);
+        letter-spacing: 0.3em;
+      }
+
+      .description br {
+        display: none;
+      }
+    }
+
+    /* For smaller phones */
+    @media (max-width: 380px) {
+      :root {
+        --title-size: 2rem;
+        --desc-size: 0.9rem;
+      }
+    }
+
+    /* For landscape orientation */
+    @media (max-height: 600px) and (orientation: landscape) {
+      .content {
+        padding-top: var(--nav-height);
+      }
+
+      .title {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    /* High-DPI screens */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .nav {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <div id="canvas-container"></div>
+  
+  <button class="mobile-menu-btn">☰</button>
+  
+  <nav class="nav">
+    <a href="about.html">ABOUT</a>
+    <a href="gallery.html">GALLERY</a>
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="ja">JP</button>
+  </nav>
+
+  <div class="content">
+    <h1 class="title">MIYABI</h1>
+    <p class="description" 
+       data-en="MIYABI: Where the bold energy of street aesthetics fuses with the refined grace of tradition, forging the balanced spirit that redefines modern 'wa'."
+       data-ja="MIYABI：ストリートのエネルギーと和の伝統美が融合し、相反する二つのエッセンスの中庸が新たな『和』の本質を創り出す.">
+      MIYABI: Where the bold energy of street aesthetics fuses with the refined grace of tradition, forging the balanced spirit that redefines modern 'wa'.
+    </p>
+  </div>
+
+  <script>
+    // Mobile menu handling
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('.nav');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      mobileMenuBtn.textContent = nav.classList.contains('open') ? '×' : '☰';
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        nav.classList.remove('open');
+        mobileMenuBtn.textContent = '☰';
+      }
+    });
+
+    // Handle touch events for sphere interaction
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        const touchX = e.touches[0].clientX;
+        const touchY = e.touches[0].clientY;
+        
+        const deltaX = (touchX - touchStartX) / window.innerWidth;
+        const deltaY = (touchY - touchStartY) / window.innerHeight;
+        
+        targetRotationX = deltaY * Math.PI * 0.5;
+        targetRotationY = deltaX * Math.PI * 0.5;
+        
+        e.preventDefault();
+      }
+    });
+
+    // Language switching
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const description = document.querySelector('.description');
+
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const lang = btn.dataset.lang;
+        const text = description.dataset[lang];
+        description.innerHTML = text;
+      });
+    });
+
+    // Three.js Scene Setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xfcfcfc, 1);
+    document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+    const vertexShader = `
+      varying vec2 vUv;
+      varying vec3 vPosition;
+      varying vec3 vNormal;
+      varying vec3 vViewPosition;
+      
+      void main() {
+        vUv = uv;
+        vPosition = position;
+        vNormal = normalize(normalMatrix * normal);
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        vViewPosition = -mvPosition.xyz;
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    `;
+
+    const fragmentShader = `
+      uniform float time;
+      varying vec2 vUv;
+      varying vec3 vPosition;
+      varying vec3 vNormal;
+      varying vec3 vViewPosition;
+
+      vec2 hash22(vec2 p) {
+        vec3 p3 = fract(vec3(p.xyx) * vec3(.1031, .1030, .0973));
+        p3 += dot(p3, p3.yzx+33.33);
+        return fract((p3.xx+p3.yz)*p3.zy);
+      }
+
+      vec2 curl(vec2 p) {
+        const float h = 0.001;
+        float dx = hash22(p + vec2(h, 0.0)).x - hash22(p - vec2(h, 0.0)).x;
+        float dy = hash22(p + vec2(0.0, h)).x - hash22(p - vec2(0.0, h)).x;
+        return vec2(dy, -dx) / (2.0 * h);
+      }
+
+      float noise(vec2 p) {
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+        
+        vec2 u = f * f * (3.0 - 2.0 * f);
+        
+        float a = dot(hash22(i + vec2(0.0, 0.0)), f - vec2(0.0, 0.0));
+        float b = dot(hash22(i + vec2(1.0, 0.0)), f - vec2(1.0, 0.0));
+        float c = dot(hash22(i + vec2(0.0, 1.0)), f - vec2(0.0, 1.0));
+        float d = dot(hash22(i + vec2(1.0, 1.0)), f - vec2(1.0, 1.0));
+        
+        return mix(mix(a, b, u.x), mix(c, d, u.x), u.y) * 0.5 + 0.5;
+      }
+
+      float fluidEffect(vec2 p) {
+        float n = 0.0;
+        float amplitude = 1.0;
+        float frequency = 1.0;
+        vec2 shift = vec2(0.0);
+        
+        for(int i = 0; i < 4; i++) {
+          vec2 curl_shift = curl(p * frequency + time * 0.1) * 0.3;
+          shift += curl_shift;
+          n += noise(p * frequency + shift) * amplitude;
+          amplitude *= 0.5;
+          frequency *= 2.0;
+          p = p * 1.4 + vec2(n * 0.2);
+        }
+        
+        return n;
+      }
+
+      void main() {
+        vec2 p = vPosition.xy * 2.0;
+        float fluid = fluidEffect(p + time * 0.05);
+        
+        vec3 viewDir = normalize(vViewPosition);
+        float fresnel = pow(1.0 - abs(dot(vNormal, viewDir)), 3.0);
+        
+        float pattern = mix(fluid, fresnel, 0.3);
+        pattern = smoothstep(0.2, 0.8, pattern);
+        
+        vec3 color1 = vec3(0.98, 0.98, 0.98);
+        vec3 color2 = vec3(0.1, 0.1, 0.1);
+        vec3 color = mix(color2, color1, pattern);
+        
+        float edge = smoothstep(0.4, 0.6, pattern);
+        color = mix(color, color1, edge * fresnel * 0.5);
+        
+        gl_FragColor = vec4(color, 1.0);
+      }
+    `;
+
+    const sphereGeometry = new THREE.SphereGeometry(2, 128, 128);
+    const sphereMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        time: { value: 0 }
+      },
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader
+    });
+    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    scene.add(sphere);
+
+    camera.position.z = 5;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetRotationX = 0;
+    let targetRotationY = 0;
+    let currentRotationX = 0;
+    let currentRotationY = 0;
+
+    document.addEventListener('mousemove', (event) => {
+      mouseX = (event.clientX - window.innerWidth / 2) / window.innerWidth;
+      mouseY = (event.clientY - window.innerHeight / 2) / window.innerHeight;
+      
+      targetRotationX = mouseY * Math.PI * 0.5;
+      targetRotationY = mouseX * Math.PI * 0.5;
+    });
+
+    function animate(time) {
+      requestAnimationFrame(animate);
+
+      currentRotationX += (targetRotationX - currentRotationX) * 0.03;
+      currentRotationY += (targetRotationY - currentRotationY) * 0.03;
+      
+      sphere.rotation.x = currentRotationX;
+      sphere.rotation.y = currentRotationY;
+      sphere.rotation.y += 0.001;
+
+      sphereMaterial.uniforms.time.value = time * 0.001;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
