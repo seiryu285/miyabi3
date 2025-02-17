@@ -9,26 +9,29 @@
     --accent-light: #FFF0F5; /* 薄桜 - Ususakura */
     --accent-dark: #B19693; /* 灰桜 - Haisakura */
     --modal-bg: #F6F5F4; /* 白練 - Shironeri */
+    --header-height: 64px;
     --futuristic-font: 'Rajdhani', sans-serif;
 }
 
-@font-face {
-    font-family: 'Futuristic';
-    src: url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
-}
-
-* {
+/* Modern Reset */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* Typography */
+@font-face {
+    font-family: 'Rajdhani';
+    src: url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
 }
 
 body {
     font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "HGS明朝E", serif;
     background: var(--background-color);
     color: var(--text-color);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
 /* Navigation */
@@ -44,7 +47,7 @@ body {
     left: 0;
     right: 0;
     z-index: 1000;
-    height: 64px;
+    height: var(--header-height);
 }
 
 .nav-logo {
@@ -67,7 +70,7 @@ body {
 /* Tab Navigation */
 .tab-navigation {
     position: fixed;
-    top: 64px;
+    top: var(--header-height);
     left: 0;
     right: 0;
     background: var(--background-color);
@@ -130,7 +133,7 @@ body {
     max-width: 2000px;
     margin: 0 auto;
     padding: 2rem;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - var(--header-height));
 }
 
 /* Sidebar */
@@ -649,6 +652,10 @@ header {
     background: var(--background-color);
     padding: 1rem 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
 header h1 {
@@ -668,10 +675,26 @@ header nav a {
     text-decoration: none;
     font-size: 1.1rem;
     transition: color 0.3s ease;
+    position: relative;
 }
 
 header nav a:hover {
     color: var(--accent-color);
+}
+
+header nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+header nav a:hover::after {
+    width: 100%;
 }
 
 /* Hero Section */
@@ -680,12 +703,14 @@ header nav a:hover {
     padding: 4rem 2rem;
     text-align: center;
     margin-bottom: 3rem;
+    border-radius: 8px;
 }
 
 .hero h2 {
     font-size: 3rem;
     color: var(--accent-dark);
     margin-bottom: 1rem;
+    animation: fadeIn 1s ease-out;
 }
 
 .hero p {
@@ -693,6 +718,7 @@ header nav a:hover {
     color: var(--text-secondary);
     max-width: 600px;
     margin: 0 auto;
+    animation: fadeIn 1.2s ease-out;
 }
 
 /* Featured Section */
@@ -844,6 +870,42 @@ footer {
     --text-color: #000000;
     --text-secondary: rgba(0, 0, 0, 0.6);
     --border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+    
+    header nav ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .hero {
+        padding: 2rem 1rem;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* モバイル最適化 */
