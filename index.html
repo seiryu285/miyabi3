@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Miyabi Gallery - Digital Art Collection">
+    <title>Miyabi Gallery - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="index.html">Miyabi Gallery</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="lang-toggle">
+                <button class="lang-btn" data-lang="ja">日本語</button>
+                <button class="lang-btn" data-lang="en">English</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Digital Art Collection</h2>
+                <p>Discover unique digital artworks inspired by Japanese culture</p>
+                <a href="gallery.html" class="cta-button">View Gallery</a>
+            </div>
+        </section>
+
+        <section class="featured-works">
+            <div class="container">
+                <h2>Featured Works</h2>
+                <div class="featured-grid">
+                    <!-- Featured items will be loaded by JavaScript -->
+                </div>
+                <div class="view-more">
+                    <a href="gallery.html" class="button">View All Works</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Miyabi Gallery. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Error Container -->
+    <div class="error-container"></div>
+
+    <!-- Scripts -->
+    <script src="script.js" defer></script>
+</body>
+</html>

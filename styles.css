@@ -1,117 +1,74 @@
-/* Modern CSS Reset */
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-/* Custom Properties */
+/* Base Styles */
 :root {
     --primary-color: #111;
     --background-color: #fff;
     --border-color: rgba(0, 0, 0, 0.1);
     --text-color: #111;
     --text-secondary: #666;
-    --accent-color: #FFB7C5;
-    --accent-light: #FFF0F5;
-    --accent-dark: #B19693;
-    --modal-bg: #F6F5F4;
-    --header-height: 64px;
-    --transition-speed: 0.3s;
-    --container-width: 1200px;
-    --font-family-base: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", serif;
-    --font-family-heading: 'Rajdhani', sans-serif;
+    --accent-color: #FFB7C5; /* 桜色 - Sakura */
+    --accent-light: #FFF0F5; /* 薄桜 - Ususakura */
+    --accent-dark: #B19693; /* 灰桜 - Haisakura */
+    --modal-bg: #F6F5F4; /* 白練 - Shironeri */
+    --futuristic-font: 'Rajdhani', sans-serif;
 }
 
-/* Base Styles */
-html {
-    font-size: 16px;
-    scroll-behavior: smooth;
+@font-face {
+    font-family: 'Futuristic';
+    src: url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: var(--font-family-base);
+    font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "HGS明朝E", serif;
     background: var(--background-color);
     color: var(--text-color);
-    line-height: 1.6;
-    overflow-x: hidden;
-    text-rendering: optimizeLegibility;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-family-heading);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-}
-
-/* Layout */
-.container {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0 1rem;
-    width: 100%;
-}
-
-/* Header */
-header {
+/* Navigation */
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    background: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background: var(--background-color);
-    padding: 1rem;
     z-index: 1000;
-    border-bottom: 1px solid var(--border-color);
-    transition: background var(--transition-speed) ease;
+    height: 64px;
 }
 
-header.scrolled {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Navigation */
-nav ul {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-}
-
-nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    transition: color var(--transition-speed) ease;
-    position: relative;
-}
-
-nav a:hover {
+.nav-logo {
+    font-size: 1.5rem;
     color: var(--accent-color);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    font-family: var(--futuristic-font);
+    font-size: 1.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
 }
 
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--accent-color);
-    transform: scaleX(0);
-    transition: transform var(--transition-speed) ease;
-}
-
-nav a:hover::after {
-    transform: scaleX(1);
+.nav-logo:hover {
+    color: var(--accent-dark);
 }
 
 /* Tab Navigation */
 .tab-navigation {
     position: fixed;
-    top: var(--header-height);
+    top: 64px;
     left: 0;
     right: 0;
     background: var(--background-color);
@@ -137,8 +94,8 @@ nav a:hover::after {
     cursor: pointer;
     position: relative;
     font-family: inherit;
-    transition: color var(--transition-speed) ease;
-    font-family: var(--font-family-heading);
+    transition: color 0.3s ease;
+    font-family: var(--futuristic-font);
     letter-spacing: 0.1em;
 }
 
@@ -151,7 +108,7 @@ nav a:hover::after {
     height: 2px;
     background: var(--accent-color);
     transform: scaleX(0);
-    transition: transform var(--transition-speed) ease;
+    transition: transform 0.3s ease;
 }
 
 .tab-btn:hover {
@@ -174,7 +131,7 @@ nav a:hover::after {
     max-width: 2000px;
     margin: 0 auto;
     padding: 2rem;
-    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100vh - 80px);
 }
 
 /* Sidebar */
@@ -213,7 +170,7 @@ nav a:hover::after {
     cursor: pointer;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
-    transition: background-color var(--transition-speed) ease;
+    transition: background-color 0.2s ease;
 }
 
 .clear-filters:hover {
@@ -250,7 +207,7 @@ nav a:hover::after {
     padding: 0.5rem;
     cursor: pointer;
     font-size: 0.875rem;
-    transition: background-color var(--transition-speed) ease;
+    transition: background-color 0.2s ease;
     border-radius: 4px;
 }
 
@@ -296,7 +253,7 @@ nav a:hover::after {
     border-radius: 8px;
     font-size: 0.875rem;
     background: none;
-    transition: border-color var(--transition-speed) ease;
+    transition: border-color 0.2s ease;
     font-family: inherit;
 }
 
@@ -347,7 +304,7 @@ nav a:hover::after {
     border-radius: 12px;
     overflow: hidden;
     background: var(--background-color);
-    transition: all var(--transition-speed) ease;
+    transition: all 0.3s ease;
     cursor: pointer;
 }
 
@@ -372,7 +329,7 @@ nav a:hover::after {
     color: #fff;
     opacity: 0;
     transform: translateY(10px);
-    transition: all var(--transition-speed) ease;
+    transition: all 0.3s ease;
 }
 
 .gallery-item:hover .gallery-item-info {
@@ -384,7 +341,7 @@ nav a:hover::after {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    font-family: var(--font-family-heading);
+    font-family: var(--futuristic-font);
     font-size: 0.875rem;
     color: #fff;
     background: rgba(0, 0, 0, 0.5);
@@ -407,7 +364,7 @@ nav a:hover::after {
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transition: all var(--transition-speed) ease;
+    transition: all 0.3s ease;
 }
 
 .nft-modal.active {
@@ -443,7 +400,7 @@ nav a:hover::after {
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
-    transition: background-color var(--transition-speed) ease;
+    transition: background-color 0.3s ease;
 }
 
 .modal-close:hover {
@@ -489,7 +446,7 @@ nav a:hover::after {
 }
 
 .modal-collection {
-    font-family: var(--font-family-heading);
+    font-family: var(--futuristic-font);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-secondary);
@@ -497,7 +454,7 @@ nav a:hover::after {
 }
 
 .modal-number {
-    font-family: var(--font-family-heading);
+    font-family: var(--futuristic-font);
     font-size: 1.25rem;
     letter-spacing: 0.1em;
     color: var(--text-color);
@@ -619,7 +576,7 @@ nav a:hover::after {
 }
 
 .modal-title {
-    font-family: var(--font-family-heading);
+    font-family: var(--futuristic-font);
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: var(--text-color);
@@ -644,7 +601,7 @@ nav a:hover::after {
     padding: 1rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
-    transition: transform var(--transition-speed) ease;
+    transition: transform 0.2s ease;
 }
 
 .trait-type {
@@ -686,109 +643,6 @@ nav a:hover::after {
     font-size: 0.875rem;
     color: var(--text-color);
     font-weight: 500;
-}
-
-/* Header Styles */
-header {
-    background: var(--background-color);
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-header h1 {
-    color: var(--accent-dark);
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-header nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-}
-
-header nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: color var(--transition-speed) ease;
-    position: relative;
-}
-
-header nav a:hover {
-    color: var(--accent-color);
-}
-
-header nav a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: var(--accent-color);
-    transition: width var(--transition-speed) ease;
-}
-
-header nav a:hover::after {
-    width: 100%;
-}
-
-/* Hero Section */
-.hero {
-    background: var(--accent-light);
-    padding: 4rem 2rem;
-    text-align: center;
-    margin-bottom: 3rem;
-    border-radius: 8px;
-}
-
-.hero h2 {
-    font-size: 3rem;
-    color: var(--accent-dark);
-    margin-bottom: 1rem;
-    animation: fadeIn 1s ease-out;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto;
-    animation: fadeIn 1.2s ease-out;
-}
-
-/* Featured Section */
-.featured {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.featured h2 {
-    text-align: center;
-    color: var(--text-color);
-    margin-bottom: 2rem;
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 1rem;
-}
-
-/* Footer */
-footer {
-    background: var(--background-color);
-    padding: 2rem;
-    text-align: center;
-    margin-top: 3rem;
-    border-top: 1px solid var(--border-color);
 }
 
 /* Mobile Menu */
@@ -889,7 +743,7 @@ footer {
     font-size: 0.875rem;
     letter-spacing: 0.05em;
     cursor: pointer;
-    transition: all var(--transition-speed) ease;
+    transition: all 0.3s ease;
     font-family: inherit;
 }
 
@@ -911,42 +765,6 @@ footer {
     --text-color: #000000;
     --text-secondary: rgba(0, 0, 0, 0.6);
     --border-color: rgba(0, 0, 0, 0.1);
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    header {
-        padding: 1rem;
-    }
-    
-    header nav ul {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .hero {
-        padding: 2rem 1rem;
-    }
-    
-    .hero h2 {
-        font-size: 2rem;
-    }
-    
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 /* モバイル最適化 */
@@ -1016,7 +834,7 @@ footer {
 
     /* モバイルでのタッチ操作改善 */
     .trait-item, .art-detail-item {
-        transition: transform var(--transition-speed) ease;
+        transition: transform 0.2s ease;
     }
 
     .trait-item:active, .art-detail-item:active {
@@ -1051,7 +869,7 @@ footer {
         height: 100vh;
         background: var(--background-color);
         z-index: 1000;
-        transition: left var(--transition-speed) ease;
+        transition: left 0.3s ease;
         padding: 1.5rem;
     }
 
@@ -1084,7 +902,7 @@ footer {
     /* モバイルでのアニメーション最適化 */
     @media (prefers-reduced-motion: no-preference) {
         .nft-item {
-            transition: transform var(--transition-speed) ease;
+            transition: transform 0.2s ease;
         }
 
         .nft-item:active {
@@ -1116,7 +934,7 @@ footer {
     cursor: pointer;
     font-family: 'Rajdhani', sans-serif;
     font-weight: 500;
-    transition: all var(--transition-speed) ease;
+    transition: all 0.3s ease;
 }
 
 .lang-toggle:hover {
