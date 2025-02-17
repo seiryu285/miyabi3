@@ -64,139 +64,61 @@ document.addEventListener('DOMContentLoaded', function() {
       {
         id: 6,
         title: "MIYABI #006",
-        description: [
-          "【日本語】",
-          "鼓音（つづね）は伝統楽器と電子音楽を融合させるサウンドメーカー。",
-          "SNSライブで世界中を沸かせ、儀式で\"音\"を用いた封印解除をサポートするムードメーカー。",
-          "",
-          "---",
-          "### English Version",
-          "Tsudzune blends traditional instruments with electronic music,",
-          "electrifying global audiences through SNS live streams.",
-          "As a master of sonic alchemy, she aids in ritual seal-breaking, stirring hearts with her beats."
-        ].join("\n"),
+        description: "月光に照らされた日本庭園で、優雅な着物姿の女性が琴を奏でています。その姿は幽玄な雰囲気を醸し出し、伝統音楽の深い精神性を表現しています。",
         image: "assets/nft6.jpg",
-        style: "和楽器×EDM",
-        method: "デジタルサンプラー + 生演奏",
-        accessory: "鼓・三味線",
-        collection: "MIYABI",
         traits: {
-          personality: "陽気・情熱・ライブ配信",
-          specialty: "音による封印解除",
-          origin: "不明（全国行脚）",
-          currentBase: "SNSを通じ世界",
-          fourCharacterIdiom: "鼓音律響"
+            "Background": "Night Garden",
+            "Character": "Musical Woman",
+            "Clothing": "Performance Kimono",
+            "Mood": "Ethereal"
         }
       },
       {
         id: 7,
         title: "MIYABI #007",
-        description: [
-          "【日本語】",
-          "紅霞（こうか）は紅の染色技術を極める家系に生まれ、",
-          "海外でファッションを学んだ後に帰国。鮮烈なコレクションで人々を魅了し、",
-          "\"紅\"に秘められた雅の力を知るや、世界的ファッションショーを計画する。",
-          "",
-          "---",
-          "### English Version",
-          "Kōka, heir to a lineage mastering the art of crimson dye,",
-          "returned from overseas fashion study to unveil her striking collections.",
-          "Captivated by the hidden power of \"red,\" she now prepares a global fashion show spotlighting MIYABI's essence."
-        ].join("\n"),
+        description: "朱色の鳥居が連なる参道で、巫女装束の女性が神聖な舞を披露しています。古くから伝わる神事の厳かさと、その所作の美しさが見る者の心を打ちます。",
         image: "assets/nft7.jpg",
-        style: "紅染ファッション",
-        method: "伝統染色 + 前衛デザイン",
-        accessory: "赤い装飾",
-        collection: "MIYABI",
         traits: {
-          personality: "完璧主義・華やか",
-          specialty: "紅染コレクション",
-          origin: "紅染の家系",
-          currentBase: "東京ファッションシーン",
-          fourCharacterIdiom: "紅霞絢映"
+            "Background": "Shrine Path",
+            "Character": "Shrine Maiden",
+            "Clothing": "Miko Attire",
+            "Mood": "Sacred"
         }
       },
       {
         id: 8,
         title: "MIYABI #008",
-        description: [
-          "【日本語】",
-          "白牙（はくが）はアルビノ体質で、忍者集団に育てられた暗殺者。",
-          "闇に生きながらも、自身の\"白\"に宿る意味を探し始め、",
-          "やがて\"雅\"との出会いに運命を感じるようになる。",
-          "",
-          "---",
-          "### English Version",
-          "Hakuga, born with albinism and raised among ninja clans,",
-          "operates in the shadows as a silent assassin.",
-          "Haunted by his own \"whiteness,\" he's drawn toward MIYABI, sensing a destiny beyond darkness."
-        ].join("\n"),
+        description: "古い茶室で、茶道の所作を美しく演じる女性の姿があります。一つ一つの動きに込められた意味と美しさが、日本の伝統文化の深さを物語っています。",
         image: "assets/nft8.jpg",
-        style: "アルビノ忍者",
-        method: "暗殺術 + 闇装束",
-        accessory: "白髪・白の衣",
-        collection: "MIYABI",
         traits: {
-          personality: "無口・冷徹",
-          specialty: "隠密行動",
-          origin: "忍者集団",
-          currentBase: "暗黒街",
-          fourCharacterIdiom: "白狩冥迅"
+            "Background": "Tea Room",
+            "Character": "Tea Master",
+            "Clothing": "Tea Ceremony Kimono",
+            "Mood": "Focused"
         }
       },
       {
         id: 9,
         title: "MIYABI #009",
-        description: [
-          "【日本語】",
-          "幽面（ゆうめん）は能面師の家系に生まれ、AR技術を使って新たな\"面\"文化を発信する。",
-          "自身の素顔を決して見せないミステリアスさで、面に映る\"雅\"の霊力を解放する。",
-          "",
-          "---",
-          "### English Version",
-          "Yūmen, born into a lineage of Noh mask artisans,",
-          "innovates AR-based \"masks\" that unveil hidden mystique.",
-          "His true face remains unknown, as he channels MIYABI's spiritual force through each mask he crafts."
-        ].join("\n"),
+        description: "紅葉の庭園で、華やかな着物姿の女性が伝統的な舞を披露しています。落ち葉が舞う中、優美な動きで物語を紡ぎ出す姿は、日本の芸能の真髄を表現しています。",
         image: "assets/nft9.jpg",
-        style: "能面×AR",
-        method: "木彫 + デジタル投影",
-        accessory: "多彩な面",
-        collection: "MIYABI",
         traits: {
-          personality: "神秘・寡黙",
-          specialty: "面による霊力可視化",
-          origin: "能面師の家系",
-          currentBase: "不明",
-          fourCharacterIdiom: "幽面幻刻"
+            "Background": "Autumn Garden",
+            "Character": "Dance Performer",
+            "Clothing": "Dance Kimono",
+            "Mood": "Elegant"
         }
       },
       {
         id: 10,
         title: "MIYABI #010",
-        description: [
-          "【日本語】",
-          "修羅（しゅら）は没落した武家の名残を継ぎつつ、",
-          "自作の赤いサイバーアーマーを纏い、街の最前線で闘う孤高の戦士。",
-          "自身を「修羅の道に生きる者」と呼び、苛烈なバトルを望む。",
-          "",
-          "---",
-          "### English Version",
-          "Shura, a scion of a fallen samurai bloodline,",
-          "dons a self-crafted crimson cyber-armor to battle on the city's front lines.",
-          "Declaring himself a lone warrior on the \"path of Ashura,\" he relentlessly pursues intense combat."
-        ].join("\n"),
+        description: "満開の梅林で、優美な着物姿の女性が生け花を嗜んでいます。早春の柔らかな光の中、花と人との調和が日本の美意識の深さを表現しています。",
         image: "assets/nft10.jpg",
-        style: "武家没落×サイバー装甲",
-        method: "自作アーマー + 刀剣",
-        accessory: "紅い甲冑",
-        collection: "MIYABI",
         traits: {
-          personality: "苛烈・孤高",
-          specialty: "激戦を好む",
-          origin: "没落武家",
-          currentBase: "廃墟のアジト",
-          fourCharacterIdiom: "修羅赫鎧"
+            "Background": "Plum Garden",
+            "Character": "Flower Artist",
+            "Clothing": "Spring Kimono",
+            "Mood": "Serene"
         }
       },
       {
