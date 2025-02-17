@@ -12,175 +12,95 @@ function checkElement(id, context = "") {
 
 // Initialize gallery when DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM fully loaded, executing initialization");
-    try {
-        initializeGallery();
-        setupModalEventListeners();
-        initializeLanguageToggle();
-        initializeWeb3();
-        optimizeForMobile();
-        setupLazyLoading();
-        console.log("Gallery initialization completed");
-    } catch (error) {
-        console.error("Error during initialization:", error);
+    console.log("DOM fully loaded");
+    const gallery = document.getElementById('nftGallery');
+    
+    if (!gallery) {
+        console.error("Gallery element not found");
+        return;
+    }
+
+    // NFTデータの数だけカードを生成
+    for (let i = 0; i < nftData.length; i++) {
+        const nft = nftData[i];
+        console.log(`Creating card for NFT #${i + 1}`);
+        
+        const card = document.createElement('div');
+        card.className = 'nft-card';
+        
+        const img = document.createElement('img');
+        img.src = nft.image;
+        img.alt = nft.title;
+        img.loading = 'lazy'; // 遅延ローディングを有効化
+        
+        const title = document.createElement('h3');
+        title.textContent = nft.titleJa || nft.title;
+        
+        card.appendChild(img);
+        card.appendChild(title);
+        
+        // クリックイベントの追加
+        card.addEventListener('click', () => {
+            console.log(`Opening modal for NFT #${i + 1}`);
+            openModal(nft);
+        });
+        
+        gallery.appendChild(card);
     }
 });
 
-// Initialize the gallery
-function initializeGallery() {
-    console.log("Initializing gallery");
-    const gallery = document.getElementById('gallery');
-    if (!gallery) {
-        throw new Error("Gallery container not found");
-    }
-
-    try {
-        nftData.forEach((nft, index) => {
-            console.log(`Creating gallery item ${index + 1}/${nftData.length}`);
-            createGalleryItem(nft, gallery);
-        });
-    } catch (error) {
-        console.error("Error populating gallery:", error);
-        throw error;
-    }
-}
-
-// Create individual gallery items
-function createGalleryItem(nft, gallery) {
-    try {
-        const item = document.createElement('div');
-        item.className = 'gallery-item';
-        
-        // Create image/video element based on type
-        if (nft.type === 'video') {
-            const video = document.createElement('video');
-            video.src = nft.image;
-            video.muted = true;
-            video.loop = true;
-            item.appendChild(video);
-            
-            // Add play/pause functionality on hover
-            item.addEventListener('mouseenter', () => video.play());
-            item.addEventListener('mouseleave', () => video.pause());
-        } else {
-            const img = document.createElement('img');
-            img.src = nft.image;
-            img.alt = nft.name;
-            img.loading = 'lazy'; // Enable lazy loading
-            item.appendChild(img);
-        }
-
-        // Add click event to open modal
-        item.addEventListener('click', () => openModal(nft));
-        gallery.appendChild(item);
-        
-    } catch (error) {
-        console.error("Error creating gallery item:", error);
-        throw error;
-    }
-}
-
-// Open modal with NFT details
 function openModal(nft) {
-    console.log("Opening modal for NFT:", nft.name);
-    try {
-        const modal = checkElement('nftModal', "Modal open");
-        const modalImg = checkElement('modalImage', "Modal image");
-        const modalVideo = checkElement('modalVideo', "Modal video");
-        const modalInfo = checkElement('modalInfo', "Modal info");
-        
-        if (!modal || !modalImg || !modalVideo || !modalInfo) {
-            throw new Error("Required modal elements not found");
-        }
-
-        // Update modal content
-        if (nft.type === 'video') {
-            modalImg.style.display = 'none';
-            modalVideo.style.display = 'block';
-            modalVideo.src = nft.image;
-        } else {
-            modalImg.style.display = 'block';
-            modalVideo.style.display = 'none';
-            modalImg.src = nft.image;
-        }
-
-        // Update modal info
-        modalInfo.innerHTML = `
-            <h2>${nft.name}</h2>
-            <p>${nft.description}</p>
-        `;
-
-        // Update traits
-        updateTraits(nft);
-
-        // Show modal
-        modal.style.display = 'block';
-        console.log("Modal opened successfully");
-
-    } catch (error) {
-        console.error("Error opening modal:", error);
+    console.log("Opening modal for:", nft.title);
+    const modal = document.getElementById('nftModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalTraits = document.getElementById('modalTraits');
+    
+    if (!modal || !modalImg || !modalTitle || !modalDescription || !modalTraits) {
+        console.error("Modal elements not found");
+        return;
     }
+    
+    modalImg.src = nft.image;
+    modalImg.alt = nft.title;
+    modalTitle.textContent = nft.titleJa || nft.title;
+    modalDescription.textContent = nft.description;
+    
+    // 特性の表示
+    modalTraits.innerHTML = '';
+    if (nft.traits) {
+        for (const [key, value] of Object.entries(nft.traits)) {
+            const traitElement = document.createElement('div');
+            traitElement.className = 'trait';
+            traitElement.innerHTML = `<strong>${key}:</strong> ${value}`;
+            modalTraits.appendChild(traitElement);
+        }
+    }
+    
+    modal.style.display = "block";
 }
 
-// Update traits display
-function updateTraits(nft) {
-    console.log("Updating traits for:", nft.name);
-    try {
-        const traitsContainer = checkElement('traitsContainer', "Traits update");
-        if (!traitsContainer) return;
-
-        traitsContainer.innerHTML = '<h3>Traits</h3>';
-        if (nft.traits && nft.traits.length > 0) {
-            const traitsList = document.createElement('ul');
-            nft.traits.forEach(trait => {
-                const li = document.createElement('li');
-                li.textContent = `${trait.trait_type}: ${trait.value}`;
-                traitsList.appendChild(li);
-            });
-            traitsContainer.appendChild(traitsList);
-        } else {
-            traitsContainer.innerHTML += '<p>No traits available</p>';
-        }
-        console.log("Traits updated successfully");
-
-    } catch (error) {
-        console.error("Error updating traits:", error);
+// モーダルを閉じる処理
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('nftModal');
+    const closeBtn = document.getElementsByClassName("close")[0];
+    
+    if (!modal || !closeBtn) {
+        console.error("Modal close elements not found");
+        return;
     }
-}
-
-// Set up modal event listeners
-function setupModalEventListeners() {
-    console.log("Setting up modal event listeners");
-    try {
-        const modal = checkElement('nftModal', "Modal setup");
-        const closeBtn = modal?.querySelector('.close');
-        
-        if (!modal || !closeBtn) {
-            throw new Error("Modal elements not found");
-        }
-
-        // Close button click
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-            const modalVideo = document.getElementById('modalVideo');
-            if (modalVideo) modalVideo.pause();
-        });
-
-        // Click outside modal
-        window.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                const modalVideo = document.getElementById('modalVideo');
-                if (modalVideo) modalVideo.pause();
-            }
-        });
-
-        console.log("Modal event listeners set up successfully");
-
-    } catch (error) {
-        console.error("Error setting up modal event listeners:", error);
+    
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
     }
-}
+    
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});
 
 // Initialize language toggle
 function initializeLanguageToggle() {
