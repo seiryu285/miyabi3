@@ -11,6 +11,8 @@
     --modal-bg: #F6F5F4; /* 白練 - Shironeri */
     --header-height: 64px;
     --futuristic-font: 'Rajdhani', sans-serif;
+    --transition-speed: 0.3s;
+    --container-width: 1200px;
 }
 
 /* Modern Reset */
@@ -32,6 +34,19 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+/* Layout */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 /* Navigation */
