@@ -1,4 +1,3 @@
-
 /* Base Styles */
 :root {
     --primary-color: #111;
@@ -294,60 +293,35 @@ body {
 /* Gallery Grid */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
-    padding: 0;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
 }
 
-.gallery-item {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    background: var(--background-color);
-    transition: all 0.3s ease;
+.nft-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
     cursor: pointer;
 }
 
-.gallery-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+.nft-card:hover {
+    transform: translateY(-5px);
 }
 
-.gallery-item img {
+.nft-card img {
     width: 100%;
-    height: 100%;
+    height: 250px;
     object-fit: cover;
+    border-radius: 10px 10px 0 0;
 }
 
-.gallery-item-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.nft-card h3 {
     padding: 1rem;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    color: #fff;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-}
-
-.gallery-item:hover .gallery-item-info {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.gallery-item-number {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    font-family: var(--futuristic-font);
-    font-size: 0.875rem;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px;
-    z-index: 2;
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
 }
 
 /* NFT Modal */
@@ -940,4 +914,35 @@ body {
 .lang-toggle:hover {
     background: var(--accent-color);
     color: var(--background-color);
+}
+
+/* ナビゲーションスタイル */
+nav {
+    background: #333;
+    padding: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #FFD700;
+}
+
+nav a.active {
+    color: #FFD700;
+    border-bottom: 2px solid #FFD700;
 }
