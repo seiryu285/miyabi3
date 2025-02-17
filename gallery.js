@@ -13,44 +13,58 @@ function checkElement(id, context = "") {
 // Initialize gallery when DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded");
+    initializeGallery();
+    setupModalEventListeners();
+});
+
+function initializeGallery() {
     const gallery = document.getElementById('nftGallery');
-    
     if (!gallery) {
-        console.error("Gallery element not found");
+        console.error('Gallery container not found');
         return;
     }
 
-    // NFTデータの数だけカードを生成
-    for (let i = 0; i < nftData.length; i++) {
-        const nft = nftData[i];
-        console.log(`Creating card for NFT #${i + 1}`);
-        
-        const card = document.createElement('div');
-        card.className = 'nft-card';
-        
-        const img = document.createElement('img');
-        img.src = nft.image;
-        img.alt = nft.title;
-        img.loading = 'lazy'; // 遅延ローディングを有効化
-        
-        const title = document.createElement('h3');
-        title.textContent = nft.titleJa || nft.title;
-        
-        card.appendChild(img);
-        card.appendChild(title);
-        
-        // クリックイベントの追加
-        card.addEventListener('click', () => {
-            console.log(`Opening modal for NFT #${i + 1}`);
-            openModal(nft);
-        });
-        
+    // 30キャラクター分のデータを表示
+    for (let i = 1; i <= 30; i++) {
+        const nft = nftData.find(item => item.id === i) || createDefaultNFT(i);
+        const card = createNFTCard(nft);
         gallery.appendChild(card);
     }
-});
+}
+
+function createDefaultNFT(id) {
+    return {
+        id: id,
+        title: `MIYABI #${String(id).padStart(3, '0')}`,
+        description: "Coming soon...",
+        image: `assets/nft${id}.jpg`,
+        traits: {
+            "Status": "Preparing"
+        }
+    };
+}
+
+function createNFTCard(nft) {
+    const card = document.createElement('div');
+    card.className = 'nft-card';
+    
+    const img = document.createElement('img');
+    img.src = nft.image;
+    img.alt = nft.title;
+    img.loading = 'lazy';
+    
+    const title = document.createElement('h3');
+    title.textContent = nft.title;
+    
+    card.appendChild(img);
+    card.appendChild(title);
+    
+    card.addEventListener('click', () => openModal(nft));
+    
+    return card;
+}
 
 function openModal(nft) {
-    console.log("Opening modal for:", nft.title);
     const modal = document.getElementById('nftModal');
     const modalImg = document.getElementById('modalImg');
     const modalTitle = document.getElementById('modalTitle');
@@ -58,49 +72,48 @@ function openModal(nft) {
     const modalTraits = document.getElementById('modalTraits');
     
     if (!modal || !modalImg || !modalTitle || !modalDescription || !modalTraits) {
-        console.error("Modal elements not found");
+        console.error('Modal elements not found');
         return;
     }
     
     modalImg.src = nft.image;
     modalImg.alt = nft.title;
-    modalTitle.textContent = nft.titleJa || nft.title;
+    modalTitle.textContent = nft.title;
     modalDescription.textContent = nft.description;
     
-    // 特性の表示
+    // 特性情報を表示
     modalTraits.innerHTML = '';
     if (nft.traits) {
-        for (const [key, value] of Object.entries(nft.traits)) {
-            const traitElement = document.createElement('div');
-            traitElement.className = 'trait';
-            traitElement.innerHTML = `<strong>${key}:</strong> ${value}`;
-            modalTraits.appendChild(traitElement);
-        }
+        Object.entries(nft.traits).forEach(([key, value]) => {
+            const trait = document.createElement('div');
+            trait.className = 'trait';
+            trait.innerHTML = `<strong>${key}:</strong> ${value}`;
+            modalTraits.appendChild(trait);
+        });
     }
     
-    modal.style.display = "block";
+    modal.style.display = 'block';
 }
 
-// モーダルを閉じる処理
-document.addEventListener('DOMContentLoaded', function() {
+function setupModalEventListeners() {
     const modal = document.getElementById('nftModal');
-    const closeBtn = document.getElementsByClassName("close")[0];
+    const closeBtn = document.querySelector('.close');
     
     if (!modal || !closeBtn) {
-        console.error("Modal close elements not found");
+        console.error('Modal elements not found');
         return;
     }
     
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
-    }
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
     
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
         }
-    }
-});
+    });
+}
 
 // Initialize language toggle
 function initializeLanguageToggle() {

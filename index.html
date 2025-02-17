@@ -3,61 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Miyabi Gallery - Digital Art Collection">
-    <title>Miyabi Gallery - Home</title>
+    <title>MIYABI - NFT Gallery</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1><a href="index.html">Miyabi Gallery</a></h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="lang-toggle">
-                <button class="lang-btn" data-lang="ja">日本語</button>
-                <button class="lang-btn" data-lang="en">English</button>
-            </div>
-        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">HOME</a></li>
+                <li><a href="model-gallery.html">ITEM</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Digital Art Collection</h2>
-                <p>Discover unique digital artworks inspired by Japanese culture</p>
-                <a href="gallery.html" class="cta-button">View Gallery</a>
-            </div>
-        </section>
-
-        <section class="featured-works">
-            <div class="container">
-                <h2>Featured Works</h2>
-                <div class="featured-grid">
-                    <!-- Featured items will be loaded by JavaScript -->
-                </div>
-                <div class="view-more">
-                    <a href="gallery.html" class="button">View All Works</a>
-                </div>
-            </div>
-        </section>
+        <div id="nftGallery" class="gallery-grid">
+            <!-- NFTカードがここに動的に追加されます -->
+        </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Miyabi Gallery. All rights reserved.</p>
+    <!-- NFT詳細モーダル -->
+    <div id="nftModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImg" src="" alt="">
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+            <div id="modalTraits">
+                <!-- 特性情報がここに動的に追加されます -->
+            </div>
         </div>
-    </footer>
+    </div>
 
-    <!-- Error Container -->
-    <div class="error-container"></div>
-
-    <!-- Scripts -->
-    <script src="script.js" defer></script>
+    <script src="nftData.js"></script>
+    <script src="gallery.js"></script>
 </body>
 </html>
