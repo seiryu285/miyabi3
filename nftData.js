@@ -3,151 +3,67 @@ document.addEventListener('DOMContentLoaded', function() {
     const nftData = [
       {
         id: 1,
-        title: "MIYABI #001: 青波 - 波紋の継承者",
-        description: [
-          "【日本語】",
-          "古都・鎌倉の染織師の家系に生まれた青波（あおなみ）は、",
-          "代々受け継がれる「藍染」の技術を持つ若きアーティスト。",
-          "静かな湖のように落ち着いた雰囲気を漂わせながらも、",
-          "時に大きな波を巻き起こすような情熱を胸に秘める。",
-          "現在はデジタルアートと伝統染織の融合を目指し、",
-          "「深き海の色彩」を作品に宿すべく挑戦を続けている。",
-          "",
-          "---",
-          "### English Version",
-          "Aonami, hailing from a family of textile artisans in old Kamakura,",
-          "carries on the centuries-old tradition of indigo dyeing.",
-          "Calm like a still lake on the surface, yet hiding a passion that can surge like mighty waves.",
-          "He strives to merge digital art with ancient techniques,",
-          "capturing the 'deep ocean hues' in every creation he produces."
-        ].join("\n"),
+        title: "MIYABI #001",
+        description: "優美な着物姿の女性が、伝統的な和の空間で静かに佇んでいます。彼女の表情には深い思慮が宿り、その姿からは凛とした気品が漂います。背景には、繊細な障子の影と、さりげなく活けられた生け花が、日本の美意識を表現しています。",
         image: "assets/nft1.jpg",
-        style: "現代絞り染め",
-        method: "デジタル描画・染色融合",
-        accessory: "波模様の着物",
-        collection: "MIYABI",
         traits: {
-          personality: "穏やか・芯の強さ",
-          specialty: "藍染とデジタルの融合",
-          origin: "鎌倉",
-          currentBase: "東京",
-          fourCharacterIdiom: "蒼潮夢韻"
+          "Background": "Traditional Japanese Room",
+          "Character": "Elegant Woman",
+          "Clothing": "Formal Kimono",
+          "Mood": "Contemplative"
         }
       },
       {
         id: 2,
-        title: "MIYABI #002: 鶴凛 - 武家の名残を継ぐ剣士",
-        description: [
-          "【日本語】",
-          "鶴凛（かくりん）は古くから鶴の家紋を戴く武家の血統。",
-          "幼少期から刀の道を歩み、都会でフリーの護衛や傭兵として生計を立てる。",
-          "礼儀を重んじるストイックさと、家名を守る誇りから、",
-          "\"雅\"を巡る争いにも徐々に引き込まれていく。",
-          "",
-          "---",
-          "### English Version",
-          "Kakurin descends from a samurai lineage known for the crane emblem.",
-          "Trained in the sword since childhood, he now works as a mercenary in the modern city.",
-          "Reserved yet proud, his unwavering courtesy and honor lead him into the unfolding conflict over \"MIYABI.\""
-        ].join("\n"),
+        title: "MIYABI #002",
+        description: "現代的な和のエッセンスを取り入れた空間で、モダンな着物を纏う女性が凛として立っています。伝統と革新が融合した雰囲気が、新しい日本の美を表現しています。洗練された色使いと、控えめながらも存在感のある小物使いが、現代的な「みやび」を感じさせます。",
         image: "assets/nft2.jpg",
-        style: "和武術×都会派",
-        method: "伝統剣術 + 現代警護スキル",
-        accessory: "鶴の家紋",
-        collection: "MIYABI",
         traits: {
-          personality: "礼儀正しい・内に誇り",
-          specialty: "剣技・護衛",
-          origin: "武家家系",
-          currentBase: "大都市",
-          fourCharacterIdiom: "鶴影剣厳"
+          "Background": "Modern Japanese Space",
+          "Character": "Modern Woman",
+          "Clothing": "Contemporary Kimono",
+          "Mood": "Confident"
         }
       },
       {
         id: 3,
-        title: "MIYABI #003: 四季（しき）",
-        description: [
-          "【日本語】",
-          "四季（しき）は日本の四季をテーマにしたデザイナー。",
-          "自然の移ろいを着物やテキスタイルアートに落とし込み、",
-          "儀式で必要な四季のモチーフを創り出す存在。",
-          "",
-          "---",
-          "### English Version",
-          "Shiki is a designer inspired by Japan's four seasons.",
-          "She incorporates the changing beauty of nature into kimono and textile art,",
-          "serving a vital role in creating seasonal motifs for sacred ceremonies."
-        ].join("\n"),
+        title: "MIYABI #003",
+        description: "桜吹雪舞う庭園で、艶やかな振袖姿の女性が優雅に佇んでいます。春の柔らかな光が彼女を包み、伝統的な日本の美しさと若々しい活力が調和した瞬間を切り取っています。",
         image: "assets/nft3.jpg",
-        style: "季節",
-        method: "デジタル描画 + テキスタイル",
-        accessory: "花と季節のモチーフ",
-        collection: "MIYABI",
         traits: {
-          personality: "優美・自然への共感",
-          specialty: "四季折々のテキスタイル",
-          origin: "日本各地",
-          currentBase: "移動しながら創作",
-          fourCharacterIdiom: "彩季巡映"
+          "Background": "Cherry Blossom Garden",
+          "Character": "Young Woman",
+          "Clothing": "Furisode Kimono",
+          "Mood": "Graceful"
         }
       },
       {
         id: 4,
-        title: "MIYABI #004: 牙堂（がどう） - 義足の無骨剣士",
-        description: [
-          "【日本語】",
-          "牙堂（がどう）は幼少期の事故で片脚を失い、サイバー義足を装備。",
-          "かつては裏社会に身を置いていたが、今は街の自警団として闇勢力と対峙する。",
-          "無骨な性格だが、弱者を放っておけない不器用な優しさを持つ。",
-          "",
-          "---",
-          "### English Version",
-          "Gadō lost one leg in a childhood accident and now wields a cybernetic limb.",
-          "Once immersed in the underworld, he has turned to vigilante work to protect the city from dark forces.",
-          "Though rough around the edges, he cannot abandon the defenseless, hinting at a hidden kindness."
-        ].join("\n"),
+        title: "MIYABI #004",
+        description: "竹林の中で、シンプルな浴衣姿の女性が涼やかな表情を見せています。風に揺れる竹の葉と、彼女の凛とした佇まいが、日本の夏の情景を優美に表現しています。",
         image: "assets/nft4.jpg",
-        style: "サイバー義足×ストリート",
-        method: "義足加速装置 + 近接格闘",
-        accessory: "機械的脚部",
-        collection: "MIYABI",
         traits: {
-          personality: "無骨・正義感",
-          specialty: "加速剣術",
-          origin: "スラム街",
-          currentBase: "裏路地〜市街地",
-          fourCharacterIdiom: "機肢鋼烈"
+          "Background": "Bamboo Forest",
+          "Character": "Serene Woman",
+          "Clothing": "Summer Yukata",
+          "Mood": "Refreshing"
         }
       },
       {
         id: 5,
-        title: "MIYABI #005: 華鞠（かまり） - バイオ華道の新星",
-        description: [
-          "【日本語】",
-          "華鞠（かまり）は華道家の名門に生まれ、バイオテクノロジーで新品種の花を創るアーティスト。",
-          "花に絶対の美を求めるあまり、自然の摂理を越えた改変にも踏み込みつつある。",
-          "",
-          "---",
-          "### English Version",
-          "Kamari, born into a prestigious flower-arranging family, is an artist who uses biotechnology to create new species of blossoms.",
-          "Driven by her quest for absolute floral beauty, she verges on transcending natural limits."
-        ].join("\n"),
+        title: "MIYABI #005",
+        description: "雪景色の中、厳かな佇まいの女性が、深い紅色の着物姿で立っています。静寂に包まれた冬の情景と、着物の鮮やかな色彩が見事なコントラストを生み出しています。",
         image: "assets/nft5.jpg",
-        style: "華道×バイオテック",
-        method: "遺伝子操作 + 花アート",
-        accessory: "特製バイオ花",
-        collection: "MIYABI",
         traits: {
-          personality: "優雅・執着心",
-          specialty: "花の育成＆改変",
-          origin: "華道名門",
-          currentBase: "研究所アトリエ",
-          fourCharacterIdiom: "華遼夢彩"
+          "Background": "Snow Landscape",
+          "Character": "Noble Woman",
+          "Clothing": "Deep Red Kimono",
+          "Mood": "Solemn"
         }
       },
       {
         id: 6,
-        title: "MIYABI #006: 鼓音（つづね） - 音の錬金術師",
+        title: "MIYABI #006",
         description: [
           "【日本語】",
           "鼓音（つづね）は伝統楽器と電子音楽を融合させるサウンドメーカー。",
@@ -174,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 7,
-        title: "MIYABI #007: 紅霞（こうか） - 鮮紅の革新デザイナー",
+        title: "MIYABI #007",
         description: [
           "【日本語】",
           "紅霞（こうか）は紅の染色技術を極める家系に生まれ、",
@@ -202,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 8,
-        title: "MIYABI #008: 白牙（はくが） - 闇に佇む白き影",
+        title: "MIYABI #008",
         description: [
           "【日本語】",
           "白牙（はくが）はアルビノ体質で、忍者集団に育てられた暗殺者。",
@@ -230,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 9,
-        title: "MIYABI #009: 幽面（ゆうめん） - 面に宿る幽玄の力",
+        title: "MIYABI #009",
         description: [
           "【日本語】",
           "幽面（ゆうめん）は能面師の家系に生まれ、AR技術を使って新たな\"面\"文化を発信する。",
@@ -257,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 10,
-        title: "MIYABI #010: 修羅（しゅら） - 赤きサイバー鎧の孤高戦士",
+        title: "MIYABI #010",
         description: [
           "【日本語】",
           "修羅（しゅら）は没落した武家の名残を継ぎつつ、",
@@ -285,8 +201,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 11,
-        title: "MIYABI #011: 刀匠 - 刀鍛冶の継承者",
-        titleJa: "MIYABI #011: 刀匠 - 刀鍛冶の継承者",
+        title: "MIYABI #011",
+        titleJa: "MIYABI #011",
         description: "伝統的な日本刀製作技術を現代に伝える若き刀匠。芸術性と実用性の両立を追求する。",
         image: "assets/nft11.jpg",
         traits: {
@@ -299,8 +215,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 12,
-        title: "MIYABI #012: 漆雅 - 漆芸家",
-        titleJa: "MIYABI #012: 漆雅 - 漆芸家",
+        title: "MIYABI #012",
+        titleJa: "MIYABI #012",
         description: "伝統的な漆芸技法を現代アートに応用する革新的な作家。独自の表現方法を確立。",
         image: "assets/nft12.jpg",
         traits: {
@@ -313,8 +229,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 13,
-        title: "MIYABI #013: 花道 - いけばなの革新者",
-        titleJa: "MIYABI #013: 花道 - いけばなの革新者",
+        title: "MIYABI #013",
+        titleJa: "MIYABI #013",
         description: "伝統的ないけばなに現代アートの要素を取り入れ、新しい表現方法を確立する若手芸術家。",
         image: "assets/nft13.jpg",
         traits: {
@@ -327,8 +243,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 14,
-        title: "MIYABI #014: 墨香 - 水墨画家",
-        titleJa: "MIYABI #014: 墨香 - 水墨画家",
+        title: "MIYABI #014",
+        titleJa: "MIYABI #014",
         description: "伝統的な水墨画に独自の解釈を加え、現代的な表現を追求する画家。",
         image: "assets/nft14.jpg",
         traits: {
@@ -341,8 +257,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 15,
-        title: "MIYABI #015: 陶心 - 陶芸の探求者",
-        titleJa: "MIYABI #015: 陶心 - 陶芸の探求者",
+        title: "MIYABI #015",
+        titleJa: "MIYABI #015",
         description: "伝統的な陶芸技法と現代的なデザインを融合させ、新しい陶芸の形を追求する。",
         image: "assets/nft15.jpg",
         traits: {
@@ -355,8 +271,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 16,
-        title: "MIYABI #016: 織姫 - テキスタイルアーティスト",
-        titleJa: "MIYABI #016: 織姫 - テキスタイルアーティスト",
+        title: "MIYABI #016",
+        titleJa: "MIYABI #016",
         description: "伝統的な織物技法とデジタル技術を組み合わせた革新的なテキスタイルアートを制作。",
         image: "assets/nft16.jpg",
         traits: {
@@ -369,8 +285,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 17,
-        title: "MIYABI #017: 香道 - 香りの芸術家",
-        titleJa: "MIYABI #017: 香道 - 香りの芸術家",
+        title: "MIYABI #017",
+        titleJa: "MIYABI #017",
         description: "伝統的な香道に現代的なアロマテラピーを組み合わせた新しい香りの表現を追求。",
         image: "assets/nft17.jpg",
         traits: {
@@ -383,8 +299,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 18,
-        title: "MIYABI #018: 庭師 - 現代庭園デザイナー",
-        titleJa: "MIYABI #018: 庭師 - 現代庭園デザイナー",
+        title: "MIYABI #018",
+        titleJa: "MIYABI #018",
         description: "伝統的な日本庭園の要素を現代的な空間デザインに取り入れる革新的な庭師。",
         image: "assets/nft18.jpg",
         traits: {
@@ -397,8 +313,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 19,
-        title: "MIYABI #019: 彩音 - 和楽器ミュージシャン",
-        titleJa: "MIYABI #019: 彩音 - 和楽器ミュージシャン",
+        title: "MIYABI #019",
+        titleJa: "MIYABI #019",
         description: "伝統的な和楽器を使用した現代音楽を創作する音楽家。電子音楽との融合も手がける。",
         image: "assets/nft19.jpg",
         traits: {
@@ -411,8 +327,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 20,
-        title: "MIYABI #020: 硯心 - 書道家",
-        titleJa: "MIYABI #020: 硯心 - 書道家",
+        title: "MIYABI #020",
+        titleJa: "MIYABI #020",
         description: "伝統的な書道をストリートアートやデジタルアートと融合させる革新的な書道家。",
         image: "assets/nft20.jpg",
         traits: {
@@ -425,8 +341,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 21,
-        title: "MIYABI #021: 染匠 - 染色アーティスト",
-        titleJa: "MIYABI #021: 染匠 - 染色アーティスト",
+        title: "MIYABI #021",
+        titleJa: "MIYABI #021",
         description: "伝統的な染色技法と現代アートを組み合わせた作品を制作する染色家。",
         image: "assets/nft21.jpg",
         traits: {
@@ -439,8 +355,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 22,
-        title: "MIYABI #022: 銀工 - シルバーアクセサリー作家",
-        titleJa: "MIYABI #022: 銀工 - シルバーアクセサリー作家",
+        title: "MIYABI #022",
+        titleJa: "MIYABI #022",
         description: "伝統的な金工技法を現代のアクセサリーデザインに活かす職人。",
         image: "assets/nft22.jpg",
         traits: {
@@ -453,8 +369,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 23,
-        title: "MIYABI #023: 箏姫 - 箏曲奏者",
-        titleJa: "MIYABI #023: 箏姫 - 箏曲奏者",
+        title: "MIYABI #023",
+        titleJa: "MIYABI #023",
         description: "伝統的な箏曲とジャズを融合させた新しい音楽を創造する演奏家。",
         image: "assets/nft23.jpg",
         traits: {
@@ -467,8 +383,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 24,
-        title: "MIYABI #024: 面匠 - 能面師",
-        titleJa: "MIYABI #024: 面匠 - 能面師",
+        title: "MIYABI #024",
+        titleJa: "MIYABI #024",
         description: "伝統的な能面制作技法を現代アートに応用する革新的な面師。",
         image: "assets/nft24.jpg",
         traits: {
@@ -481,8 +397,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 25,
-        title: "MIYABI #025: 茶匠 - 現代茶道家",
-        titleJa: "MIYABI #025: 茶匠 - 現代茶道家",
+        title: "MIYABI #025",
+        titleJa: "MIYABI #025",
         description: "伝統的な茶道を現代のライフスタイルに適応させる革新的な茶道家。",
         image: "assets/nft25.jpg",
         traits: {
@@ -495,8 +411,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 26,
-        title: "MIYABI #026: 琳派 - 現代日本画家",
-        titleJa: "MIYABI #026: 琳派 - 現代日本画家",
+        title: "MIYABI #026",
+        titleJa: "MIYABI #026",
         description: "琳派の影響を受けながら、現代的な表現を追求する日本画家。",
         image: "assets/nft26.jpg",
         traits: {
@@ -509,8 +425,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 27,
-        title: "MIYABI #027: 組紐 - 組紐アーティスト",
-        titleJa: "MIYABI #027: 組紐 - 組紐アーティスト",
+        title: "MIYABI #027",
+        titleJa: "MIYABI #027",
         description: "伝統的な組紐技法を現代アートとして再解釈する革新的な作家。",
         image: "assets/nft27.jpg",
         traits: {
@@ -523,8 +439,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 28,
-        title: "MIYABI #028: 蒔絵 - 漆芸家",
-        titleJa: "MIYABI #028: 蒔絵 - 漆芸家",
+        title: "MIYABI #028",
+        titleJa: "MIYABI #028",
         description: "伝統的な蒔絵技法を現代アートに応用する革新的な漆芸家。",
         image: "assets/nft28.jpg",
         traits: {
@@ -537,8 +453,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 29,
-        title: "MIYABI #029: 彫金 - ジュエリーアーティスト",
-        titleJa: "MIYABI #029: 彫金 - ジュエリーアーティスト",
+        title: "MIYABI #029",
+        titleJa: "MIYABI #029",
         description: "伝統的な彫金技法を現代ジュエリーデザインに活かす革新的な作家。",
         image: "assets/nft29.jpg",
         traits: {
@@ -551,8 +467,8 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       {
         id: 30,
-        title: "MIYABI #030: 和傘 - 傘職人",
-        titleJa: "MIYABI #030: 和傘 - 傘職人",
+        title: "MIYABI #030",
+        titleJa: "MIYABI #030",
         description: "伝統的な和傘制作技法を現代的なデザインに応用する革新的な職人。",
         image: "assets/nft30.jpg",
         traits: {
