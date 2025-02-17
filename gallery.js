@@ -252,39 +252,164 @@ function closeModal() {
     }, 300);
 }
 
-// イベントリスナーの設定
-document.addEventListener('DOMContentLoaded', () => {
-    // ギャラリーの初期化
+// Translation object for multilingual support
+const translations = {
+  en: {
+    connectWallet: "CONNECT",
+    gallery: "VIEW GALLERY",
+    about: "ABOUT",
+    enterWorld: "ENTER",
+    search: "Search by name or number...",
+    ui: {
+      all: "All",
+      recent: "Recent",
+      popular: "Popular",
+      trending: "Trending"
+    },
+    details: {
+      style: "Style:",
+      method: "Method:",
+      accessory: "Accessory:"
+    },
+    traitsTitle: "Traits"
+  },
+  ja: {
+    connectWallet: "ウォレット接続",
+    gallery: "ギャラリーを見る",
+    about: "このプロジェクトについて",
+    enterWorld: "没入体験",
+    search: "名前または番号で検索...",
+    ui: {
+      all: "すべて",
+      recent: "新着",
+      popular: "人気",
+      trending: "トレンド"
+    },
+    details: {
+      style: "スタイル:",
+      method: "制作技法:",
+      accessory: "装飾:"
+    },
+    traitsTitle: "特性"
+  }
+};
+
+let currentLang = "en";
+
+// Initialize everything when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+  try {
     initializeGallery();
+    initializeLanguageToggle();
+    initializeWeb3();
+    optimizeForMobile();
+    setupLazyLoading();
+  } catch (error) {
+    handleError(error, 'initialization');
+  }
+});
 
-    // モーダルの閉じるボタン
-    const closeButton = document.querySelector('.close-button');
-    if (closeButton) {
-        closeButton.addEventListener('click', closeModal);
+// Initialize language toggle
+function initializeLanguageToggle() {
+  const langSelect = document.querySelector('.lang-select');
+  if (!langSelect) return;
+
+  langSelect.value = currentLang;
+  langSelect.addEventListener('change', () => {
+    currentLang = langSelect.value;
+    updateLanguage();
+  });
+}
+
+// Update language throughout the page
+function updateLanguage() {
+  const gallery = document.getElementById('gallery');
+  if (gallery) {
+    initializeGallery();
+  }
+}
+
+// Initialize Web3
+async function initializeWeb3() {
+  if (typeof window.ethereum !== 'undefined') {
+    window.web3 = new Web3(window.ethereum);
+  }
+}
+
+// Mobile optimization
+function optimizeForMobile() {
+  if (isMobileDevice()) {
+    document.documentElement.style.fontSize = '14px';
+    const gallery = document.querySelector('.gallery-grid');
+    if (gallery) {
+      gallery.style.gridTemplateColumns = 'repeat(auto-fill, minmax(150px, 1fr))';
     }
+  }
+}
 
-    // モーダル外クリックで閉じる
-    const modal = document.getElementById('nftModal');
-    if (modal) {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-    }
+// Check if device is mobile
+function isMobileDevice() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
 
-    // フィルターボタンの設定
-    const filterButtons = document.querySelectorAll('.menu-item');
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // アクティブクラスの切り替え
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            
-            // フィルタリングの実装（今後追加予定）
-        });
+// Setup lazy loading for images
+function setupLazyLoading() {
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          observer.unobserve(img);
+        }
+      });
     });
 
-    // ギャラリーグリッドの初期化
-    populateGallery();
+    document.querySelectorAll('img[data-src]').forEach(img => {
+      imageObserver.observe(img);
+    });
+  }
+}
+
+// Error handling
+function handleError(error, context) {
+  console.error(`Error in ${context}:`, error);
+  // You could add more sophisticated error handling here
+}
+
+// イベントリスナーの設定
+document.addEventListener('DOMContentLoaded', () => {
+  // ギャラリーの初期化
+  initializeGallery();
+
+  // モーダルの閉じるボタン
+  const closeButton = document.querySelector('.close-button');
+  if (closeButton) {
+    closeButton.addEventListener('click', closeModal);
+  }
+
+  // モーダル外クリックで閉じる
+  const modal = document.getElementById('nftModal');
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  }
+
+  // フィルターボタンの設定
+  const filterButtons = document.querySelectorAll('.menu-item');
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // アクティブクラスの切り替え
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      
+      // フィルタリングの実装（今後追加予定）
+    });
+  });
+
+  // ギャラリーグリッドの初期化
+  populateGallery();
 });
