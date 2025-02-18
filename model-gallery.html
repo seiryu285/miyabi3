@@ -79,7 +79,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            max-width: 1200px;
+            max-width: 1400px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -89,21 +89,33 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
         }
 
         .model-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .model-viewer-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background-color: #f5f5f5;
+            transition: all 0.5s ease;
         }
 
         model-viewer {
             width: 100%;
-            height: 300px;
-            background-color: #f5f5f5;
+            height: 100%;
+            --poster-color: transparent;
         }
 
         .model-info {
             padding: 1rem;
+            transition: all 0.3s ease;
         }
 
         .model-title {
@@ -134,6 +146,55 @@
             color: white;
             font-size: 1.2rem;
         }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+        }
+
+        .modal-content {
+            width: 90%;
+            height: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .modal model-viewer {
+            width: 100%;
+            height: calc(100% - 60px);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: var(--main-color);
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0.5rem;
+            line-height: 1;
+        }
+
+        .modal-title {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 1.5rem;
+            color: var(--main-color);
+        }
     </style>
 </head>
 <body>
@@ -146,63 +207,101 @@
         </nav>
     </header>
 
-    <div class="model-gallery">
-        <div class="model-card">
-            <model-viewer
-                src="assets/models1.glb"
-                camera-controls
-                auto-rotate
-                shadow-intensity="1"
-                exposure="1"
-                alt="3Dモデル1">
-            </model-viewer>
-            <div class="model-info">
-                <h3 class="model-title">雅の形 - 壱</h3>
-                <p class="model-description">伝統と現代が融合した3Dアート作品</p>
-            </div>
-        </div>
-
-        <div class="model-card">
-            <model-viewer
-                src="assets/models2.glb"
-                camera-controls
-                auto-rotate
-                shadow-intensity="1"
-                exposure="1"
-                alt="3Dモデル2">
-            </model-viewer>
-            <div class="model-info">
-                <h3 class="model-title">雅の形 - 弐</h3>
-                <p class="model-description">日本の美意識を表現した立体作品</p>
-            </div>
-        </div>
-
-        <div class="model-card">
-            <model-viewer
-                src="assets/models3.glb"
-                camera-controls
-                auto-rotate
-                shadow-intensity="1"
-                exposure="1"
-                alt="3Dモデル3">
-            </model-viewer>
-            <div class="model-info">
-                <h3 class="model-title">雅の形 - 参</h3>
-                <p class="model-description">和のエッセンスを取り入れた現代アート</p>
-            </div>
-        </div>
+    <div class="model-gallery" id="modelGallery">
+        <!-- 3Dモデルカードはスクリプトで動的に生成されます -->
     </div>
 
     <div id="loading" class="loading-container">
         <div class="loading-text">Loading 3D Models...</div>
     </div>
 
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle" class="modal-title"></h2>
+            <button class="close-button">&times;</button>
+            <model-viewer id="modalViewer"
+                camera-controls
+                auto-rotate
+                rotation-per-second="30deg"
+                shadow-intensity="1"
+                exposure="1">
+            </model-viewer>
+        </div>
+    </div>
+
     <script>
+        const modelData = [
+            { src: 'assets/models1.glb', title: '雅の形 - 壱', description: '伝統と現代が融合した3Dアート作品' },
+            { src: 'assets/models2.glb', title: '雅の形 - 弐', description: '日本の美意識を表現した立体作品' },
+            { src: 'assets/models3.glb', title: '雅の形 - 参', description: '和のエッセンスを取り入れた現代アート' },
+            { src: 'assets/models4.glb', title: '雅の形 - 四', description: '現代的な解釈による伝統美の表現' },
+            { src: 'assets/models5.glb', title: '雅の形 - 五', description: '日本の四季を表現した立体アート' },
+            { src: 'assets/models6.glb', title: '雅の形 - 六', description: '禅の思想を取り入れた3D作品' },
+            { src: 'assets/models7.glb', title: '雅の形 - 七', description: '和の色彩が織りなす立体表現' },
+            { src: 'assets/models8.glb', title: '雅の形 - 八', description: '伝統工芸からインスピレーションを得た作品' },
+            { src: 'assets/models9.glb', title: '雅の形 - 九', description: '日本建築の美学を3Dで表現' },
+            { src: 'assets/models10.glb', title: '雅の形 - 十', description: '和のミニマリズムを追求した作品' },
+            { src: 'assets/models11.glb', title: '雅の形 - 十一', description: '現代アートと日本美術の融合' },
+            { src: 'assets/models12.glb', title: '雅の形 - 十二', description: 'デジタルと伝統の調和' },
+            { src: 'assets/models13.glb', title: '雅の形 - 十三', description: '侘び寂びの現代的解釈' },
+            { src: 'assets/models14.glb', title: '雅の形 - 十四', description: '日本の精神性を表現した3Dアート' }
+        ];
+
+        // モデルカードの生成
+        const gallery = document.getElementById('modelGallery');
+        modelData.forEach(model => {
+            const card = document.createElement('div');
+            card.className = 'model-card';
+            card.innerHTML = `
+                <div class="model-viewer-container">
+                    <model-viewer
+                        src="${model.src}"
+                        camera-controls
+                        auto-rotate
+                        shadow-intensity="1"
+                        exposure="1"
+                        alt="${model.title}">
+                    </model-viewer>
+                </div>
+                <div class="model-info">
+                    <h3 class="model-title">${model.title}</h3>
+                    <p class="model-description">${model.description}</p>
+                </div>
+            `;
+            gallery.appendChild(card);
+
+            // クリックイベントの追加
+            card.addEventListener('click', () => openModal(model));
+        });
+
+        // モーダル関連の処理
+        const modal = document.getElementById('modal');
+        const modalViewer = document.getElementById('modalViewer');
+        const modalTitle = document.getElementById('modalTitle');
+        const closeButton = document.querySelector('.close-button');
+
+        function openModal(model) {
+            modal.style.display = 'flex';
+            modalViewer.src = model.src;
+            modalTitle.textContent = model.title;
+            modalViewer.setAttribute('auto-rotate', '');
+            modalViewer.setAttribute('camera-controls', '');
+            modalViewer.setAttribute('rotation-per-second', '30deg');
+        }
+
+        closeButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
         // ローディング処理
         window.addEventListener('load', () => {
             const loading = document.getElementById('loading');
-            
-            // すべてのmodel-viewerの読み込みを待つ
             const modelViewers = document.querySelectorAll('model-viewer');
             let loadedCount = 0;
 
