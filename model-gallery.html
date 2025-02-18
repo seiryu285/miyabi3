@@ -158,6 +158,12 @@
             justify-content: center;
             align-items: center;
             z-index: 3000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
         }
 
         .modal-content {
@@ -168,6 +174,12 @@
             border-radius: 15px;
             padding: 2rem;
             position: relative;
+            transform: scale(0.7) rotate(0deg);
+            transition: transform 0.5s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1) rotate(360deg);
         }
 
         .modal model-viewer {
@@ -231,20 +243,20 @@
 
     <script>
         const modelData = [
-            { src: 'assets/models1.glb', title: '雅の形 - 壱', description: '伝統と現代が融合した3Dアート作品' },
-            { src: 'assets/models2.glb', title: '雅の形 - 弐', description: '日本の美意識を表現した立体作品' },
-            { src: 'assets/models3.glb', title: '雅の形 - 参', description: '和のエッセンスを取り入れた現代アート' },
-            { src: 'assets/models4.glb', title: '雅の形 - 四', description: '現代的な解釈による伝統美の表現' },
-            { src: 'assets/models5.glb', title: '雅の形 - 五', description: '日本の四季を表現した立体アート' },
-            { src: 'assets/models6.glb', title: '雅の形 - 六', description: '禅の思想を取り入れた3D作品' },
-            { src: 'assets/models7.glb', title: '雅の形 - 七', description: '和の色彩が織りなす立体表現' },
-            { src: 'assets/models8.glb', title: '雅の形 - 八', description: '伝統工芸からインスピレーションを得た作品' },
-            { src: 'assets/models9.glb', title: '雅の形 - 九', description: '日本建築の美学を3Dで表現' },
-            { src: 'assets/models10.glb', title: '雅の形 - 十', description: '和のミニマリズムを追求した作品' },
-            { src: 'assets/models11.glb', title: '雅の形 - 十一', description: '現代アートと日本美術の融合' },
-            { src: 'assets/models12.glb', title: '雅の形 - 十二', description: 'デジタルと伝統の調和' },
-            { src: 'assets/models13.glb', title: '雅の形 - 十三', description: '侘び寂びの現代的解釈' },
-            { src: 'assets/models14.glb', title: '雅の形 - 十四', description: '日本の精神性を表現した3Dアート' }
+            { src: 'assets/models1.glb', title: '壱', description: '伝統と現代が融合した3Dアート作品' },
+            { src: 'assets/models2.glb', title: '弐', description: '日本の美意識を表現した立体作品' },
+            { src: 'assets/models3.glb', title: '参', description: '和のエッセンスを取り入れた現代アート' },
+            { src: 'assets/models4.glb', title: '四', description: '現代的な解釈による伝統美の表現' },
+            { src: 'assets/models5.glb', title: '五', description: '日本の四季を表現した立体アート' },
+            { src: 'assets/models6.glb', title: '六', description: '禅の思想を取り入れた3D作品' },
+            { src: 'assets/models7.glb', title: '七', description: '和の色彩が織りなす立体表現' },
+            { src: 'assets/models8.glb', title: '八', description: '伝統工芸からインスピレーションを得た作品' },
+            { src: 'assets/models9.glb', title: '九', description: '日本建築の美学を3Dで表現' },
+            { src: 'assets/models10.glb', title: '十', description: '和のミニマリズムを追求した作品' },
+            { src: 'assets/models11.glb', title: '十一', description: '現代アートと日本美術の融合' },
+            { src: 'assets/models12.glb', title: '十二', description: 'デジタルと伝統の調和' },
+            { src: 'assets/models13.glb', title: '十三', description: '侘び寂びの現代的解釈' },
+            { src: 'assets/models14.glb', title: '十四', description: '日本の精神性を表現した3Dアート' }
         ];
 
         // モデルカードの生成
@@ -287,15 +299,26 @@
             modalViewer.setAttribute('auto-rotate', '');
             modalViewer.setAttribute('camera-controls', '');
             modalViewer.setAttribute('rotation-per-second', '30deg');
+            
+            // アニメーションのためにタイミングをずらす
+            requestAnimationFrame(() => {
+                modal.classList.add('show');
+            });
         }
 
         closeButton.addEventListener('click', () => {
-            modal.style.display = 'none';
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
         });
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-                modal.style.display = 'none';
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
             }
         });
 
