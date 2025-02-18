@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>雅 -MIYABI- | 3Dモデルギャラリー</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link rel="preload" as="fetch" href="assets/models1.glb" crossorigin="anonymous">
+    <link rel="preload" as="fetch" href="assets/models2.glb" crossorigin="anonymous">
+    <link rel="preload" as="fetch" href="assets/models3.glb" crossorigin="anonymous">
+    <meta name="description" content="日本の伝統美をモダンに表現した3Dアートギャラリー">
     <style>
         :root {
             --main-color: #2D2D2D;
@@ -242,6 +246,7 @@
     </div>
 
     <script>
+        const CACHE_NAME = 'miyabi-3d-models-v1';
         const modelData = [
             { src: 'assets/models1.glb', title: '壱', description: '伝統と現代が融合した3Dアート作品' },
             { src: 'assets/models2.glb', title: '弐', description: '日本の美意識を表現した立体作品' },
@@ -259,9 +264,38 @@
             { src: 'assets/models14.glb', title: '十四', description: '日本の精神性を表現した3Dアート' }
         ];
 
-        // モデルカードの生成
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(err => {
+                    console.log('Service Worker registration failed:', err);
+                });
+            });
+        }
+
+        async function preloadModels() {
+            try {
+                const cache = await caches.open(CACHE_NAME);
+                const preloadPromises = modelData.map(async model => {
+                    try {
+                        const response = await fetch(model.src);
+                        if (response.ok) {
+                            await cache.put(model.src, response.clone());
+                        }
+                    } catch (error) {
+                        console.warn(`Failed to preload ${model.src}:`, error);
+                    }
+                });
+                await Promise.all(preloadPromises);
+            } catch (error) {
+                console.warn('Preloading failed:', error);
+            }
+        }
+
         const gallery = document.getElementById('modelGallery');
-        modelData.forEach(model => {
+        let loadedModels = 0;
+        const totalModels = modelData.length;
+
+        modelData.forEach((model, index) => {
             const card = document.createElement('div');
             card.className = 'model-card';
             card.innerHTML = `
@@ -272,7 +306,10 @@
                         auto-rotate
                         shadow-intensity="1"
                         exposure="1"
-                        alt="${model.title}">
+                        alt="${model.title}"
+                        preload
+                        loading="eager"
+                        reveal="interaction">
                     </model-viewer>
                 </div>
                 <div class="model-info">
@@ -282,11 +319,29 @@
             `;
             gallery.appendChild(card);
 
-            // クリックイベントの追加
+            const modelViewer = card.querySelector('model-viewer');
+            modelViewer.addEventListener('load', () => {
+                loadedModels++;
+                updateLoadingProgress();
+            });
+
             card.addEventListener('click', () => openModal(model));
         });
 
-        // モーダル関連の処理
+        function updateLoadingProgress() {
+            const loading = document.getElementById('loading');
+            const progress = (loadedModels / totalModels) * 100;
+            const loadingText = document.querySelector('.loading-text');
+            loadingText.textContent = `Loading 3D Models... ${Math.round(progress)}%`;
+
+            if (loadedModels === totalModels) {
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 500);
+            }
+        }
+
         const modal = document.getElementById('modal');
         const modalViewer = document.getElementById('modalViewer');
         const modalTitle = document.getElementById('modalTitle');
@@ -300,7 +355,6 @@
             modalViewer.setAttribute('camera-controls', '');
             modalViewer.setAttribute('rotation-per-second', '30deg');
             
-            // アニメーションのためにタイミングをずらす
             requestAnimationFrame(() => {
                 modal.classList.add('show');
             });
@@ -322,26 +376,7 @@
             }
         });
 
-        // ローディング処理
-        window.addEventListener('load', () => {
-            const loading = document.getElementById('loading');
-            const modelViewers = document.querySelectorAll('model-viewer');
-            let loadedCount = 0;
-
-            modelViewers.forEach(viewer => {
-                viewer.addEventListener('load', () => {
-                    loadedCount++;
-                    if (loadedCount === modelViewers.length) {
-                        loading.style.display = 'none';
-                    }
-                });
-            });
-
-            // 10秒後にローディング画面を強制的に非表示（タイムアウト処理）
-            setTimeout(() => {
-                loading.style.display = 'none';
-            }, 10000);
-        });
+        preloadModels();
     </script>
 </body>
 </html>
