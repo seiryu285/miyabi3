@@ -1,382 +1,414 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>雅 -MIYABI- | 3Dモデルギャラリー</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <link rel="preload" as="fetch" href="assets/models1.glb" crossorigin="anonymous">
-    <link rel="preload" as="fetch" href="assets/models2.glb" crossorigin="anonymous">
-    <link rel="preload" as="fetch" href="assets/models3.glb" crossorigin="anonymous">
-    <meta name="description" content="日本の伝統美をモダンに表現した3Dアートギャラリー">
-    <style>
-        :root {
-            --main-color: #2D2D2D;
-            --accent-color: #B70033;
-            --bg-color: #FAFAFA;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "Yu Mincho", "MS Mincho", serif;
-            background-color: var(--bg-color);
-            color: var(--main-color);
-        }
-
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1rem;
-            background-color: rgba(250, 250, 250, 0.95);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(8px);
-        }
-
-        .logo {
-            font-size: 2rem;
-            text-decoration: none;
-            color: var(--main-color);
-            letter-spacing: 0.2em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--main-color);
-            font-size: 1rem;
-            letter-spacing: 0.1em;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .model-gallery {
-            margin-top: 80px;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .model-card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .model-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .model-viewer-container {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            background-color: #f5f5f5;
-            transition: all 0.5s ease;
-        }
-
-        model-viewer {
-            width: 100%;
-            height: 100%;
-            --poster-color: transparent;
-        }
-
-        .model-info {
-            padding: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .model-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--main-color);
-        }
-
-        .model-description {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .loading-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .loading-text {
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 3000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal.show {
-            opacity: 1;
-        }
-
-        .modal-content {
-            width: 90%;
-            height: 90%;
-            max-width: 1200px;
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            position: relative;
-            transform: scale(0.7) rotate(0deg);
-            transition: transform 0.5s ease;
-        }
-
-        .modal.show .modal-content {
-            transform: scale(1) rotate(360deg);
-        }
-
-        .modal model-viewer {
-            width: 100%;
-            height: calc(100% - 60px);
-        }
-
-        .close-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 2rem;
-            color: var(--main-color);
-            cursor: pointer;
-            border: none;
-            background: none;
-            padding: 0.5rem;
-            line-height: 1;
-        }
-
-        .modal-title {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            font-size: 1.5rem;
-            color: var(--main-color);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>雅 -MIYABI- | 3Dモデルギャラリー</title>
+  <!-- 外部リソースへの接続を高速化 -->
+  <link rel="preconnect" href="https://unpkg.com">
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <link rel="preload" as="fetch" href="assets/models1.glb" crossorigin="anonymous">
+  <link rel="preload" as="fetch" href="assets/models2.glb" crossorigin="anonymous">
+  <link rel="preload" as="fetch" href="assets/models3.glb" crossorigin="anonymous">
+  <meta name="description" content="日本の伝統美をモダンに表現した3Dアートギャラリー">
+  <style>
+    :root {
+      --main-color: #2D2D2D;
+      --accent-color: #B70033;
+      --bg-color: #FAFAFA;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: "Yu Mincho", "MS Mincho", serif;
+      background-color: var(--bg-color);
+      color: var(--main-color);
+    }
+    
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem;
+      background-color: rgba(250, 250, 250, 0.95);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(8px);
+    }
+    
+    .logo {
+      font-size: 2rem;
+      text-decoration: none;
+      color: var(--main-color);
+      letter-spacing: 0.2em;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--main-color);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    
+    .model-gallery {
+      margin-top: 80px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .model-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      /* 豪華なフレーム（グラデーションボーダー） */
+      border: 3px solid;
+      border-image: linear-gradient(45deg, #B70033, #2D2D2D, #B70033) 1;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .model-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .model-viewer-container {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      background-color: #f5f5f5;
+      transition: all 0.5s ease;
+    }
+    
+    model-viewer {
+      width: 100%;
+      height: 100%;
+      --poster-color: transparent;
+      will-change: transform;
+    }
+    
+    .model-info {
+      padding: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .model-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--main-color);
+    }
+    
+    .model-description {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .loading-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    
+    .loading-text {
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .modal.show {
+      opacity: 1;
+    }
+    
+    .modal-content {
+      width: 90%;
+      height: 90%;
+      max-width: 1200px;
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      position: relative;
+      transform: scale(0.7) rotate(0deg);
+      transition: transform 0.5s ease;
+    }
+    
+    .modal.show .modal-content {
+      transform: scale(1) rotate(360deg);
+    }
+    
+    .modal model-viewer {
+      width: 100%;
+      height: calc(100% - 60px);
+    }
+    
+    .close-button {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      color: var(--main-color);
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0.5rem;
+      line-height: 1;
+    }
+    
+    .modal-title {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 1.5rem;
+      color: var(--main-color);
+    }
+  </style>
 </head>
 <body>
-    <header class="header">
-        <a href="index.html" class="logo">雅</a>
-        <nav class="nav-links">
-            <a href="about.html">ABOUT</a>
-            <a href="gallery.html">GALLERY</a>
-            <a href="model-gallery.html">ITEMS</a>
-        </nav>
-    </header>
+  <header class="header">
+    <a href="index.html" class="logo">雅</a>
+    <nav class="nav-links">
+      <a href="about.html">ABOUT</a>
+      <a href="gallery.html">GALLERY</a>
+      <a href="model-gallery.html">ITEMS</a>
+    </nav>
+  </header>
 
-    <div class="model-gallery" id="modelGallery">
-        <!-- 3Dモデルカードはスクリプトで動的に生成されます -->
+  <div class="model-gallery" id="modelGallery">
+    <!-- 3Dモデルカードはスクリプトで動的に生成されます -->
+  </div>
+
+  <div id="loading" class="loading-container">
+    <div class="loading-text">Loading 3D Models...</div>
+  </div>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h2 id="modalTitle" class="modal-title"></h2>
+      <button class="close-button">&times;</button>
+      <model-viewer id="modalViewer"
+          camera-controls
+          auto-rotate
+          rotation-per-second="30deg"
+          shadow-intensity="1"
+          exposure="1">
+      </model-viewer>
     </div>
+  </div>
 
-    <div id="loading" class="loading-container">
-        <div class="loading-text">Loading 3D Models...</div>
-    </div>
+  <script>
+    const CACHE_NAME = 'miyabi-3d-models-v1';
+    const modelData = [
+      { src: 'assets/models1.glb', title: '壱', description: '伝統と現代が融合した3Dアート作品' },
+      { src: 'assets/models2.glb', title: '弐', description: '日本の美意識を表現した立体作品' },
+      { src: 'assets/models3.glb', title: '参', description: '和のエッセンスを取り入れた現代アート' },
+      { src: 'assets/models4.glb', title: '四', description: '現代的な解釈による伝統美の表現' },
+      { src: 'assets/models5.glb', title: '五', description: '日本の四季を表現した立体アート' },
+      { src: 'assets/models6.glb', title: '六', description: '禅の思想を取り入れた3D作品' },
+      { src: 'assets/models7.glb', title: '七', description: '和の色彩が織りなす立体表現' },
+      { src: 'assets/models8.glb', title: '八', description: '伝統工芸からインスピレーションを得た作品' },
+      { src: 'assets/models9.glb', title: '九', description: '日本建築の美学を3Dで表現' },
+      { src: 'assets/models10.glb', title: '十', description: '和のミニマリズムを追求した作品' },
+      { src: 'assets/models11.glb', title: '十一', description: '現代アートと日本美術の融合' },
+      { src: 'assets/models12.glb', title: '十二', description: 'デジタルと伝統の調和' },
+      { src: 'assets/models13.glb', title: '十三', description: '侘び寂びの現代的解釈' },
+      { src: 'assets/models14.glb', title: '十四', description: '日本の精神性を表現した3Dアート' }
+    ];
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h2 id="modalTitle" class="modal-title"></h2>
-            <button class="close-button">&times;</button>
-            <model-viewer id="modalViewer"
-                camera-controls
-                auto-rotate
-                rotation-per-second="30deg"
-                shadow-intensity="1"
-                exposure="1">
-            </model-viewer>
-        </div>
-    </div>
+    // Service Worker 登録（キャッシュ用）
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => {
+          console.log('Service Worker registration failed:', err);
+        });
+      });
+    }
 
-    <script>
-        const CACHE_NAME = 'miyabi-3d-models-v1';
-        const modelData = [
-            { src: 'assets/models1.glb', title: '壱', description: '伝統と現代が融合した3Dアート作品' },
-            { src: 'assets/models2.glb', title: '弐', description: '日本の美意識を表現した立体作品' },
-            { src: 'assets/models3.glb', title: '参', description: '和のエッセンスを取り入れた現代アート' },
-            { src: 'assets/models4.glb', title: '四', description: '現代的な解釈による伝統美の表現' },
-            { src: 'assets/models5.glb', title: '五', description: '日本の四季を表現した立体アート' },
-            { src: 'assets/models6.glb', title: '六', description: '禅の思想を取り入れた3D作品' },
-            { src: 'assets/models7.glb', title: '七', description: '和の色彩が織りなす立体表現' },
-            { src: 'assets/models8.glb', title: '八', description: '伝統工芸からインスピレーションを得た作品' },
-            { src: 'assets/models9.glb', title: '九', description: '日本建築の美学を3Dで表現' },
-            { src: 'assets/models10.glb', title: '十', description: '和のミニマリズムを追求した作品' },
-            { src: 'assets/models11.glb', title: '十一', description: '現代アートと日本美術の融合' },
-            { src: 'assets/models12.glb', title: '十二', description: 'デジタルと伝統の調和' },
-            { src: 'assets/models13.glb', title: '十三', description: '侘び寂びの現代的解釈' },
-            { src: 'assets/models14.glb', title: '十四', description: '日本の精神性を表現した3Dアート' }
-        ];
-
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').catch(err => {
-                    console.log('Service Worker registration failed:', err);
-                });
-            });
-        }
-
-        async function preloadModels() {
-            try {
-                const cache = await caches.open(CACHE_NAME);
-                const preloadPromises = modelData.map(async model => {
-                    try {
-                        const response = await fetch(model.src);
-                        if (response.ok) {
-                            await cache.put(model.src, response.clone());
-                        }
-                    } catch (error) {
-                        console.warn(`Failed to preload ${model.src}:`, error);
-                    }
-                });
-                await Promise.all(preloadPromises);
-            } catch (error) {
-                console.warn('Preloading failed:', error);
+    async function preloadModels() {
+      try {
+        const cache = await caches.open(CACHE_NAME);
+        const preloadPromises = modelData.map(async model => {
+          try {
+            const response = await fetch(model.src);
+            if (response.ok) {
+              await cache.put(model.src, response.clone());
             }
-        }
+          } catch (error) {
+            console.warn(`Failed to preload ${model.src}:`, error);
+          }
+        });
+        await Promise.all(preloadPromises);
+      } catch (error) {
+        console.warn('Preloading failed:', error);
+      }
+    }
 
-        const gallery = document.getElementById('modelGallery');
-        let loadedModels = 0;
-        const totalModels = modelData.length;
+    const gallery = document.getElementById('modelGallery');
+    let loadedModels = 0;
+    const totalModels = modelData.length;
 
-        modelData.forEach((model, index) => {
-            const card = document.createElement('div');
-            card.className = 'model-card';
-            card.innerHTML = `
-                <div class="model-viewer-container">
-                    <model-viewer
-                        src="${model.src}"
-                        camera-controls
-                        auto-rotate
-                        shadow-intensity="1"
-                        exposure="1"
-                        alt="${model.title}"
-                        preload
-                        loading="eager"
-                        reveal="interaction">
-                    </model-viewer>
-                </div>
-                <div class="model-info">
-                    <h3 class="model-title">${model.title}</h3>
-                    <p class="model-description">${model.description}</p>
-                </div>
-            `;
-            gallery.appendChild(card);
+    // モデルカード生成（src属性は後から IntersectionObserver で設定）
+    modelData.forEach(model => {
+      const card = document.createElement('div');
+      card.className = 'model-card';
+      card.innerHTML = `
+        <div class="model-viewer-container">
+          <model-viewer
+              data-src="${model.src}"
+              camera-controls
+              auto-rotate
+              shadow-intensity="1"
+              exposure="1"
+              alt="${model.title}"
+              loading="lazy"
+              reveal="interaction">
+          </model-viewer>
+        </div>
+        <div class="model-info">
+          <h3 class="model-title">${model.title}</h3>
+          <p class="model-description">${model.description}</p>
+        </div>
+      `;
+      gallery.appendChild(card);
+      card.addEventListener('click', () => openModal(model));
+    });
 
-            const modelViewer = card.querySelector('model-viewer');
-            modelViewer.addEventListener('load', () => {
+    function updateLoadingProgress() {
+      const loading = document.getElementById('loading');
+      const progress = (loadedModels / totalModels) * 100;
+      const loadingText = document.querySelector('.loading-text');
+      loadingText.textContent = `Loading 3D Models... ${Math.round(progress)}%`;
+
+      if (loadedModels === totalModels) {
+        loading.style.opacity = '0';
+        setTimeout(() => {
+          loading.style.display = 'none';
+        }, 500);
+      }
+    }
+
+    // IntersectionObserver による Lazy Loading の実装
+    document.addEventListener('DOMContentLoaded', () => {
+      const modelViewers = document.querySelectorAll('model-viewer');
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const viewer = entry.target;
+            if (!viewer.getAttribute('src')) {
+              viewer.setAttribute('src', viewer.dataset.src);
+              viewer.addEventListener('load', () => {
                 loadedModels++;
                 updateLoadingProgress();
-            });
-
-            card.addEventListener('click', () => openModal(model));
-        });
-
-        function updateLoadingProgress() {
-            const loading = document.getElementById('loading');
-            const progress = (loadedModels / totalModels) * 100;
-            const loadingText = document.querySelector('.loading-text');
-            loadingText.textContent = `Loading 3D Models... ${Math.round(progress)}%`;
-
-            if (loadedModels === totalModels) {
-                loading.style.opacity = '0';
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                }, 500);
+              });
             }
-        }
-
-        const modal = document.getElementById('modal');
-        const modalViewer = document.getElementById('modalViewer');
-        const modalTitle = document.getElementById('modalTitle');
-        const closeButton = document.querySelector('.close-button');
-
-        function openModal(model) {
-            modal.style.display = 'flex';
-            modalViewer.src = model.src;
-            modalTitle.textContent = model.title;
-            modalViewer.setAttribute('auto-rotate', '');
-            modalViewer.setAttribute('camera-controls', '');
-            modalViewer.setAttribute('rotation-per-second', '30deg');
-            
-            requestAnimationFrame(() => {
-                modal.classList.add('show');
-            });
-        }
-
-        closeButton.addEventListener('click', () => {
-            modal.classList.remove('show');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
+            observer.unobserve(viewer);
+          }
         });
+      }, { rootMargin: '0px 0px 200px 0px' });
+      modelViewers.forEach(viewer => observer.observe(viewer));
+    });
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('show');
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                }, 300);
-            }
-        });
+    const modal = document.getElementById('modal');
+    const modalViewer = document.getElementById('modalViewer');
+    const modalTitle = document.getElementById('modalTitle');
+    const closeButton = document.querySelector('.close-button');
 
-        preloadModels();
-    </script>
+    function openModal(model) {
+      modal.style.display = 'flex';
+      modalViewer.src = model.src;
+      modalTitle.textContent = model.title;
+      modalViewer.setAttribute('auto-rotate', '');
+      modalViewer.setAttribute('camera-controls', '');
+      modalViewer.setAttribute('rotation-per-second', '30deg');
+      
+      requestAnimationFrame(() => {
+        modal.classList.add('show');
+      });
+    }
+
+    closeButton.addEventListener('click', () => {
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 300);
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('show');
+        setTimeout(() => {
+          modal.style.display = 'none';
+        }, 300);
+      }
+    });
+
+    // 万が一、全モデルの読み込みイベントが発火しなかった場合のフォールバック（5秒後にローディング画面を非表示）
+    setTimeout(() => {
+      const loading = document.getElementById('loading');
+      if (loading.style.display !== 'none') {
+        loading.style.opacity = '0';
+        setTimeout(() => {
+          loading.style.display = 'none';
+        }, 500);
+      }
+    }, 5000);
+
+    preloadModels();
+  </script>
 </body>
 </html>
