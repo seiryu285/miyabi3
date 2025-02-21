@@ -225,3 +225,18 @@ const translations = {
 };
 
 let currentLang = "en";
+
+const cacheStrategy = (request) => {
+  if (request.url.endsWith('.glb')) {
+    return caches.match(request).then(response => {
+      return response || fetch(request).then(response => {
+        const clonedResponse = response.clone();
+        caches.open('model-gallery-v1').then(cache => {
+          cache.put(request, clonedResponse);
+        });
+        return response;
+      });
+    });
+  }
+  return fetch(request);
+};
