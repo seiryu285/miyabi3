@@ -261,7 +261,6 @@
       object-fit: contain;
       border-radius: 16px;
     }
-    /* Note: video tag does not include controls attribute so no native UI is shown */
     .modal-info {
       width: 400px;
       height: 100%;
@@ -403,7 +402,7 @@
   <!-- Gallery Container -->
   <div class="gallery-container">
     <div class="gallery-grid">
-      <!-- NFT items are 生成 via JS -->
+      <!-- NFT items are generated via JS -->
     </div>
   </div>
 
@@ -511,7 +510,8 @@
           description_en: "Aonami, hailing from a lineage of Kamakura textile artisans, upholds the ancient art of indigo dyeing. Calm as a deep ocean, he channels a fervent passion to fuse digital art with traditional techniques.",
           description_ja: "青波は鎌倉の染織職人の家系に生まれ、古来の藍染技法を受け継いでいます。深海のような静けさを持ちながら、デジタルアートと伝統技法の融合に情熱を注ぐ。",
           image: "assets/nft1.jpg",
-          video: "assets/nft1.mp4",
+          // Optional example video:
+          video: "assets/nft1.mp4", 
           style: "Contemporary Shibori",
           method: "Digital Painting & Dyeing Fusion",
           accessory: "Kimono with Wave Pattern",
@@ -527,7 +527,6 @@
             fourCharacterIdiom_ja: "青藍夢韻"
           }
         },
-        // #2～#10 のデータ（省略）
         {
           id: 2,
           title: "MIYABI #002: Kakurin - The Swordmaster of Tradition",
@@ -550,7 +549,628 @@
             fourCharacterIdiom_ja: "鶴影剣"
           }
         },
-        // #3～#30 のデータ（省略）
+        {
+          id: 3,
+          title: "MIYABI #003: Kaguya - The Enigma of Moonlight",
+          description_en: "Kaguya, rumored to have been born under a lunar eclipse, infuses her brushstrokes with lunar radiance.",
+          description_ja: "月食の夜に生まれたと言い伝えられる輝夜は、月の輝きを筆致に映し出す。",
+          image: "assets/nft3.jpg",
+          video: "",
+          style: "Moonlit Avant-garde",
+          method: "Sumi-e & Digital Overlay",
+          accessory: "Lunar Hairpin",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Gentle & Mystical",
+            personality_ja: "神秘的でやわらかい",
+            specialty_en: "Moonlit Brush",
+            specialty_ja: "月光筆",
+            currentBase_en: "Kyoto",
+            currentBase_ja: "京都",
+            fourCharacterIdiom_en: "Moonlit Dream Path",
+            fourCharacterIdiom_ja: "月夜幻道"
+          }
+        },
+        {
+          id: 4,
+          title: "MIYABI #004: Tsubame - The Swift Ink Artisan",
+          description_en: "Tsubame is known for her lightning-fast strokes, capturing fleeting emotions before they vanish.",
+          description_ja: "燕は稲妻のように素早い筆運びで、消えゆく感情を一瞬のうちに描き上げる。",
+          image: "assets/nft4.jpg",
+          video: "",
+          style: "Neo-Shodo",
+          method: "Expressive Ink & Watercolor",
+          accessory: "Swallow Feather Brush",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Energetic & Precise",
+            personality_ja: "活気に満ち正確",
+            specialty_en: "Calligraphy Flashes",
+            specialty_ja: "閃きの書道",
+            currentBase_en: "Osaka",
+            currentBase_ja: "大阪",
+            fourCharacterIdiom_en: "Lightning Ink Fury",
+            fourCharacterIdiom_ja: "閃筆怒涛"
+          }
+        },
+        {
+          id: 5,
+          title: "MIYABI #005: Akanezora - The Twilight Artisan",
+          description_en: "Akanezora weaves vivid sunsets into her art, bridging day and night with ethereal hues.",
+          description_ja: "茜空は鮮烈な夕焼けを作品に織り込み、昼と夜を繋ぐ幻想的な色彩を生み出す。",
+          image: "assets/nft5.jpg",
+          // Example with video:
+          video: "assets/nft5.mp4",
+          style: "Vibrant Twilight",
+          method: "Dye & Pastel Fusion",
+          accessory: "Sunset Kimono Shawl",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Warm & Reflective",
+            personality_ja: "温かく思慮深い",
+            specialty_en: "Sunset Dye",
+            specialty_ja: "夕焼け染め",
+            currentBase_en: "Hiroshima",
+            currentBase_ja: "広島",
+            fourCharacterIdiom_en: "Crimson Arc Horizon",
+            fourCharacterIdiom_ja: "茜虹境"
+          }
+        },
+        {
+          id: 6,
+          title: "MIYABI #006: Momiji - The Autumn Whisperer",
+          description_en: "Momiji draws inspiration from autumn leaves, capturing their fleeting blaze in digital layering.",
+          description_ja: "紅葉は秋の落ち葉からインスピレーションを得て、儚い紅の輝きをデジタルレイヤーに落とし込む。",
+          image: "assets/nft6.jpg",
+          video: "",
+          style: "Falling Leaves Impression",
+          method: "Digital Collage & Ink Wash",
+          accessory: "Maple Leaf Headpiece",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Melancholic & Passionate",
+            personality_ja: "物悲しくも情熱的",
+            specialty_en: "Foliage Hues",
+            specialty_ja: "紅葉彩",
+            currentBase_en: "Nara",
+            currentBase_ja: "奈良",
+            fourCharacterIdiom_en: "Fallen Leaf Elegy",
+            fourCharacterIdiom_ja: "落葉哀歌"
+          }
+        },
+        {
+          id: 7,
+          title: "MIYABI #007: Suzuhana - The Bellflower Muse",
+          description_en: "Graceful as a bellflower, Suzuhana’s gentle strokes resonate with harmony and quietude.",
+          description_ja: "鈴花は桔梗のように優美で、その穏やかな筆致は調和と静寂を響かせる。",
+          image: "assets/nft7.jpg",
+          video: "",
+          style: "Floral Harmony",
+          method: "Hand-Drawn Blossoms & Digital Tones",
+          accessory: "Bellflower Pendant",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Gentle & Harmonious",
+            personality_ja: "優しく調和的",
+            specialty_en: "Floral Patterns",
+            specialty_ja: "花模様",
+            currentBase_en: "Nagoya",
+            currentBase_ja: "名古屋",
+            fourCharacterIdiom_en: "Flower Bell Echo",
+            fourCharacterIdiom_ja: "花鈴の響"
+          }
+        },
+        {
+          id: 8,
+          title: "MIYABI #008: Kaishin - The Sea-Heart Visionary",
+          description_en: "Kaishin merges oceanic themes with ethereal calligraphy, exploring the depths of the human heart.",
+          description_ja: "海心は海洋のモチーフと幻想的な書道を融合させ、人間の心の奥深くを表現する。",
+          image: "assets/nft8.jpg",
+          video: "",
+          style: "Marine Calligraphy",
+          method: "Ink & Sea Salt Texture",
+          accessory: "Coral Inkstone",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Calm & Introspective",
+            personality_ja: "静かで内省的",
+            specialty_en: "Oceanic Inks",
+            specialty_ja: "海墨",
+            currentBase_en: "Fukuoka",
+            currentBase_ja: "福岡",
+            fourCharacterIdiom_en: "Ocean Heart Flow",
+            fourCharacterIdiom_ja: "海心流転"
+          }
+        },
+        {
+          id: 9,
+          title: "MIYABI #009: Yomichi - The Night-Path Virtuoso",
+          description_en: "Yomichi thrives in the hush of midnight, weaving glowing lines against a backdrop of endless night.",
+          description_ja: "夜道は深夜の静寂を好み、無限の闇に光る線を織り込む作品を得意とする。",
+          image: "assets/nft9.jpg",
+          video: "",
+          style: "Nocturnal Minimalism",
+          method: "Glow Ink & Black Canvas",
+          accessory: "Lantern Earring",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Mysterious & Patient",
+            personality_ja: "神秘的で辛抱強い",
+            specialty_en: "Midnight Glimmer",
+            specialty_ja: "深夜の輝き",
+            currentBase_en: "Yokohama",
+            currentBase_ja: "横浜",
+            fourCharacterIdiom_en: "Night Path Illume",
+            fourCharacterIdiom_ja: "夜道幻灯"
+          }
+        },
+        {
+          id: 10,
+          title: "MIYABI #010: Fuurin - The Resonant Spirit",
+          description_en: "Fuurin’s art dances with the sound of wind chimes, transforming gentle breezes into visible form.",
+          description_ja: "風鈴の作品は風鈴の音色とともに舞い、そよ風を可視化するかのように描き出す。",
+          image: "assets/nft10.jpg",
+          // Example with video:
+          video: "assets/nft10.mp4",
+          style: "Wind Chime Aesthetic",
+          method: "Acrylic & Ambient Sound Waves",
+          accessory: "Metallic Wind Bell",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Joyful & Tranquil",
+            personality_ja: "陽気で安らか",
+            specialty_en: "Wind Sound Visualization",
+            specialty_ja: "風音可視化",
+            currentBase_en: "Sendai",
+            currentBase_ja: "仙台",
+            fourCharacterIdiom_en: "Wind Bell Serenade",
+            fourCharacterIdiom_ja: "風鈴の調"
+          }
+        },
+        {
+          id: 11,
+          title: "MIYABI #011: Harutsuki - The Spring Moon Poet",
+          description_en: "Harutsuki captures the bloom of spring under moonlit nights, highlighting life's ephemeral beauty.",
+          description_ja: "春月は月夜の下で咲く春の花を描き、その儚い美しさを強調する作品を作り上げる。",
+          image: "assets/nft11.jpg",
+          video: "",
+          style: "Lunar Spring Fusion",
+          method: "Soft Pastel & Ink Wash",
+          accessory: "Moon Blossom Hair Ornament",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Poetic & Delicate",
+            personality_ja: "叙情的で繊細",
+            specialty_en: "Night-Blooming Florals",
+            specialty_ja: "夜咲き花",
+            currentBase_en: "Kyushu",
+            currentBase_ja: "九州",
+            fourCharacterIdiom_en: "Moonlit Petal Verse",
+            fourCharacterIdiom_ja: "月下花詩"
+          }
+        },
+        {
+          id: 12,
+          title: "MIYABI #012: Kazehime - The Princess of Gales",
+          description_en: "Kazehime’s swirling lines mimic gusts of wind, filling her canvases with dynamic movement.",
+          description_ja: "風姫のうねるような線は風を模し、キャンバスを動感に溢れた世界へと変える。",
+          image: "assets/nft12.jpg",
+          video: "",
+          style: "Spiraling Expression",
+          method: "Vortex Brush & Spray Paint",
+          accessory: "Wind Ribbon",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Spirited & Bold",
+            personality_ja: "活発で大胆",
+            specialty_en: "Gale Dynamics",
+            specialty_ja: "疾風力学",
+            currentBase_en: "Kanazawa",
+            currentBase_ja: "金沢",
+            fourCharacterIdiom_en: "Cyclone Grace",
+            fourCharacterIdiom_ja: "旋風優雅"
+          }
+        },
+        {
+          id: 13,
+          title: "MIYABI #013: Shikimi - The Ink Alchemist",
+          description_en: "Shikimi experiments with pigments and ink chemistry, forging new hues unseen in nature.",
+          description_ja: "式美は顔料や墨の化学変化を探求し、自然界に存在しない新たな色彩を生み出す。",
+          image: "assets/nft13.jpg",
+          video: "",
+          style: "Alchemical Splendor",
+          method: "Chemically Reactive Paint & Ink",
+          accessory: "Philosopher’s Brush",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Curious & Innovative",
+            personality_ja: "探究心旺盛で革新的",
+            specialty_en: "Color Alchemy",
+            specialty_ja: "色彩錬金術",
+            currentBase_en: "Tsukuba",
+            currentBase_ja: "つくば",
+            fourCharacterIdiom_en: "Alchemy of Hue",
+            fourCharacterIdiom_ja: "色彩錬成"
+          }
+        },
+        {
+          id: 14,
+          title: "MIYABI #014: Ranpu - The Lantern Bearer",
+          description_en: "Ranpu illuminates hidden corners of the soul with lantern-themed art, shining hope in darkness.",
+          description_ja: "乱風はランタンをモチーフに、心の奥底の暗がりに希望の光を灯す作品を生み出す。",
+          image: "assets/nft14.jpg",
+          video: "",
+          style: "Illumination Realism",
+          method: "Oil Paint & Glowing Pigments",
+          accessory: "Iron Lantern Clip",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Bright & Compassionate",
+            personality_ja: "明るく慈悲深い",
+            specialty_en: "Light-Emitting Oils",
+            specialty_ja: "発光油絵",
+            currentBase_en: "Kobe",
+            currentBase_ja: "神戸",
+            fourCharacterIdiom_en: "Lantern Heart Light",
+            fourCharacterIdiom_ja: "灯籠心光"
+          }
+        },
+        {
+          id: 15,
+          title: "MIYABI #015: Takamine - The Spirit of Summits",
+          description_en: "Takamine embodies lofty mountain peaks, depicting grand vistas that instill reverence and awe.",
+          description_ja: "高嶺は壮大な山岳を象徴し、畏敬を抱かせる雄大な風景を描き出す。",
+          image: "assets/nft15.jpg",
+          // Example with video:
+          video: "assets/nft15.mp4",
+          style: "Grand Mountain Scape",
+          method: "Layered Ink & Texture Knife",
+          accessory: "Summit Headband",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Stoic & Majestic",
+            personality_ja: "厳粛で雄大",
+            specialty_en: "Mountain Impressions",
+            specialty_ja: "山岳表現",
+            currentBase_en: "Nagano",
+            currentBase_ja: "長野",
+            fourCharacterIdiom_en: "Peak Reverence",
+            fourCharacterIdiom_ja: "山巓尊崇"
+          }
+        },
+        {
+          id: 16,
+          title: "MIYABI #016: Miyako - The Imperial Grace",
+          description_en: "Miyako merges regal motifs with traditional patterns, reflecting an imperial grace in every piece.",
+          description_ja: "雅は王朝のモチーフと伝統紋様を融合し、作品に皇室のような気品を漂わせる。",
+          image: "assets/nft16.jpg",
+          video: "",
+          style: "Imperial Elegance",
+          method: "Silk Screen & Gold Leaf",
+          accessory: "Golden Headdress",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Noble & Serene",
+            personality_ja: "優雅で静謐",
+            specialty_en: "Royal Patterns",
+            specialty_ja: "王朝紋様",
+            currentBase_en: "Kyoto Palace District",
+            currentBase_ja: "京都御所周辺",
+            fourCharacterIdiom_en: "Regal Artistry",
+            fourCharacterIdiom_ja: "皇雅美術"
+          }
+        },
+        {
+          id: 17,
+          title: "MIYABI #017: Nenju - The Meditative Carver",
+          description_en: "Nenju’s tranquility is channeled into intricate carvings, imprinting spiritual calm into each piece.",
+          description_ja: "念珠は深い静寂を糸口に細密な彫刻を行い、作品へと精神的な安らぎを刻み込む。",
+          image: "assets/nft17.jpg",
+          video: "",
+          style: "Sculpted Serenity",
+          method: "Wood Carving & Ink Rub",
+          accessory: "Prayer Bead Bracelet",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Serene & Reflective",
+            personality_ja: "穏やかで思索的",
+            specialty_en: "Zen Carving",
+            specialty_ja: "禅彫",
+            currentBase_en: "Mount Koya",
+            currentBase_ja: "高野山",
+            fourCharacterIdiom_en: "Meditative Form",
+            fourCharacterIdiom_ja: "禅形象"
+          }
+        },
+        {
+          id: 18,
+          title: "MIYABI #018: Yuzu - The Citrus Crafter",
+          description_en: "Inspired by the bright tang of citrus, Yuzu’s art sparkles with uplifting colors and tangy warmth.",
+          description_ja: "柚子は柑橘系の爽やかな刺激から着想を得て、明るく心弾む色彩と甘酸っぱい温もりを作品に落とし込む。",
+          image: "assets/nft18.jpg",
+          video: "",
+          style: "Citrus Pop",
+          method: "Acrylic Splatter & Airbrush",
+          accessory: "Citrus Palette",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Cheerful & Fresh",
+            personality_ja: "朗らかで新鮮",
+            specialty_en: "Tangy Hues",
+            specialty_ja: "柑橘彩",
+            currentBase_en: "Shikoku",
+            currentBase_ja: "四国",
+            fourCharacterIdiom_en: "Citrus Radiance",
+            fourCharacterIdiom_ja: "柑光輝耀"
+          }
+        },
+        {
+          id: 19,
+          title: "MIYABI #019: Mokuran - The Silent Timber",
+          description_en: "Deep in ancient forests, Mokuran sculpts wooden canvases that echo the silent voice of nature.",
+          description_ja: "木蘭は太古の森に分け入り、自然の静寂な声を映す木製キャンバスを彫り出す。",
+          image: "assets/nft19.jpg",
+          video: "",
+          style: "Forest Aesthetic",
+          method: "Wood Burn & Natural Pigments",
+          accessory: "Engraved Wooden Pendants",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Grounded & Reflective",
+            personality_ja: "落ち着いて内省的",
+            specialty_en: "Wooden Relief",
+            specialty_ja: "木版レリーフ",
+            currentBase_en: "Aomori",
+            currentBase_ja: "青森",
+            fourCharacterIdiom_en: "Silent Grove Muse",
+            fourCharacterIdiom_ja: "静樹の詩"
+          }
+        },
+        {
+          id: 20,
+          title: "MIYABI #020: Yozakura - The Midnight Bloom",
+          description_en: "Yozakura excels in capturing cherry blossoms under moonlight, an ode to the silent beauty of spring nights.",
+          description_ja: "夜桜は夜の月明かりに照らされる桜を描くことに長け、静かな春夜の美しさを讃える。",
+          image: "assets/nft20.jpg",
+          // Example with video:
+          video: "assets/nft20.mp4",
+          style: "Moonlit Sakura",
+          method: "Glowing Ink & Watercolor",
+          accessory: "Petal Hair Clip",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Romantic & Mysterious",
+            personality_ja: "ロマンチックで神秘的",
+            specialty_en: "Moonlit Blossoms",
+            specialty_ja: "夜桜",
+            currentBase_en: "Tohoku",
+            currentBase_ja: "東北",
+            fourCharacterIdiom_en: "Night Flower Reverie",
+            fourCharacterIdiom_ja: "夜花幻想"
+          }
+        },
+        {
+          id: 21,
+          title: "MIYABI #021: Hisui - The Jade-Eyed Oracle",
+          description_en: "Hisui’s emerald palette unveils hidden realms, as if gazing through precious jade into secret worlds.",
+          description_ja: "翡翠はエメラルドグリーンの色彩を用い、宝石を通して隠された世界を覗き見るような作品を生み出す。",
+          image: "assets/nft21.jpg",
+          video: "",
+          style: "Jade Vision",
+          method: "Metallic Pastes & Glossy Ink",
+          accessory: "Jade Eye Pendant",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Enigmatic & Insightful",
+            personality_ja: "謎めいて洞察力に富む",
+            specialty_en: "Emerald Tones",
+            specialty_ja: "翡翠色彩",
+            currentBase_en: "Gifu",
+            currentBase_ja: "岐阜",
+            fourCharacterIdiom_en: "Jade Eye Revelation",
+            fourCharacterIdiom_ja: "翠眼啓示"
+          }
+        },
+        {
+          id: 22,
+          title: "MIYABI #022: Kirameki - The Glittering Edge",
+          description_en: "Kirameki harnesses shimmering metallics, forging artworks that dazzle with hypnotic light play.",
+          description_ja: "煌めきは金属的なきらめきを利用し、催眠的な光の演出で見る者を魅了する作品を作る。",
+          image: "assets/nft22.jpg",
+          video: "",
+          style: "Metallic Shimmer",
+          method: "Foil Stamping & Spray Glitter",
+          accessory: "Silver Fan",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Flashy & Confident",
+            personality_ja: "華やかで自信家",
+            specialty_en: "Metallic Reflections",
+            specialty_ja: "金属反射",
+            currentBase_en: "Tokyo",
+            currentBase_ja: "東京",
+            fourCharacterIdiom_en: "Gleaming Apex",
+            fourCharacterIdiom_ja: "輝頂点"
+          }
+        },
+        {
+          id: 23,
+          title: "MIYABI #023: Shiranui - The Phantom Glow",
+          description_en: "Like elusive wisps of flame, Shiranui’s art flickers in and out of focus, capturing the ephemeral.",
+          description_ja: "不知火の作品は儚く揺らめく炎のように現れては消え、儚さを映し出す。",
+          image: "assets/nft23.jpg",
+          video: "",
+          style: "Wisp Impressionism",
+          method: "Glow Pigments & Smoke Textures",
+          accessory: "Foxfire Amulet",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Elusive & Spiritual",
+            personality_ja: "捉えどころなく神秘的",
+            specialty_en: "Will-o'-the-wisp Effect",
+            specialty_ja: "鬼火表現",
+            currentBase_en: "Kumamoto",
+            currentBase_ja: "熊本",
+            fourCharacterIdiom_en: "Phantom Ember",
+            fourCharacterIdiom_ja: "幻炎奇火"
+          }
+        },
+        {
+          id: 24,
+          title: "MIYABI #024: Hikari - The Dawn Breaker",
+          description_en: "Hikari’s bold works evoke the first rays of sunlight, full of optimism and new beginnings.",
+          description_ja: "光は黎明の一筋の光を思わせる力強い作品で、希望と始まりを表現する。",
+          image: "assets/nft24.jpg",
+          video: "",
+          style: "Radiant Abstract",
+          method: "Bold Brush & Acrylic Glow",
+          accessory: "Sunrise Ribbon",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Optimistic & Daring",
+            personality_ja: "前向きで大胆",
+            specialty_en: "Daybreak Palette",
+            specialty_ja: "夜明け色",
+            currentBase_en: "Chiba",
+            currentBase_ja: "千葉",
+            fourCharacterIdiom_en: "Dawn’s Radiance",
+            fourCharacterIdiom_ja: "暁光輝"
+          }
+        },
+        {
+          id: 25,
+          title: "MIYABI #025: Kasei - The Fire Planet Crafter",
+          description_en: "Infused with Martian shades, Kasei’s canvases pulse with otherworldly heat and cosmic imagination.",
+          description_ja: "火星の色彩を纏った華星のキャンバスは、異世界の熱と宇宙的な想像力に満ちている。",
+          image: "assets/nft25.jpg",
+          // Example with video:
+          video: "assets/nft25.mp4",
+          style: "Cosmic Vigor",
+          method: "Mixed Media & Planetary Textures",
+          accessory: "Orbital Charm",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Fiery & Visionary",
+            personality_ja: "情熱的で先見的",
+            specialty_en: "Cosmic Hues",
+            specialty_ja: "宇宙色彩",
+            currentBase_en: "Space VR Studio",
+            currentBase_ja: "宇宙VRスタジオ",
+            fourCharacterIdiom_en: "Planet Ember Arc",
+            fourCharacterIdiom_ja: "惑星焔弧"
+          }
+        },
+        {
+          id: 26,
+          title: "MIYABI #026: Nadeshiko - The Pink Blossom Icon",
+          description_en: "Nadeshiko embodies the soft elegance of pink blossoms, championing refined yet gentle themes.",
+          description_ja: "撫子は柔らかなピンクの花を象徴し、上品で優美なテーマを追求する。",
+          image: "assets/nft26.jpg",
+          video: "",
+          style: "Blossom Couture",
+          method: "Watercolor & Soft Pastel",
+          accessory: "Flower Hairband",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Graceful & Tender",
+            personality_ja: "上品で優しい",
+            specialty_en: "Blossom Gradients",
+            specialty_ja: "花のグラデーション",
+            currentBase_en: "Ueno Park",
+            currentBase_ja: "上野公園",
+            fourCharacterIdiom_en: "Petal Harmony",
+            fourCharacterIdiom_ja: "花弁調和"
+          }
+        },
+        {
+          id: 27,
+          title: "MIYABI #027: Arashi - The Storm Bringer",
+          description_en: "Arashi harnesses the chaotic force of storms, layering thunderous textures and electric hues.",
+          description_ja: "嵐は嵐のカオスな力を操り、雷鳴のようなテクスチャと電撃的な色彩を重ねる。",
+          image: "assets/nft27.jpg",
+          video: "",
+          style: "Tempest Abstract",
+          method: "Thick Acrylic & Lightning Brush",
+          accessory: "Storm Bandana",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Tempestuous & Intense",
+            personality_ja: "荒々しく激烈",
+            specialty_en: "Thunderous Layers",
+            specialty_ja: "雷鳴の層",
+            currentBase_en: "Typhoon Coast",
+            currentBase_ja: "台風沿岸",
+            fourCharacterIdiom_en: "Raging Storm Pulse",
+            fourCharacterIdiom_ja: "荒嵐鼓動"
+          }
+        },
+        {
+          id: 28,
+          title: "MIYABI #028: Yukine - The Snowfall Dancer",
+          description_en: "Yukine’s gentle strokes evoke falling snow, capturing the hush and purity of winter’s embrace.",
+          description_ja: "雪音は舞い散る雪を思わせる優しい筆致で、冬の静寂と純白を表現する。",
+          image: "assets/nft28.jpg",
+          video: "",
+          style: "Snowy Serenity",
+          method: "White Ink & Subtle Glitter",
+          accessory: "Snowflake Shawl",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Calm & Pure",
+            personality_ja: "静穏で純粋",
+            specialty_en: "Snowfall Detail",
+            specialty_ja: "降雪表現",
+            currentBase_en: "Sapporo",
+            currentBase_ja: "札幌",
+            fourCharacterIdiom_en: "Silent Snow Grace",
+            fourCharacterIdiom_ja: "静雪雅舞"
+          }
+        },
+        {
+          id: 29,
+          title: "MIYABI #029: Kurotsuki - The Eclipse Vanguard",
+          description_en: "Kurotsuki embraces cosmic darkness in ink-laden works, revealing glimmers of light from the void.",
+          description_ja: "黒月は宇宙の闇を墨の中に封じ込め、空虚からわずかな光を見出すような作品を生み出す。",
+          image: "assets/nft29.jpg",
+          video: "",
+          style: "Eclipse Expressionism",
+          method: "Deep Ink & Negative Space",
+          accessory: "Eclipse Pendant",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Brooding & Profound",
+            personality_ja: "陰鬱で深遠",
+            specialty_en: "Void Illumination",
+            specialty_ja: "虚空照明",
+            currentBase_en: "Hokkaido",
+            currentBase_ja: "北海道",
+            fourCharacterIdiom_en: "Eclipsed Glint",
+            fourCharacterIdiom_ja: "月蝕微光"
+          }
+        },
+        {
+          id: 30,
+          title: "MIYABI #030: Seiryu - The Azure Dragon’s Roar",
+          description_en: "Seiryu channels the legendary Azure Dragon, unleashing fierce, swirling strokes of unstoppable momentum.",
+          description_ja: "青龍は伝説の蒼き龍を象徴し、圧倒的な勢いのうねる筆致を解き放つ。",
+          image: "assets/nft30.jpg",
+          // Example with video:
+          video: "assets/nft30.mp4",
+          style: "Mythic Beast",
+          method: "Large-scale Ink & Splatter",
+          accessory: "Dragon Crest",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Fierce & Regal",
+            personality_ja: "荒々しくも威厳ある",
+            specialty_en: "Dragon Swirls",
+            specialty_ja: "龍の渦",
+            currentBase_en: "Okinawa",
+            currentBase_ja: "沖縄",
+            fourCharacterIdiom_en: "Azure Spiral Force",
+            fourCharacterIdiom_ja: "蒼龍渦力"
+          }
+        }
       ];
 
       // エラーハンドリング付きの openModal 関数
@@ -598,8 +1218,8 @@
           document.getElementById('modalMethod').textContent = nft["method_" + currentLang] || nft.method;
           document.getElementById('modalAccessory').textContent = nft["accessory_" + currentLang] || nft.accessory;
           updateTraits(nft);
-          
-          // 画像読み込み後、背景色抽出（Color Thief 利用例）
+
+          // 画像読み込み後、背景色抽出
           if(modalImg) {
             modalImg.onload = function() {
               try {
@@ -865,10 +1485,6 @@
                     element.textContent = translation;
                 }
             });
-            const searchInput = document.querySelector('.search-input');
-            if (searchInput) {
-                searchInput.placeholder = translations[currentLang].search;
-            }
             const connectBtn = document.querySelector('.connect-btn');
             if (connectBtn && !connectBtn.textContent.includes('0x')) {
                 connectBtn.textContent = translations[currentLang].connectWallet;
