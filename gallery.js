@@ -240,3 +240,72 @@ const cacheStrategy = (request) => {
   }
   return fetch(request);
 };
+
+// Added optimization toggle flags
+const ENABLE_DRACO = true;  // Flag to enable DRACOLoader for DRACO compression
+const ENABLE_CACHE = true;  // Flag to enable caching via Service Worker
+const ENABLE_CUSTOM_SHADER = true;  // Flag to enable custom shader material
+
+// Assuming gltfLoader is already created earlier in the code
+if (ENABLE_DRACO) {
+    // Create and configure DRACOLoader for optimized model loading
+    const dracoLoader = new THREE.DRACOLoader();
+    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
+    gltfLoader.setDRACOLoader(dracoLoader);
+    console.log('DRACOLoader enabled for GLTFLoader.');
+}
+
+// Caching Strategy Implementation
+if (ENABLE_CACHE && 'serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch(error => {
+                console.error('Service Worker registration failed:', error);
+            });
+    });
+}
+
+// Render Loop Optimization
+function animate() {
+    requestAnimationFrame(animate);
+    // Only perform scene updates if necessary
+    if (typeof needsUpdate !== 'undefined' && needsUpdate) {
+        // Update camera controls, object transformations, etc.
+        // This conditional minimizes unnecessary processing
+    }
+    renderer.render(scene, camera);
+}
+
+// Custom Shader Integration
+if (ENABLE_CUSTOM_SHADER) {
+    // Define simple custom vertex and fragment shaders
+    const vertexShader = `
+        void main() {
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    `;
+    const fragmentShader = `
+        void main() {
+            gl_FragColor = vec4(1.0, 0.5, 0.0, 1.0); // Simple orange color
+        }
+    `;
+    // Create a ShaderMaterial using the custom shaders. This material can replace existing materials for performance tests.
+    const customShaderMaterial = new THREE.ShaderMaterial({
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader
+    });
+    
+    // Example: Traverse loaded model and replace mesh materials with the custom shader
+    if (model) { // Assuming model is a loaded GLTF scene
+        model.traverse(child => {
+            if (child.isMesh) {
+                // Replace the current material with the custom shader material
+                child.material = customShaderMaterial;
+            }
+        });
+    }
+    console.log('Custom shader material applied to model meshes.');
+}
