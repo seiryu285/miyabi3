@@ -1484,52 +1484,15 @@
               canvas.height = modalImage.height;
               ctx.drawImage(modalImage, 0, 0);
               
-              // 画像の中央部分から色を抽出
-              const centerX = Math.floor(modalImage.width / 2);
-              const centerY = Math.floor(modalImage.height / 2);
-              const imageData = ctx.getImageData(centerX, centerY, 1, 1).data;
-              const r = imageData[0];
-              const g = imageData[1];
-              const b = imageData[2];
-              
-              // 背景色をRGBで設定
-              const bgColor = `rgb(${r}, ${g}, ${b})`;
-              
-              // 明るさを計算（標準的な輝度計算式）
-              const brightness = (r * 0.299 + g * 0.587 + b * 0.114) / 255;
+              // 画像の背景色を抽出（左上隅から数ピクセル内の平均色を使用）
+              const imageData = ctx.getImageData(0, 0, 1, 1).data;
+              const bgColor = `rgb(${imageData[0]}, ${imageData[1]}, ${imageData[2]})`;
               
               // モーダルの背景色を設定
-              const modalBg = document.querySelector('.modal-background');
-              if (modalBg) {
-                  modalBg.style.backgroundColor = bgColor;
-              }
-              
-              // 情報パネルの背景色を調整（少し暗くまたは明るく）
-              const modalInfo = document.querySelector('.modal-info');
-              if (modalInfo) {
-                  // 明るい背景色の場合は少し暗く、暗い背景色の場合は少し明るく
-                  let infoPanelColor;
-                  if (brightness > 0.5) {
-                      // 明るい背景の場合、少し暗くする
-                      infoPanelColor = `rgba(${r * 0.8}, ${g * 0.8}, ${b * 0.8}, 0.8)`;
-                  } else {
-                      // 暗い背景の場合、少し明るくする
-                      infoPanelColor = `rgba(${Math.min(r * 1.2, 255)}, ${Math.min(g * 1.2, 255)}, ${Math.min(b * 1.2, 255)}, 0.8)`;
-                  }
-                  modalInfo.style.backgroundColor = infoPanelColor;
-                  
-                  // テキスト色も調整
-                  const textColor = brightness > 0.6 ? '#000' : '#fff';
-                  modalInfo.style.color = textColor;
-              }
-              
-              // モバイル表示の場合はオーバーレイの背景色も設定
-              if (window.innerWidth <= 768) {
-                  const modalOverlay = document.querySelector('.modal-overlay');
-                  if (modalOverlay) {
-                      modalOverlay.style.backgroundColor = bgColor;
-                  }
-              }
+              modalBackground.style.backgroundColor = bgColor;
+              modalContent.style.backgroundColor = bgColor;
+              modalInfo.style.backgroundColor = bgColor;
+              modalInfo.style.color = '#fff';
             } catch (e) {
               console.error("Error extracting background color:", e);
             }
