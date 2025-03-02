@@ -384,6 +384,34 @@
         font-size: 1.25rem;
       }
     }
+    .character-description-section {
+      margin-bottom: 2rem;
+    }
+    .character-description-title {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .character-description-content {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .character-idiom-section {
+      margin-bottom: 1.5rem;
+    }
+    .character-idiom-title {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .character-idiom {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .character-idiom-meaning {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
   </style>
 </head>
 <body>
@@ -428,6 +456,15 @@
             <h2 class="modal-title" id="modalTitle"></h2>
           </div>
           <div class="modal-description" id="modalDescription"></div>
+          <div class="character-description-section">
+            <h3 class="character-description-title" data-translate="characterDescription">Character Description</h3>
+            <div class="character-description-content" id="characterDescriptionContent"></div>
+            <div class="character-idiom-section">
+              <div class="character-idiom-title" data-translate="fourCharacterIdiom">Four Character Idiom</div>
+              <div class="character-idiom" id="characterIdiom"></div>
+              <div class="character-idiom-meaning" id="characterIdiomMeaning"></div>
+            </div>
+          </div>
           <div class="modal-traits" id="modalTraits"></div>
           <div class="modal-details">
             <div class="detail-item">
@@ -442,6 +479,14 @@
               <span class="detail-label" data-translate="details.accessory">Accessory:</span>
               <span class="detail-value" id="modalAccessory"></span>
             </div>
+          </div>
+          <div class="modal-traits-item">
+            <div class="modal-traits-label" data-i18n="fourCharacterIdiom"></div>
+            <div class="modal-traits-value" id="modalFourCharacterIdiom"></div>
+          </div>
+          <div class="modal-traits-item">
+            <div class="modal-traits-label" data-i18n="fourCharacterIdiomMeaning"></div>
+            <div class="modal-traits-value" id="modalFourCharacterIdiomMeaning"></div>
           </div>
         </div>
       </div>
@@ -477,7 +522,10 @@
           method: "Method:",
           accessory: "Accessory:"
         },
-        traitsTitle: "Traits"
+        traitsTitle: "Traits",
+        characterDescription: "Character Description",
+        fourCharacterIdiom: "Four Character Idiom",
+        fourCharacterIdiomMeaning: "Four Character Idiom Meaning"
       },
       ja: {
         connectWallet: "ウォレット接続",
@@ -496,7 +544,10 @@
           method: "制作技法:",
           accessory: "装飾:"
         },
-        traitsTitle: "特性"
+        traitsTitle: "特性",
+        characterDescription: "キャラクター説明",
+        fourCharacterIdiom: "四字熟語",
+        fourCharacterIdiomMeaning: "四字熟語の意味"
       }
     };
 
@@ -523,16 +574,21 @@
             specialty_ja: "藍染",
             currentBase_en: "Tokyo",
             currentBase_ja: "東京",
-            fourCharacterIdiom_en: "Aosio Dream Rhyme",
-            fourCharacterIdiom_ja: "青藍夢韻"
-          }
+            fourCharacterIdiom: {
+              en: "Azure waves weaving dreams",
+              ja: "蒼濤夢染",
+              meaning_en: "Azure waves weaving dreams into vibrant patterns.",
+              meaning_ja: "\"蒼い大波\"(蒼濤) が夢を染め上げる(夢染) というイメージ。染色技術と波モチーフを融合した\"蒼波\"の個性を四文字で象徴しています。"
+            }
+          },
+          characterDescription_en: "Born into a family of textile artisans in the ancient city of Kamakura, Aonami inherited the traditional art of 'shibori' dyeing from a young age. With a calm demeanor like a still lake, he harbors a passion that can sometimes stir up great waves. In his childhood, he learned dyeing techniques in his grandparents' workshop while also being taught the significance of 'waves.' Deciding to become a 'moving wave,' he now creates works that fuse digital art with traditional textile techniques from his base in Tokyo. After encountering those seeking the power of 'Miyabi,' he discovers that the dyeing patterns left by his family hold secrets connected to the fate of the world.",
+          characterDescription_ja: "古都・鎌倉にある染織師(せんしょくし)の家系に生まれた青波は、幼少期から「絞り染め」の技術を受け継ぐアーティスト気質の持ち主です。静かな湖面のように落ち着いた雰囲気を持ちながらも、ときに大きな波を巻き起こすような情熱を秘めています。幼い頃、祖父母の工房で染め物の技術を学ぶと同時に、「波」という存在の意味を説かれました。「動く波」となることを決意し、現在は東京を拠点に、デジタルアートと伝統染織の融合を目指し作品を発信中です。「雅」の力を求める者たちと出会い、家族の遺した染色文様に秘められた秘密が、世界の命運に関わることを知っていくのです。"
         },
-        // #2～#10 のデータ（省略）
         {
           id: 2,
-          title: "MIYABI #002: Kakurin - The Swordmaster of Tradition",
-          description_en: "Kakurin, descendant of a samurai lineage bearing the crane emblem, has been trained in swordsmanship since childhood.",
-          description_ja: "鶴凛は鶴の家紋を持つ武家の末裔で、幼少より剣の修行を積んでいる。",
+          title: "MIYABI #002: Tsuruga - Guardian of Tradition",
+          description_en: "Tsuruga, descendant of a samurai lineage bearing the crane emblem, has been trained in swordsmanship since childhood.",
+          description_ja: "鶴雅は鶴の家紋を持つ武家の末裔で、幼少より剣の修行を積んでいる。",
           image: "assets/nft2.jpg",
           video: "",
           style: "Samurai Urban",
@@ -546,420 +602,938 @@
             specialty_ja: "剣術",
             currentBase_en: "Metropolis",
             currentBase_ja: "大都市",
-            fourCharacterIdiom_en: "Crane Shadow Blade",
-            fourCharacterIdiom_ja: "鶴影剣"
-          }
+            fourCharacterIdiom: {
+              en: "Crane Shadow Sword Discipline",
+              ja: "鶴影剣律",
+              meaning_en: "A crane's graceful silhouette guiding the sword's disciplined form.",
+              meaning_ja: "鶴の優雅な影が剣の規律ある形を導くさま。鶴雅の武士としての精神と技を表現しています。"
+            }
+          },
+          characterDescription_en: "Descended from a warrior family that has used the crane as its symbol for generations, Tsuruga received strict sword training from childhood and now works as a security professional in the city. Quiet and polite, he pledges deep loyalty to those he trusts. In the story, he uses his sword skills to protect his companions from dark forces seeking 'Miyabi.' After a chance meeting with Soha, he joins the quest to uncover the secrets hidden in textile patterns.",
+          characterDescription_ja: "代々「鶴」を象徴とする武家の末裔である鶴雅は、幼少から厳しい剣術修行を受け、現在は都会で警護の仕事を行っています。寡黙で礼儀正しい性格ですが、一度心を許した相手には深い忠誠を誓います。物語の中では、「雅」を守るため、その剣の腕を活かして闇勢力から仲間を守る役割を担います。蒼波と偶然出会い、染物文様に隠された秘密を追う旅に同行することになります。"
         },
-        // #3～#30 のデータ（省略）
-      ];
-
-      // エラーハンドリング付きの openModal 関数
-      function openModal(nft) {
-        try {
-          const modal = document.getElementById('nftModal');
-          if (!modal) return;
-          const modalImg = document.getElementById('modalImage');
-          const modalVideo = document.getElementById('modalVideo');
-          const modalInfo = document.querySelector('.modal-info');
-          const modalContent = document.querySelector('.modal-content');
-          // 初期状態：画像＋詳細情報表示、動画は非表示
-          if(modalImg) {
-            modalImg.style.display = 'block';
-          }
-          if(modalVideo) {
-            modalVideo.style.display = 'none';
-          }
-          if(modalInfo) {
-            modalInfo.style.display = '';
-          }
-          if(modalContent) {
-            modalContent.classList.remove('video-active');
-          }
-
-          if(modalImg) {
-            modalImg.src = nft.image;
-            modalImg.alt = nft.title;
-          }
-          if(modalVideo) {
-            modalVideo.src = nft.video ? nft.video : "";
-          }
-          const modalCollectionElem = document.getElementById('modalCollection');
-          const modalNumberElem = document.getElementById('modalNumber');
-          if (modalCollectionElem) {
-              modalCollectionElem.textContent = nft.collection ? nft.collection.toUpperCase() : 'MIYABI';
-          }
-          if (modalNumberElem) {
-              modalNumberElem.textContent = "#" + String(nft.id).padStart(4, '0');
-          }
-          document.getElementById('modalTitle').textContent = nft.title;
-          // 説明文、style, method, accessory は現在の言語に応じて
-          document.getElementById('modalDescription').textContent = nft["description_" + currentLang];
-          document.getElementById('modalStyle').textContent = nft["style_" + currentLang] || nft.style;
-          document.getElementById('modalMethod').textContent = nft["method_" + currentLang] || nft.method;
-          document.getElementById('modalAccessory').textContent = nft["accessory_" + currentLang] || nft.accessory;
-          updateTraits(nft);
+        {
+          id: 3,
+          title: "MIYABI #003: Shiki - The Seasonal Artisan",
+          description_en: "Shiki, born into a family of traditional craftsmen, expresses the beauty of the four seasons through kimono designs.",
+          description_ja: "四季は伝統工芸の家系に生まれ、四季折々の美しさを着物デザインで表現する若手アーティスト。",
+          image: "assets/nft3.jpg",
+          video: "",
+          style: "Seasonal Kimono Art",
+          method: "Traditional Textile Design",
+          accessory: "Four Seasons Patterns",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Gentle & Sensitive",
+            personality_ja: "温厚で繊細",
+            specialty_en: "Seasonal Designs",
+            specialty_ja: "季節のデザイン",
+            currentBase_en: "Kyoto",
+            currentBase_ja: "京都",
+            fourCharacterIdiom: {
+              en: "Four Vivid Seasonal Blooms",
+              ja: "四彩循華",
+              meaning_en: "A cycle of four vivid hues unfolding in perpetual bloom.",
+              meaning_ja: "四つの鮮やかな色彩が永遠に循環し、花開き続けるさま。四季の持つ季節表現の才能を表しています。"
+            }
+          },
+          characterDescription_en: "Born into a family of traditional craftsmen, Shiki is a young artist who expresses the beauty of the four seasons through kimono designs. With a gentle and sensitive nature, Shiki's creations reflect the delicate changes in seasons with intricate color palettes. Though appearing soft-spoken, Shiki harbors a deep passion that manifests in vibrant artwork. In the story, Shiki becomes a key person who creates the 'seasonal motifs' necessary for the rituals of 'Miyabi.'",
+          characterDescription_ja: "伝統工芸の家系に生まれた四季は、四季折々の美しさを着物デザインで表現する若手アーティストです。純粋で温厚な性格の持ち主で、季節の移ろいに強く感性が反応し、作品にも繊細な色彩を織り込みます。外見は柔らかな印象ですが、内に秘めた情熱は大きく、その感性は作品に鮮やかに表れています。物語の中では、「雅」の儀式に必要な「四季のモチーフ」を描くキーパーソンとなります。"
+        },
+        {
+          id: 4,
+          title: "MIYABI #004: Fuboku - The Mechanical Swordsman",
+          description_en: "Fuboku, a swordsman with a prosthetic leg and mechanical parts, rose from adversity after losing his left leg in childhood.",
+          description_ja: "楓墨は義足と機械パーツを身に付けた剣士。幼い頃に左脚を失ったが、サイバーパンクな義足で再起した。",
+          image: "assets/nft4.jpg",
+          video: "",
+          style: "Cyberpunk Samurai",
+          method: "Fusion of Traditional Swordsmanship & Technology",
+          accessory: "Cyber Prosthetic Leg",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Rugged & Caring",
+            personality_ja: "無骨で面倒見が良い",
+            specialty_en: "Cyber-Enhanced Combat",
+            specialty_ja: "サイバー強化戦闘",
+            currentBase_en: "Neo-Tokyo District",
+            currentBase_ja: "ネオ東京区",
+            fourCharacterIdiom: {
+              en: "Maple Shadow Mechanical Blade",
+              ja: "楓影機刃",
+              meaning_en: "An autumn leaf's silhouette forged into a mechanical blade.",
+              meaning_ja: "秋の葉のシルエットが機械の刃に鍛造されるさま。楓墨の義足と剣術の融合を表現しています。"
+            }
+          },
+          characterDescription_en: "A swordsman equipped with a prosthetic leg and mechanical parts. Though he lost his left leg as a child, he made a comeback with a cyberpunk-style prosthetic. While appearing rough around the edges, he is actually very caring and values his comrades greatly, taking on a big brother role. In the story, he serves as an active force protecting the city from the dark forces' conspiracies, utilizing his cyber prosthetic technology in conjunction with traditional martial arts.",
+          characterDescription_ja: "義足と機械パーツを身に付けた剣士である楓墨は、幼い頃に左脚を失ったが、サイバーパンクな義足で再起を果たしました。無骨な印象を与えますが、実は面倒見が良く、仲間を大切にする兄貴肌の性格の持ち主です。物語の中では、「白隠」の秘術を駆使し、闇勢力に狙われる仲間を守る影の護衛として、表舞台には立たず、縁の下の力持ちとして活躍します。"
+        },
+        {
+          id: 5,
+          title: "MIYABI #005: Sakuya - Child of the New Moon",
+          description_en: "Sakuya, said to be born on the night of a new moon, is rumored to possess the mysterious power to manipulate shadows.",
+          description_ja: "朔夜は新月の夜に生まれたとされる男性。影を操る不思議な力が噂される。",
+          image: "assets/nft5.jpg",
+          video: "",
+          style: "Lunar Mystic",
+          method: "Shadow Manipulation",
+          accessory: "Moon Phase Pendant",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Mysterious & Ephemeral",
+            personality_ja: "ミステリアスで儚げ",
+            specialty_en: "Shadow Control",
+            specialty_ja: "影操作",
+            currentBase_en: "Tsukiyomi Shrine",
+            currentBase_ja: "月夜見神社",
+            fourCharacterIdiom: {
+              en: "New Moon Shadow Dawn",
+              ja: "朔影夜明",
+              meaning_en: "A new moon's shadow heralding the dawn's gentle light.",
+              meaning_ja: "新月の影が夜明けの優しい光を告げるさま。朔夜の神秘的な力と儚さを表現しています。"
+            }
+          },
+          characterDescription_en: "A young man said to have been born on the night of a new moon. There are rumors that he possesses the mysterious power to manipulate shadows. Mysterious and somewhat ephemeral in nature, he exhibits his true strength at night. In the story, he has deep ties to the Tsukiyomi Shrine and plays an essential role in a crucial ritual, though he may resist this destiny.",
+          characterDescription_ja: "新月の夜に生まれたとされる朔夜は、影を操る不思議な力が噂される男性です。ミステリアスかつ少し儚げな性格で、夜にこそ本来の強さを発揮します。物語の中では、月夜見(つきよみ)神社と縁が深く、欠かせない儀式の片翼を担いますが、本人はその宿命を拒むかもしれません。"
+        },
+        {
+          id: 6,
+          title: "MIYABI #006: Tsudzune - The Sound Weaver",
+          description_en: "Tsudzune, a sound creator who remixes traditional instruments with electronic music, has gained worldwide attention on social media.",
+          description_ja: "鼓音は伝統楽器をリミックスした電子音楽を作るサウンドクリエイター。SNSで世界的に注目されている。",
+          image: "assets/nft6.jpg",
+          video: "",
+          style: "Neo-Traditional Music",
+          method: "Sound Engineering & Traditional Instruments",
+          accessory: "Digital Drum Interface",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Energetic & Social",
+            personality_ja: "元気で社交的",
+            specialty_en: "Sound Fusion",
+            specialty_ja: "音楽融合",
+            currentBase_en: "Global Tour",
+            currentBase_ja: "世界ツアー中",
+            fourCharacterIdiom: {
+              en: "Drum Echoes Weaving Harmony",
+              ja: "鼓響織律",
+              meaning_en: "Drum echoes weaving a tapestry of harmony.",
+              meaning_ja: "太鼓の響きが調和の織物を紡ぎ出すさま。鼓音の音楽が生み出す豊かな世界観を表現しています。"
+            }
+          },
+          characterDescription_en: "A sound creator who remixes traditional instruments (drums, shamisen, koto, etc.) with electronic music, gaining worldwide attention on social media. Energetic and social, they become talkative when discussing music but are otherwise easygoing. In the story, they spread awareness of 'Miyabi' to the world through their vibrant live performances and support the crucial ritual of unsealing through sound at the climax.",
+          characterDescription_ja: "伝統楽器（鼓・三味線・琴など）をリミックスした電子音楽を作るサウンドクリエイターである鼓音は、SNSで世界的に注目されています。元気で社交的な性格で、音楽の話になると饒舌ですが、それ以外は大雑把です。物語の中では、華やかなライブパフォーマンスで「雅」の存在を世界に広める役割を担い、クライマックスでは音による封印解除をサポートする重要ポジションとなります。"
+        },
+        {
+          id: 7,
+          title: "MIYABI #007: Toka - Illumination Artist",
+          description_en: "Toka, from a family of lantern craftsmen, designs fashion using light decorations, fusing traditional washi paper with modern LED technology.",
+          description_ja: "燈華は灯籠職人の家系で、発光装飾を使ったファッションを考案。現代のLED×和紙技術を融合する。",
+          image: "assets/nft7.jpg",
+          video: "",
+          style: "Luminous Traditional",
+          method: "LED & Washi Paper Integration",
+          accessory: "Light-Emitting Ornaments",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Elegant & Calming",
+            personality_ja: "優雅で落ち着いている",
+            specialty_en: "Light Art",
+            specialty_ja: "光のアート",
+            currentBase_en: "Design Studio",
+            currentBase_ja: "デザインスタジオ",
+            fourCharacterIdiom: {
+              en: "Illuminated Hues of Refined Elegance",
+              ja: "灯彩明雅",
+              meaning_en: "Illuminated hues radiating refined elegance.",
+              meaning_ja: "光に照らされた色彩が洗練された優雅さを放つさま。燈華の光のアートが生み出す美しい雰囲気を表現しています。"
+            }
+          },
+          characterDescription_en: "From a family of lantern craftsmen, Toka designs fashion using light decorations, fusing modern LED technology with traditional washi paper. With an elegant and calming presence, they have a soothing effect on those around them. In the story, they visualize the mysteries of 'Miyabi' through light art and are responsible for the lighting effects during rituals.",
+          characterDescription_ja: "灯籠職人の家系で育った燈華は、発光装飾を使ったファッションを考案し、現代のLED技術と伝統的な和紙を融合させています。優雅で落ち着いており、周囲を柔らかく照らすような存在感があります。物語の中では、ライトアートを介して「雅」の神秘を視覚化し、儀式の際の照明演出を担当します。"
+        },
+        {
+          id: 8,
+          title: "MIYABI #008: Hakuto - The White Shadow",
+          description_en: "Hakuto, an albino raised in the ninja village of Byakuin, learned to blend with shadows before leaving to become a mercenary.",
+          description_ja: "白遠はアルビノ体質で、白い髪と瞳を持つ。かつて忍の里「白隠」に育ち、影に溶け込む技を学んだが、里を抜け出して傭兵稼業へ。",
+          image: "assets/nft8.jpg",
+          video: "",
+          style: "Albino Shinobi",
+          method: "Shadow Infiltration",
+          accessory: "White Tactical Gear",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Reserved & Loyal",
+            personality_ja: "寡黙で義理堅い",
+            specialty_en: "Stealth Operations",
+            specialty_ja: "隠密作戦",
+            currentBase_en: "Unknown",
+            currentBase_ja: "不明",
+            fourCharacterIdiom: {
+              en: "White Shadow Swift Steps",
+              ja: "白影迅歩",
+              meaning_en: "A fleeting white shadow stepping with silent, rapid grace.",
+              meaning_ja: "一瞬で消える白い影が静かに素早く動くさま。白遠の隠密としての技と素早さを表現しています。"
+            }
+          },
+          characterDescription_en: "An albino with white hair and eyes who was raised in the ninja village of 'Byakuin' where he learned techniques to blend with shadows. He left the village to work as a mercenary. Though reserved and showing little emotion, appearing almost mechanical, his loyalty to comrades is unmatched. In the story, he uses the secret techniques of 'Byakuin' to protect his companions who are targeted by dark forces, working behind the scenes rather than in the spotlight.",
+          characterDescription_ja: "アルビノ体質で、白い髪と瞳を持つ白遠は、かつて忍の里「白隠（びゃくいん）」に育ち、影に溶け込む技を学びましたが、里を抜け出して傭兵稼業へと転身しました。感情をあまり表に出さず、冷静で機械的にも見えますが、仲間への義理堅さは人一倍です。物語の中では、「白隠」の秘術を駆使し、闇勢力に狙われる仲間を守る影の護衛として、表舞台には立たず、縁の下の力持ちとして活躍します。"
+        },
+        {
+          id: 9,
+          title: "MIYABI #009: Honomote - The Mask Crafter",
+          description_en: "Honomote, born into a family of Noh mask craftsmen, recreates intricate mask-making techniques through digital art.",
+          description_ja: "仄面は能面職人として生まれ、精巧な面打ち技術をデジタルアートで再現している。",
+          image: "assets/nft9.jpg",
+          video: "",
+          style: "Digital Noh Artisan",
+          method: "Traditional Mask Crafting & Digital Art",
+          accessory: "Collection of Mystical Masks",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Reserved & Passionate",
+            personality_ja: "控えめだが情熱的",
+            specialty_en: "Mask Creation",
+            specialty_ja: "面の創造",
+            currentBase_en: "Mask Studio",
+            currentBase_ja: "面工房",
+            fourCharacterIdiom: {
+              en: "Hidden Revelation Behind Mask",
+              ja: "面裏幽示",
+              meaning_en: "A hidden revelation whispered behind the mask's facade.",
+              meaning_ja: "仮面の裏に隠された啓示がささやかれるさま。仄面の面を通じた真実の表現を象徴しています。"
+            }
+          },
+          characterDescription_en: "Born into a family of Noh mask craftsmen, Honomote recreates intricate mask-making techniques through digital art. Always wearing a mask to hide their face, they tend to keep distance from others, but become passionate when discussing art or history. In the story, they can visualize hidden souls and the spiritual power of 'Miyabi' through their masks, using various masks during rituals to create dramatic effects.",
+          characterDescription_ja: "能面職人として生まれた仄面は、精巧な面打ち(おもてうち)技術をデジタルアートで再現しています。常に仮面を着けて素顔を隠し、人と距離を取りがちですが、アートや歴史の話になると熱く語ります。物語の中では、面を通じて隠された魂や「雅」の霊力を可視化でき、儀式時には多彩な面を使い分け、大きなドラマを生み出します。"
+        },
+        {
+          id: 10,
+          title: "MIYABI #010: Akehana - The Crimson Warrior",
+          description_en: "Akehana, daughter of a samurai family, showcases swordsmanship in vibrant crimson kimono while equipped with a cyber-arm resembling armor.",
+          description_ja: "朱華はもともと武家の娘。鎧のようなサイバーアームを装備し、華やかな紅色の着物で剣術を披露する。",
+          image: "assets/nft10.jpg",
+          video: "",
+          style: "Cyber Samurai",
+          method: "Traditional Swordsmanship & Cybernetic Enhancement",
+          accessory: "Armored Cyber Arm",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Proud & Strong-willed",
+            personality_ja: "プライドが高く意志が強い",
+            specialty_en: "Elegant Combat",
+            specialty_ja: "華麗な戦闘術",
+            currentBase_en: "Modern Dojo",
+            currentBase_ja: "現代道場",
+            fourCharacterIdiom: {
+              en: "Crimson Blade Enchanting Armor",
+              ja: "朱刃艶鎧",
+              meaning_en: "A crimson blade and enchanting armor reflecting fierce beauty.",
+              meaning_ja: "紅の刃と魅惑的な鎧が激しい美しさを映し出すさま。朱華の華麗な戦闘スタイルを表現しています。"
+            }
+          },
+          characterDescription_en: "Originally the daughter of a samurai family, Akehana is equipped with a cyber-arm resembling armor and showcases swordsmanship in a vibrant crimson kimono. With high pride and strong will, she refuses to be swayed by others. In the story, she fights against the dark forces' assassins with her elegant combat style, while wavering between cooperation and opposition with the shrine group.",
+          characterDescription_ja: "もともと武家の娘である朱華は、鎧のようなサイバーアームを装備し、華やかな紅色の着物で剣術を披露します。プライドが高く、周囲に流されない意志の強さを持っています。物語の中では、華麗な武闘スタイルで闇勢力の刺客と戦う一方、神社衆とは協力関係を築くか対立するか揺れ動いています。"
+        },
+        {
+          id: 11,
+          title: "MIYABI #011: Bokuya - The Ink Artist",
+          description_en: "Bokuya, born into a family of ink painters, creates grand Japanese landscapes in virtual reality with a single brush.",
+          description_ja: "墨夜は墨絵師の一族に生まれ、筆一本で仮想空間に壮大な和風風景を描くVRアーティスト。",
+          image: "assets/nft11.jpg",
+          video: "",
+          style: "VR Ink Painting",
+          method: "Traditional Sumi-e & Virtual Reality",
+          accessory: "Digital Calligraphy Brush",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Cool & Eloquent about Art",
+            personality_ja: "クールだが芸術談義では饒舌",
+            specialty_en: "Virtual Ink Landscapes",
+            specialty_ja: "仮想墨絵風景",
+            currentBase_en: "Digital Art Studio",
+            currentBase_ja: "デジタルアートスタジオ",
+            fourCharacterIdiom: {
+              en: "Ink Shades Tranquil Enigma",
+              ja: "墨彩幽静",
+              meaning_en: "Inky shades unveiling a tranquil and enigmatic world.",
+              meaning_ja: "墨の色彩が静かで神秘的な世界を明らかにするさま。墨夜の作品が持つ静謐さと深遠さを表現しています。"
+            }
+          },
+          characterDescription_en: "Born into a family of ink painters, Bokuya creates grand Japanese landscapes in virtual reality with a single brush. Cool in demeanor but becoming talkative when discussing art, they struggle with social interactions. In the story, they use the power of ink to create barriers and other tech-art essential for rituals. Initially closed off, they gradually open up as they are drawn to their companions.",
+          characterDescription_ja: "墨絵師の一族に生まれた墨夜は、筆一本で仮想空間に壮大な和風風景を描くVRアーティストです。クールな性格ですが、芸術談義になると饒舌になります。人付き合いは苦手としています。物語の中では、墨の力で結界を作るなど、儀式に不可欠なテックアートを担当します。閉鎖的だった性格も、仲間に惹かれるうちに少しずつ変化していきます。"
+        },
+        {
+          id: 12,
+          title: "MIYABI #012: Amaki - The Ancient Text Scholar",
+          description_en: "Amaki, an enthusiast of ancient texts, collects and researches lost scriptures related to 'Miyabi'.",
+          description_ja: "天貴は古文書オタク。雅にまつわる失われた経典を蒐集し、独自研究を行う。",
+          image: "assets/nft12.jpg",
+          video: "",
+          style: "Academic Explorer",
+          method: "Historical Research & Textual Analysis",
+          accessory: "Ancient Scroll Collection",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Knowledge-driven & Obsessive",
+            personality_ja: "知識欲が強く探究心旺盛",
+            specialty_en: "Ancient Text Analysis",
+            specialty_ja: "古文書解析",
+            currentBase_en: "Private Library",
+            currentBase_ja: "私設図書館",
+            fourCharacterIdiom: {
+              en: "Heavenly Archives Hidden Records",
+              ja: "天閲秘録",
+              meaning_en: "Heavenly archives revealing hidden ancient records.",
+              meaning_ja: "天からの啓示のような古文書が隠された記録を明らかにするさま。天貴の研究が持つ重要性を表現しています。"
+            }
+          },
+          characterDescription_en: "An enthusiast of ancient texts, Amaki collects and researches lost scriptures related to 'Miyabi'. With a strong desire for knowledge, their research obsession can sometimes make them oblivious to their surroundings. In the story, they become a key person in locating important artifacts, potentially making them a target for external forces.",
+          characterDescription_ja: "古文書オタクである天貴は、雅にまつわる失われた経典を蒐集し、独自研究を行っています。知識欲が強く、探究心が暴走すると周囲が見えなくなることもあります。物語の中では、重要アイテムの在り処を突き止めるキーパーソンとなり、外部勢力から狙われる可能性も高まっていきます。"
+        },
+        {
+          id: 13,
+          title: "MIYABI #013: Genryu - The Phantom Projectionist",
+          description_en: "Genryu, from the 'Genkyu' clan that inherited ancient projection arts, recreates various traditional Japanese arts using digital technology.",
+          description_ja: "幻琉は古の幻灯芸術を受け継ぐ「幻宮」の一族出身。能面や灯籠、屏風絵など、多彩な和芸をデジタル技術で再現する。",
+          image: "assets/nft13.jpg",
+          video: "",
+          style: "Digital Projection Artist",
+          method: "Traditional Illusion Arts & Modern Technology",
+          accessory: "Holographic Projector",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Mystical & Gentle",
+            personality_ja: "神秘的かつ温厚",
+            specialty_en: "Projection Art",
+            specialty_ja: "投影芸術",
+            currentBase_en: "Projection Studio",
+            currentBase_ja: "投影スタジオ",
+            fourCharacterIdiom: {
+              en: "Phantom Lights Spectral Colors",
+              ja: "幻燈幽彩",
+              meaning_en: "Ethereal lights casting a spectral array of color.",
+              meaning_ja: "幻想的な光が幽玄な色彩を映し出すさま。幻琉の投影芸術の美しさと神秘性を表現しています。"
+            }
+          },
+          characterDescription_en: "From the 'Genkyu' clan that inherited ancient projection arts, Genryu has the talent to recreate various traditional Japanese arts such as Noh masks, lanterns, and folding screen paintings using digital technology. Mystical yet gentle in nature, they believe their mission is to restore 'Miyabi' to people's hearts through their art. In the story, they support rituals with vivid visual productions and use illusions to prevent interference from dark forces.",
+          characterDescription_ja: "古の幻灯（げんとう）芸術を受け継ぐ「幻宮（げんきゅう）」の一族出身の幻琉は、能面や灯籠、屏風絵など、多彩な和芸をデジタル技術で再現する才能を持ちます。神秘的かつ温厚な性格で、自分の芸術によって人の心に「雅」を取り戻すことが使命と考えています。物語の中では、鮮烈な映像演出で儀式をサポートし、必要に応じて幻灯による偽装・幻惑を駆使して、闇勢力の妨害を防ぐキーマンとなります。"
+        },
+        {
+          id: 14,
+          title: "MIYABI #014: Chiyo - The Steel-Armed Guardian",
+          description_en: "Chiyo, daughter of a fallen samurai family, now wears a self-made prosthetic arm and engages in vigilante activities to protect the town.",
+          description_ja: "千夜は武家の流れを汲む一族の娘。家が没落してからは、自作の義腕を装着し、街の自警活動を行っていいる。",
+          image: "assets/nft14.jpg",
+          video: "",
+          style: "Mechanical Samurai",
+          method: "Traditional Combat & Engineering",
+          accessory: "Custom Prosthetic Arm",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Serious & Responsible",
+            personality_ja: "真面目で責任感が強い",
+            specialty_en: "Defensive Combat",
+            specialty_ja: "防御戦闘",
+            currentBase_en: "Local Community",
+            currentBase_ja: "地域コミュニティ",
+            fourCharacterIdiom: {
+              en: "Steel Arm Resolute Will",
+              ja: "鋼腕毅志",
+              meaning_en: "A resolute steel arm reflecting unyielding courage.",
+              meaning_ja: "鋼の腕が不屈の勇気を映し出すさま。千夜の強靭な意志と献身を表現しています。"
+            }
+          },
+          characterDescription_en: "Daughter of a family descended from samurai, Chiyo now wears a self-made prosthetic arm (or cyber arm) and engages in vigilante activities to protect the town after her family's downfall. Serious and responsible, she retains traces of her noble upbringing but now lives humbly alongside common people. In the story, she appears as a guardian of the town, using overwhelming defensive power and self-sacrificing actions to protect her companions when dark forces attempt to disrupt the ritual.",
+          characterDescription_ja: "武家の流れを汲む一族の娘である千夜は、家が没落してからは、自作の義腕（もしくはサイバーアーム）を装着し、街の自警活動を行っています。真面目で責任感が強い性格で、かつての高貴さは残るものの、今は庶民とともに地道に生きる実直な面があります。物語の中では、街を守る存在として登場し、闇勢力が儀式を妨害しようとすると、圧倒的な防御力と捨て身の行動力で仲間を助ける立ち位置を担います。"
+        },
+        {
+          id: 15,
+          title: "MIYABI #015: Rogetsu - The Moonlit Dancer",
+          description_en: "Rogetsu, a dancer who performs under the moonlight, has an unconscious ability to respond to lunar energy.",
+          description_ja: "朧月は月夜の下で舞う踊り子。本人も自覚していないが、月の霊力に呼応する体質。",
+          image: "assets/nft15.jpg",
+          video: "",
+          style: "Lunar Dancer",
+          method: "Mystical Dance Performance",
+          accessory: "Moonlight Veil",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Mysterious & Elusive",
+            personality_ja: "神秘的で掴みどころがない",
+            specialty_en: "Moon Ritual Dance",
+            specialty_ja: "月の儀式舞",
+            currentBase_en: "Moonlit Stage",
+            currentBase_ja: "月光の舞台",
+            fourCharacterIdiom: {
+              en: "Hazy Moon Dance Darkness",
+              ja: "朧月舞冥",
+              meaning_en: "A hazy moon's dance lingering in silent darkness.",
+              meaning_ja: "朧げな月の舞が静かな闇に漂うさま。朧月の神秘的な舞と月との繋がりを表現しています。"
+            }
+          },
+          characterDescription_en: "A dancer who performs under the moonlight, Rogetsu has an unconscious ability to respond to lunar energy. Mysterious and elusive, they occasionally experience prophetic dreams. In the story, as a symbol of the moon, they may hold an important key in the final ritual.",
+          characterDescription_ja: "月夜の下で舞う踊り子である朧月は、本人も自覚していませんが、月の霊力に呼応する体質を持っています。神秘的で掴みどころがない性格で、ときどき予知夢を見ることがあります。物語の中では、月を象徴する存在として、ラストの儀式で重要な鍵を握る可能性が高いです。"
+        },
+        {
+          id: 16,
+          title: "MIYABI #016: Kagura - The Sacred Dancer",
+          description_en: "Kagura, a performer of sacred Shinto dances, channels divine energy through traditional movements passed down through generations.",
+          description_ja: "神楽は神道の神聖な舞を継承する舞手。代々伝わる伝統的な所作を通じて神の力を呼び起こす。",
+          image: "assets/nft16.jpg",
+          video: "",
+          style: "Shrine Maiden",
+          method: "Sacred Dance Ritual",
+          accessory: "Ceremonial Bells",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Devoted & Disciplined",
+            personality_ja: "献身的で規律正しい",
+            specialty_en: "Divine Connection Through Dance",
+            specialty_ja: "舞による神との繋がり",
+            currentBase_en: "Ancient Mountain Shrine",
+            currentBase_ja: "古の山の神社",
+            fourCharacterIdiom: {
+              en: "Divine Dance Summons Gods",
+              ja: "神舞招神",
+              meaning_en: "Sacred dances that summon divine presence.",
+              meaning_ja: "神聖な舞によって神々の存在を招き寄せること。神楽の舞の本質を表現しています。"
+            }
+          },
+          characterDescription_en: "Born into a lineage of shrine maidens, Kagura has dedicated her life to mastering the sacred dances that connect the mortal realm with the divine. Her movements, precise and flowing like water, are said to momentarily thin the veil between worlds. Though reserved in daily life, when performing the ritual dances, she radiates an otherworldly presence that even skeptics find mesmerizing. In the search for the power of 'Miyabi,' her connection to the spiritual realm may provide insights that others cannot access.",
+          characterDescription_ja: "神社の巫女の血筋に生まれた神楽は、現世と神の領域を繋ぐ神聖な舞の習得に人生を捧げてきました。水のように正確で流れるような彼女の動きは、一時的に世界間の垣根を薄くすると言われています。日常では控えめな性格ですが、儀式の舞を演じるとき、懐疑的な人々さえも魅了する異世界的な存在感を放ちます。「雅」の力を求める旅において、彼女の霊的領域とのつながりは、他の人々がアクセスできない洞察を提供するかもしれません。"
+        },
+        {
+          id: 17,
+          title: "MIYABI #017: Kuzuha - The Digital Illusionist",
+          description_en: "Kuzuha, a digital artist specializing in holographic illusions, blends traditional Japanese aesthetics with cutting-edge technology.",
+          description_ja: "葛葉はホログラフィックな幻影を専門とするデジタルアーティスト。日本の伝統美と最先端技術を融合させる。",
+          image: "assets/nft17.jpg",
+          video: "",
+          style: "Tech-Traditional Fusion",
+          method: "Holographic Art Installation",
+          accessory: "AR Glasses",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Innovative & Contemplative",
+            personality_ja: "革新的で思索的",
+            specialty_en: "Digital-Traditional Art Fusion",
+            specialty_ja: "デジタルと伝統芸術の融合",
+            currentBase_en: "Kyoto Digital Art Lab",
+            currentBase_ja: "京都デジタルアートラボ",
+            fourCharacterIdiom: {
+              en: "Virtual Reality Ancient Beauty",
+              ja: "幻像古美",
+              meaning_en: "Illusory visions revealing ancient beauty.",
+              meaning_ja: "幻のような映像が古来の美を映し出すこと。葛葉の芸術が伝統と革新を繋ぐ様子を表しています。"
+            }
+          },
+          characterDescription_en: "Raised in Kyoto's historic Gion district but educated in Tokyo's digital art scene, Kuzuha represents the perfect bridge between Japan's ancient aesthetics and its technological future. Their holographic installations create immersive experiences that transport viewers through time, allowing them to experience traditional Japanese art forms in revolutionary ways. Quiet and observant, Kuzuha sees patterns and connections others miss. Their work with digital reconstructions of ancient artifacts has unexpectedly revealed hidden symbols connected to the 'Miyabi' phenomenon, drawing them into the search for its true meaning.",
+          characterDescription_ja: "京都の歴史ある祇園地区で育ち、東京のデジタルアートシーンで教育を受けた葛葉は、日本の古代美学と技術的未来の完璧な架け橋です。彼のホログラフィックインスタレーションは、視聴者を時間を超えて運ぶ没入型体験を作り出し、伝統的な日本の芸術形式を革新的な方法で体験させます。静かで観察力に優れた葛葉は、他の人が見逃すパターンやつながりを見抜きます。古代の工芸品のデジタル再構築に関する彼の研究は、予期せず「雅」現象に関連する隠されたシンボルを明らかにし、その真の意味を探求する旅へと彼を導きました。"
+        },
+        {
+          id: 18,
+          title: "MIYABI #018: Mizuki - The Water Memory Keeper",
+          description_en: "Mizuki, a water diviner with the ability to read memories contained in water, can extract historical information from ancient fountains and lakes.",
+          description_ja: "水姫は水に含まれる記憶を読み取る能力を持つ水占い師。古代の泉や湖から歴史的情報を抽出できる。",
+          image: "assets/nft18.jpg",
+          video: "",
+          style: "Water Diviner",
+          method: "Hydromancy",
+          accessory: "Crystal Water Vessel",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Intuitive & Serene",
+            personality_ja: "直感的で穏やか",
+            specialty_en: "Water Memory Reading",
+            specialty_ja: "水の記憶読解",
+            currentBase_en: "Lake Biwa Research Center",
+            currentBase_ja: "琵琶湖研究センター",
+            fourCharacterIdiom: {
+              en: "Water Remembers Ancient Times",
+              ja: "水記古代",
+              meaning_en: "Water retains memories of ancient times.",
+              meaning_ja: "水が古代の記憶を保持していること。水姫の特殊能力と水の持つ神秘性を表現しています。"
+            }
+          },
+          characterDescription_en: "Mizuki discovered her unusual ability as a child when touching an antique fountain caused her to experience vivid visions of its past. Born near Lake Biwa, Japan's oldest lake, she grew up surrounded by water that whispered stories of centuries past. Her gift allows her to extract memories from any body of water—from ancient wells to morning dew. Scientists remain skeptical, but her uncannily accurate historical insights have earned her respect. Gentle and contemplative, she speaks with the measured pace of flowing water. Her search for understanding the 'Miyabi' phenomenon led her to discover that certain bodies of water throughout Japan contain synchronized memories of a forgotten ritual.",
+          characterDescription_ja: "水姫は子供の頃、古代の噴水に触れた際に鮮明な過去の光景を体験し、彼女の珍しい能力を発見しました。日本最古の湖である琵琶湖の近くで生まれた彼女は、何世紀も前の物語をささやく水に囲まれて育ちました。彼女の才能により、古代の井戸から朝露まで、あらゆる水源から記憶を抽出することができます。科学者たちは懐疑的ですが、彼女の不思議なほど正確な歴史的洞察により尊敬を集めています。穏やかで内省的な彼女は、流れる水のような落ち着いたペースで話します。「雅」現象を理解するための彼女の探求は、日本全国の特定の水域が忘れられた儀式の同期した記憶を含んでいることを発見したときに始まりました。"
+        },
+        {
+          id: 19,
+          title: "MIYABI #019: Kagetora - The Shadow Strategist",
+          description_en: "Kagetora, a strategic advisor with a mysterious past, uses ancient war tactics and modern game theory to solve complex problems.",
+          description_ja: "影虎は謎めいた過去を持つ戦略アドバイザー。古代の戦術と現代のゲーム理論を駆使して複雑な問題を解決する。",
+          image: "assets/nft19.jpg",
+          video: "",
+          style: "Strategic Mastermind",
+          method: "Tactical Analysis",
+          accessory: "Ancient Strategy Scrolls",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Calculating & Perceptive",
+            personality_ja: "計算高く洞察力がある",
+            specialty_en: "Strategic Problem Solving",
+            specialty_ja: "戦略的問題解決",
+            currentBase_en: "Undisclosed Location",
+            currentBase_ja: "非公開の場所",
+            fourCharacterIdiom: {
+              en: "Shadow Tiger Hidden Strategy",
+              ja: "影虎潜策",
+              meaning_en: "Like a tiger hiding in shadows, concealing brilliant strategies.",
+              meaning_ja: "影に潜む虎のように、優れた戦略を隠し持つこと。影虎の戦略的思考と神秘的な性質を表現しています。"
+            }
+          },
+          characterDescription_en: "Kagetora emerged from obscurity five years ago, offering strategic consultation to corporations and occasionally governments. Their background remains deliberately vague, though rumors suggest training in both traditional Japanese military arts and cutting-edge game theory. With an uncanny ability to predict outcomes and identify patterns, they approach problems like a master shogi player—always thinking several moves ahead. Reserved and intensely private, they reveal little about themselves while observing everything about others. Their interest in the 'Miyabi' phenomenon appears purely intellectual, but those who know them suspect deeper motivations connected to their shadowy past.",
+          characterDescription_ja: "影虎は5年前に突如として現れ、企業や時には政府に戦略的コンサルテーションを提供し始めました。彼の経歴は意図的に曖昧にされていますが、日本の伝統的な武術と最先端のゲーム理論の両方で訓練を受けたという噂があります。結果を予測しパターンを識別する不思議な能力を持ち、彼は常に数手先を考える将棋の達人のように問題に取り組みます。控えめで極めてプライベートな人物である彼は、自分自身についてはほとんど明かさない一方で、他者についてはすべてを観察しています。「雅」現象への彼の関心は純粋に知的なものに見えますが、彼を知る人々は彼の謎めいた過去に関連するより深い動機を疑っています。"
+        },
+        {
+          id: 20,
+          title: "MIYABI #020: Yukihime - The Frost Sculptor",
+          description_en: "Yukihime, an ice sculptor with an affinity for winter, creates ephemeral art pieces that capture the transient beauty of snow and frost.",
+          description_ja: "雪姫は冬に親和性を持つ氷彫刻家。雪と霜の儚い美しさを捉えた一時的なアート作品を創作する。",
+          image: "assets/nft20.jpg",
+          video: "",
+          style: "Ice Artist",
+          method: "Frost Sculpting",
+          accessory: "Crystal Ice Tools",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Elegant & Melancholic",
+            personality_ja: "優雅で物憂げ",
+            specialty_en: "Ephemeral Ice Art",
+            specialty_ja: "儚い氷のアート",
+            currentBase_en: "Northern Japan Studio",
+            currentBase_ja: "北日本のスタジオ",
+            fourCharacterIdiom: {
+              en: "Snow Princess Ephemeral Beauty",
+              ja: "雪姫刹那",
+              meaning_en: "The snow princess's beauty exists in a fleeting moment.",
+              meaning_ja: "雪姫の美しさが一瞬の間に存在すること。雪姫の芸術の儚さと彼女自身の美学を表現しています。"
+            }
+          },
+          characterDescription_en: "Born in Hokkaido during the heaviest snowfall in a century, Yukihime has always shared a mysterious connection with winter. Her hands can shape ice with unusual precision, creating sculptures of such delicate beauty that viewers often weep—though whether from the beauty or the knowledge that the art will soon melt remains unclear. Soft-spoken and introspective, she views the impermanence of her medium as its greatest strength. 'True beauty,' she often says, 'exists in the moment of appreciation, not in preservation.' Her search for understanding the 'Miyabi' phenomenon led her to discover that certain patterns forming naturally in frost on certain sacred sites during winter solstice nights hold secrets connected to the fate of the world.",
+          characterDescription_ja: "一世紀で最も激しい雪の降る北海道で生まれた雪姫は、常に冬との神秘的なつながりを持っていました。彼女の手は異常な精度で氷を形作ることができ、観る者がしばしば涙を流すほどの繊細な美しさを持つ彫刻を作り出します—その涙が美しさからなのか、それともすぐに溶けてしまうという知識からなのかは不明です。物静かで内省的な彼女は、自分の媒体の無常さをその最大の強みと考えています。「真の美しさは」と彼女はよく言います、「保存ではなく、鑑賞の瞬間に存在するのです。」彼女の「雅」の理解を求める探求は、日本全国の特定の神聖な場所の霜に自然に形成される古代のパターンを発見したときに始まりました。"
+        },
+        {
+          id: 21,
+          title: "MIYABI #021: Yozakura - The Nocturnal Enchantress",
+          description_en: "Yozakura, raised in the flower districts, combines the elegance of a geisha with the skills of a warrior, mastering the art of scents and poisons.",
+          description_ja: "夜桜は花街で育ち、芸者の優雅さと戦士の技を兼ね備え、香りと毒の技術に精通している。",
+          image: "assets/nft21.jpg",
+          video: "",
+          style: "Geisha Warrior",
+          method: "Fragrance Manipulation",
+          accessory: "Scented Fan",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Gentle yet Passionate",
+            personality_ja: "表面は柔らかいが内に激情を秘める",
+            specialty_en: "Enchanting Fragrances & Information Gathering",
+            specialty_ja: "魅惑の香りと情報収集",
+            currentBase_en: "Traditional Flower District",
+            currentBase_ja: "伝統的な花街",
+            fourCharacterIdiom: {
+              en: "Bewitching Nocturnal Blossom",
+              ja: "妖艶夜華",
+              meaning_en: "A beguiling blossom flourishing under the nocturnal veil.",
+              meaning_ja: "夜の帳の下で咲き誇る魅惑的な花。夜桜の妖艶さと夜の世界での活躍を表現しています。"
+            }
+          },
+          characterDescription_en: "Raised in the secretive world of traditional flower districts, Yozakura embodies the duality of enchanting beauty and deadly precision. Her training as a geisha gives her unparalleled grace and social intelligence, while her warrior skills make her formidable in combat. Specializing in the ancient arts of fragrance, she can create scents that bewitch, heal, or incapacitate. Though outwardly gentle, a fierce determination burns within her—she would rather forge her own destiny than be used as a pawn by dark forces. In the search for 'Miyabi,' she excels at gathering intelligence and warning her allies of hidden dangers, using her connections in both high society and the underworld.",
+          characterDescription_ja: "伝統的な花街の秘密めいた世界で育った夜桜は、芸者の優雅さと戦士の技を兼ね備え、香りと毒の技術に精通しています。表面は柔らかいですが、内に激しい決意が燃えています—彼女は闇の勢力の駒として利用されるよりも、自分自身の運命を切り開くことを選びます。「雅」の探求において、彼女は上流社会と裏社会の両方での人脈を活かし、情報収集と仲間への隠れた危険の警告に優れています。"
+        },
+        {
+          id: 22,
+          title: "MIYABI #022: Rinka - The Flame Priestess",
+          description_en: "Rinka, born into a lineage of flame-wielding shrine maidens, performs rituals that combine kagura dance with fire ceremonies.",
+          description_ja: "凛火は炎を操る巫女一族の出身。神楽舞と火の儀式を融合させたパフォーマンスを行う。",
+          image: "assets/nft22.jpg",
+          video: "",
+          style: "Fire Priestess",
+          method: "Ritual Fire Dance",
+          accessory: "Sacred Flame Wand",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Noble & Proud",
+            personality_ja: "気高く、誇り高い",
+            specialty_en: "Fire Ritual Performance",
+            specialty_ja: "火の儀式パフォーマンス",
+            currentBase_en: "Ancient Fire Shrine",
+            currentBase_ja: "古代の火の神社",
+            fourCharacterIdiom: {
+              en: "Majestic Flame Floral Dance",
+              ja: "凛焔舞華",
+              meaning_en: "A majestic flame dancing in floral splendor.",
+              meaning_ja: "気高い炎が花のように華麗に舞うさま。凛火の気高さと炎の舞の美しさを表現しています。"
+            }
+          },
+          characterDescription_en: "Descended from an ancient lineage of fire priestesses, Rinka carries the sacred duty of maintaining the eternal flame that has burned for centuries at her family's shrine. Her performances, which blend traditional kagura dance with fire rituals, are both mesmerizing and spiritually powerful. With her proud bearing and fierce dedication, she inspires those around her like the very flames she controls. Though some fear her intense temperament, her loyalty to allies is unquestionable. As the embodiment of 'fire' in ceremonial contexts, her participation is essential in major rituals. In the search for the power of 'Miyabi,' her passionate nature drives the group forward even in the darkest moments.",
+          characterDescription_ja: "古代の火の巫女の血筋を受け継ぐ凛火は、彼女の家族の神社で何世紀にもわたって燃え続けてきた永遠の炎を維持するという神聖な義務を担っています。伝統的な神楽舞と火の儀式を融合させた彼女のパフォーマンスは、魅惑的であると同時に霊的な力を持っています。誇り高い態度と熱心な献身により、彼女は自分が操る炎のように周囲の人々を鼓舞します。激しい気質を恐れる人もいますが、仲間への忠誠心は疑う余地がありません。儀式の場では「火」の象徴として、彼女の参加は主要な儀式に不可欠です。「雅」の力を求める探求において、彼女の情熱的な性質は、最も暗い瞬間でさえグループを前進させます。"
+        },
+        {
+          id: 23,
+          title: "MIYABI #023: Kanzaki - The Divine Strategist",
+          description_en: "Kanzaki, a master of divination and strategy, uses ancient techniques to guide the group through challenges with calculated precision.",
+          description_ja: "神崎は占術と戦略の達人。古代の技術を用いて、計算された精度でグループを導く。",
+          image: "assets/nft23.jpg",
+          video: "",
+          style: "Strategic Diviner",
+          method: "Ancient Calculation",
+          accessory: "Divination Compass",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Analytical & Composed",
+            personality_ja: "分析的で冷静",
+            specialty_en: "Strategic Divination",
+            specialty_ja: "戦略的占術",
+            currentBase_en: "Mountain Observatory",
+            currentBase_ja: "山の天文台",
+            fourCharacterIdiom: {
+              en: "Divine Wisdom Foresees All",
+              ja: "神算鬼謀",
+              meaning_en: "Supernatural calculation and ingenious strategy.",
+              meaning_ja: "神のような計算と鬼のような謀略。優れた戦略家の知恵を表現しています。"
+            }
+          },
+          characterDescription_en: "Kanzaki combines ancient divination arts with modern strategic thinking, creating a unique system that has proven uncannily accurate in predicting outcomes and planning operations. Raised in a family that has served as advisors to powerful figures for generations, they were trained from childhood in both traditional arts and contemporary analytics. Their calm, measured demeanor masks a mind that constantly calculates probabilities and contingencies. Though some find their analytical approach cold, those who work closely with Kanzaki recognize the deep compassion that drives their desire to find optimal solutions that minimize harm. In the quest for 'Miyabi,' they serve as the group's chief strategist, using their divination compass to navigate through both physical and metaphysical challenges.",
+          characterDescription_ja: "神崎は古代の占術と現代の戦略的思考を組み合わせ、結果を予測し作戦を計画する上で不思議なほど正確であることが証明されたユニークなシステムを作り出しました。何世代にもわたって権力者の顧問を務めてきた家系で育った彼は、幼少期から伝統的な芸術と現代の分析の両方で訓練されました。彼の冷静で測定された態度は、常に確率と不測の事態を計算する心を隠しています。分析的なアプローチを冷たいと感じる人もいますが、神崎と密接に働く人々は、害を最小限に抑える最適な解決策を見つけたいという彼の願望を駆り立てる深い思いやりを認識しています。「雅」の探求において、彼はグループの主席戦略家として、占術コンパスを使用して物理的および形而上学的な課題を通じて導きます。"
+        },
+        {
+          id: 24,
+          title: "MIYABI #024: Higen - The Sun Guardian",
+          description_en: "Higen, a guardian of ancient solar rituals, harnesses the power of sunlight through specialized mirrors and lenses.",
+          description_ja: "緋幻は古代の太陽儀式の守護者。特殊な鏡とレンズを通して太陽光のパワーを活用する。",
+          image: "assets/nft24.jpg",
+          video: "",
+          style: "Solar Guardian",
+          method: "Light Manipulation",
+          accessory: "Ceremonial Sun Mirrors",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Radiant & Disciplined",
+            personality_ja: "輝かしく、規律正しい",
+            specialty_en: "Solar Energy Manipulation",
+            specialty_ja: "太陽エネルギー操作",
+            currentBase_en: "Ancient Solar Temple",
+            currentBase_ja: "古代の太陽神殿",
+            fourCharacterIdiom: {
+              en: "Crimson Illusion Sunlight Dance",
+              ja: "緋幻陽舞",
+              meaning_en: "The crimson illusion dances with sunlight.",
+              meaning_ja: "緋色の幻影が太陽の光と共に舞う。太陽の力を操る緋幻の神秘的な能力を表現しています。"
+            }
+          },
+          characterDescription_en: "Higen is the last in a lineage of sun guardians who have protected and maintained the ancient solar temples hidden throughout Japan. Trained from childhood in the forgotten art of light manipulation, they can focus, bend, and amplify sunlight using specialized mirrors and crystals crafted by their ancestors. Their disciplined nature reflects their belief that like the sun, one must maintain a consistent path while radiating energy to others. Though serious about their sacred duty, they possess an unexpected warmth and optimism that draws others to them. In the search for 'Miyabi,' Higen's abilities prove crucial for deciphering sun-aligned artifacts and activating mechanisms that only respond to precisely focused light. Their knowledge of celestial alignments also helps the group time their movements according to auspicious moments.",
+          characterDescription_ja: "緋幻は、日本全国に隠された古代の太陽神殿を守り、維持してきた太陽の守護者の系譜の最後の一人です。幼少期から光の操作という忘れられた芸術で訓練され、先祖が作った特殊な鏡や結晶を使用して太陽光を集中させ、曲げ、増幅することができます。彼らの規律正しい性格は、太陽のように、他者にエネルギーを放射しながら一貫した道を維持しなければならないという信念を反映しています。神聖な義務に真剣である一方で、他者を引き寄せる予想外の温かさと楽観主義を持っています。「雅」の探求において、緋幻の能力は太陽に合わせた遺物を解読し、正確に集中した光にのみ反応する機構を活性化するために不可欠であることが証明されます。彼らの天体の配列に関する知識はまた、グループが吉兆の瞬間に従って動きをタイミングよく行うのを助けます。"
+        },
+        {
+          id: 25,
+          title: "MIYABI #025: Suiran - The Verdant Spirit",
+          description_en: "Suiran, a botanical expert with an innate connection to plants, creates living art and medicinal remedies from Japan's rarest flora.",
+          description_ja: "翠蘭は植物との生来の繋がりを持つ植物学の専門家。日本の希少な植物から生きた芸術と薬用療法を生み出す。",
+          image: "assets/nft25.jpg",
+          video: "",
+          style: "Botanical Artist",
+          method: "Plant Communication",
+          accessory: "Living Plant Jewelry",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Nurturing & Patient",
+            personality_ja: "育成的で忍耐強い",
+            specialty_en: "Botanical Cultivation",
+            specialty_ja: "植物栽培",
+            currentBase_en: "Hidden Forest Garden",
+            currentBase_ja: "隠された森の庭",
+            fourCharacterIdiom: {
+              en: "Emerald Orchid Whispers Truth",
+              ja: "翠蘭語真",
+              meaning_en: "The emerald orchid speaks truth.",
+              meaning_ja: "翠色の蘭が真実を語る。植物と交流できる翠蘭の特殊能力を表現しています。"
+            }
+          },
+          characterDescription_en: "Suiran possesses a rare gift that allows her to sense and communicate with plant life. Raised by her grandmother, a renowned herbalist in a remote mountain village, she learned to identify and cultivate hundreds of rare medicinal plants. Her connection to the plant world goes beyond scientific knowledge—she can feel the health of ecosystems and hear whispers from ancient trees. Her living jewelry consists of miniature plants that grow and change with her moods and needs. Though soft-spoken and patient, she becomes fiercely protective when natural spaces are threatened. In the story, she discovers that certain sacred plants hold memories of ancient rituals in their DNA, and only she can interpret these botanical archives. Her ability to encourage rapid growth in plants also proves invaluable when the group needs emergency shelter or to navigate difficult terrain.",
+          characterDescription_ja: "翠蘭は植物の生命を感じ、コミュニケーションを取ることができる珍しい才能を持っています。遠隔の山村で有名な薬草師だった祖母に育てられ、彼女は何百もの希少な薬用植物を識別し栽培することを学びました。植物界とのつながりは科学的知識を超えています—彼女は生態系の健康を感じ、古代の木々からのささやきを聞くことができます。彼女の生きたジュエリーは、彼女の気分やニーズに合わせて成長し変化する小さな植物で構成されています。物静かで忍耐強いですが、自然空間が脅かされると激しく保護的になります。物語の中では、特定の神聖な植物がその遺伝子に古代の儀式の記憶を保持していることを発見し、彼女だけがこれらの植物アーカイブを解釈できます。植物の急速な成長を促進する彼女の能力は、グループが緊急の避難所を必要とするとき、または困難な地形をナビゲートするときにも非常に貴重であることが証明されます。"
+        },
+        {
+          id: 26,
+          title: "MIYABI #026: Kōyō - The Crimson Radiance",
+          description_en: "Kōyō, a master of traditional Japanese color pigments, creates artworks that seem to glow with an inner light and evoke powerful emotions.",
+          description_ja: "紅葉は日本の伝統的な色顔料の達人。内なる光で輝き、強い感情を呼び起こす芸術作品を創作する。",
+          image: "assets/nft26.jpg",
+          video: "",
+          style: "Pigment Alchemist",
+          method: "Emotional Chromatics",
+          accessory: "Ancient Color Scrolls",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Passionate & Expressive",
+            personality_ja: "情熱的で表現力豊か",
+            specialty_en: "Emotional Color Manipulation",
+            specialty_ja: "感情的な色彩操作",
+            currentBase_en: "Traditional Pigment Workshop",
+            currentBase_ja: "伝統的な顔料工房",
+            fourCharacterIdiom: {
+              en: "Autumn Leaves Crimson Brilliance",
+              ja: "紅葉燦爛",
+              meaning_en: "The brilliant splendor of crimson autumn leaves.",
+              meaning_ja: "紅葉の鮮やかな輝き。紅葉の名前と、その色彩の美しさを表現しています。"
+            }
+          },
+          characterDescription_en: "Kōyō comes from a family that has preserved the ancient art of creating traditional Japanese pigments for over fifteen generations. Her specialty lies in crafting colors that not only please the eye but also evoke specific emotional responses in viewers. Using techniques passed down through her family, combined with her own innovations, she creates pigments that seem to radiate with an inner light. Her most remarkable works appear to change color depending on the viewer's emotional state. Though passionate and expressive in her art, she can be reserved in personal interactions, preferring to let her colors speak for her. In the quest for 'Miyabi,' she discovers that certain ancient artifacts respond to specific color frequencies, revealing hidden messages and mechanisms when exposed to the right pigments. Her knowledge of traditional color symbolism also proves crucial in deciphering old texts and maps.",
+          characterDescription_ja: "紅葉は15世代以上にわたって日本の伝統的な顔料を作る古代の芸術を保存してきた家系の出身です。彼女の専門は、目を楽しませるだけでなく、見る人に特定の感情的な反応を引き起こす色を作ることにあります。家族から受け継がれた技術と彼女自身の革新を組み合わせて、彼女は内側から光を放つように見える顔料を作り出します。彼女の最も注目すべき作品は、見る人の感情状態に応じて色が変わるように見えます。芸術において情熱的で表現力豊かですが、個人的な交流では控えめで、彼女の色彩に代わりに語らせることを好みます。「雅」の探求において、彼女は特定の古代の遺物が特定の色の周波数に反応し、正しい顔料にさらされると隠されたメッセージやメカニズムを明らかにすることを発見します。伝統的な色のシンボリズムに関する彼女の知識は、古いテキストや地図を解読する上でも非常に重要であることが証明されます。"
+        },
+        {
+          id: 27,
+          title: "MIYABI #027: Kuroi - The Shadow Ninja",
+          description_en: "Kuroi, a master of stealth and shadow arts, moves unseen through both physical and digital realms to protect ancient knowledge.",
+          description_ja: "黒衣は隠密と影の技の達人。古代の知識を守るため、物理的およびデジタルの両方の領域を見えずに移動する。",
+          image: "assets/nft27.jpg",
+          video: "",
+          style: "Shadow Operative",
+          method: "Stealth Infiltration",
+          accessory: "Shadow-Bending Tools",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Secretive & Vigilant",
+            personality_ja: "秘密主義で警戒心が強い",
+            specialty_en: "Shadow Manipulation",
+            specialty_ja: "影の操作",
+            currentBase_en: "Hidden Mountain Sanctuary",
+            currentBase_ja: "隠された山の聖域",
+            fourCharacterIdiom: {
+              en: "Black Garment Conceals Movement",
+              ja: "黒衣隠動",
+              meaning_en: "The black garment conceals all movement.",
+              meaning_ja: "黒い衣装がすべての動きを隠す。黒衣の隠密能力を表現しています。"
+            }
+          },
+          characterDescription_en: "Kuroi is the last heir to a secretive clan that has protected Japan's most dangerous knowledge for centuries. Trained from childhood in both traditional ninja arts and modern infiltration techniques, they can move through shadows with supernatural grace. Their specialized tools allow them to bend light and sound around themselves, becoming nearly imperceptible to both human senses and electronic surveillance. Though intensely private, they possess a strong moral code and deep loyalty to their mission of keeping dangerous secrets from falling into the wrong hands. In the story, Kuroi serves as both scout and guardian, infiltrating secured locations to recover lost artifacts and protecting the group from those who would exploit the power for their own ends. Their ability to move between the physical and digital worlds makes them uniquely suited to tracking down information scattered across both ancient scrolls and modern databases.",
+          characterDescription_ja: "黒衣は何世紀にもわたって日本の最も危険な知識を保護してきた秘密の一族の最後の後継者です。幼少期から伝統的な忍術と現代の潜入技術の両方で訓練され、超自然的な優雅さで影を通り抜けることができます。彼らの特殊な道具は、自分の周りの光と音を曲げることを可能にし、人間の感覚と電子監視の両方にほとんど感知されなくなります。非常にプライベートですが、強い道徳的規範と、危険な秘密が間違った手に落ちないようにするという使命への深い忠誠心を持っています。物語の中では、黒衣は偵察者と守護者の両方として機能し、安全な場所に侵入して失われた遺物を回収し、力を自分の目的のために利用しようとする人々からグループを保護します。物理的な世界とデジタルの世界の間を移動する彼らの能力は、日本全国の特定の水域が忘れられた儀式の同期した記憶を含んでいることを発見したときに始まりました。"
+        },
+        {
+          id: 28,
+          title: "MIYABI #028: Shōshō - The Misty Scout",
+          description_en: "Shōshō, a mountain guide with an innate connection to fog and mist, navigates treacherous terrain and uncovers hidden paths invisible to others.",
+          description_ja: "霄笙は霧や靄との生来の繋がりを持つ山岳ガイド。危険な地形を案内し、他の人には見えない隠された道を発見する。",
+          image: "assets/nft28.jpg",
+          video: "",
+          style: "Mist Walker",
+          method: "Fog Navigation",
+          accessory: "Ancient Bamboo Flute",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Perceptive & Calm",
+            personality_ja: "知覚力が高く、穏やか",
+            specialty_en: "Mist Manipulation",
+            specialty_ja: "霧の操作",
+            currentBase_en: "Misty Mountain Peaks",
+            currentBase_ja: "霧に包まれた山頂",
+            fourCharacterIdiom: {
+              en: "Heavenly Flute Controls Mist",
+              ja: "霄笙御霧",
+              meaning_en: "The heavenly flute controls the mist.",
+              meaning_ja: "天空の笙が霧を操る。霄笙の霧を操る特殊能力を表現しています。"
+            }
+          },
+          characterDescription_en: "Born in a remote mountain village where fog perpetually shrouds the peaks, Shōshō developed an uncanny ability to not only navigate through dense mist but to subtly influence its movements. Playing their ancient bamboo flute, they can cause fog to thicken or disperse, revealing hidden paths or concealing their group from pursuers. Their perception extends beyond the visual—they can sense changes in air pressure, temperature, and humidity that allow them to predict weather patterns and detect approaching threats long before others. Though quiet and introspective, they possess a deep wisdom about the natural world and human nature. In the quest for 'Miyabi,' Shōshō's abilities prove invaluable for finding hidden shrines and temples nestled in misty mountains that have been lost to time. Their connection to the mist also allows them to perceive the thin boundaries between our world and the spirit realm, especially in places where fog blurs the distinction between earth and sky.",
+          characterDescription_ja: "霧が絶えず山頂を覆う遠隔の山村で生まれた霄笙は、濃い霧の中を案内するだけでなく、その動きを微妙に影響させる不思議な能力を発達させました。古代の竹笛を演奏することで、霧を濃くしたり散らしたりして、隠された道を明らかにしたり、追跡者からグループを隠したりすることができます。彼らの知覚は視覚を超えて—気圧、温度、湿度の変化を感知することができ、他の人が気づく遥か前に天候パターンを予測し、接近する脅威を検出することができます。静かで内省的ですが、自然界と人間の本性について深い知恵を持っています。「雅」の探求において、霄笙の能力は、時間の経過とともに失われた霧に包まれた山々に隠された神社や寺院を見つけるのに非常に貴重であることが証明されます。霧への彼らの繋がりはまた、特に霧が地球と空の区別をぼかす場所で、私たちの世界と霊界の間の薄い境界を知覚することを可能にします。"
+        },
+        {
+          id: 29,
+          title: "MIYABI #029: Tsukikage - The Moonlight Blade",
+          description_en: "Tsukikage, a master swordsman who harnesses lunar energy, performs blade dances that blur the line between combat and art.",
+          description_ja: "月影は月のエネルギーを活用する剣術の達人。戦闘と芸術の境界を曖昧にする刀の舞を披露する。",
+          image: "assets/nft29.jpg",
+          video: "",
+          style: "Lunar Swordsman",
+          method: "Moonlight Blade Dance",
+          accessory: "Moonstone-Inlaid Katana",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Elegant & Precise",
+            personality_ja: "優雅で精密",
+            specialty_en: "Lunar-Enhanced Swordsmanship",
+            specialty_ja: "月光強化剣術",
+            currentBase_en: "Mountain Shrine Dojo",
+            currentBase_ja: "山の神社道場",
+            fourCharacterIdiom: {
+              en: "Moon Shadow Blade Dance",
+              ja: "月影舞刃",
+              meaning_en: "The shadow of the moon dances with the blade.",
+              meaning_ja: "月の影が刃と共に舞う。月影の剣術の美しさと神秘性を表現しています。"
+            }
+          },
+          characterDescription_en: "Tsukikage descends from an ancient line of swordsmen who developed a unique fighting style that draws power from moonlight. Their katana, inlaid with moonstones passed down through generations, seems to glow with an ethereal light during night battles. Their swordsmanship blends traditional techniques with movements inspired by classical Japanese dance, creating combat sequences of such beauty that witnesses often forget they are watching a deadly art. Though formal and reserved in daily life, they become transformed when performing their blade dances under the moon, moving with supernatural grace and precision. In the search for 'Miyabi,' Tsukikage's abilities reach their peak during full moons, when they can cut through spiritual barriers that would otherwise be impenetrable. Their deep knowledge of lunar cycles and celestial alignments also helps the group time their most important rituals to harness maximum power.",
+          characterDescription_ja: "月影は、月光からパワーを引き出すユニークな戦闘スタイルを開発した古代の剣士の系譜から降りてきます。世代を超えて受け継がれてきた月長石がはめ込まれた彼らの刀は、夜の戦いの間に幽玄な光で輝くように見えます。彼らの剣術は伝統的な技術と古典的な日本舞踊にインスパイアされた動きを融合させ、目撃者がしばしば致命的な芸術を見ていることを忘れてしまうほどの美しさの戦闘シーケンスを作り出します。日常生活では形式的で控えめですが、月の下で刀の舞を披露するとき、彼らは超自然的な優雅さと精度で動き、変容します。「雅」の探求において、月影の能力は満月の間にピークに達し、そのとき彼らは他の方法では貫通できない霊的な障壁を切り抜けることができます。月の周期と天体の配列に関する彼らの深い知識は、グループが最大のパワーを活用するために最も重要な儀式のタイミングを合わせるのにも役立ちます。"
+        },
+        {
+          id: 30,
+          title: "MIYABI #030: Sansen - The Dazzling Fan Artist",
+          description_en: "Sansen, a master of traditional Japanese fan art, creates performances that combine dance, illusion, and hidden weapons with dazzling brilliance.",
+          description_ja: "燦扇は日本の伝統的な扇子芸の達人。舞踊、幻術、隠し武器を眩しい輝きで組み合わせたパフォーマンスを創り出す。",
+          image: "assets/nft30.jpg",
+          video: "",
+          style: "Brilliant Fan Artist",
+          method: "Illusion Fan Dance",
+          accessory: "Jeweled Combat Fans",
+          collection: "MIYABI",
+          traits: {
+            personality_en: "Dazzling & Strategic",
+            personality_ja: "眩しく、戦略的",
+            specialty_en: "Light Manipulation with Fans",
+            specialty_ja: "扇子による光の操作",
+            currentBase_en: "Traditional Theater House",
+            currentBase_ja: "伝統的な劇場",
+            fourCharacterIdiom: {
+              en: "Brilliant Fan Dazzles World",
+              ja: "燦扇驚世",
+              meaning_en: "The brilliant fan astonishes the world.",
+              meaning_ja: "輝かしい扇が世界を驚かせる。燦扇の芸術の素晴らしさを表現しています。"
+            }
+          },
+          characterDescription_en: "Sansen comes from a lineage of performers who specialized in the art of war fans, blending combat techniques with theatrical performance. Their fans, adorned with rare jewels and special reflective materials, can create dazzling light displays that momentarily blind opponents or reveal hidden messages when struck by specific light sources. Behind their flamboyant performance style lies a calculating mind that uses misdirection and illusion to achieve their goals. Though they appear carefree and dramatic, they carefully plan each movement and gesture for maximum effect. In the quest for 'Miyabi,' Sansen's performances serve multiple purposes—entertaining allies to boost morale, distracting enemies during crucial moments, and encoding important messages in their dance patterns that only their companions can decipher. Their knowledge of traditional performance arts also helps the group understand ancient ritual dances described in recovered texts.",
+          characterDescription_ja: "燦扇は、戦闘技術と演劇的なパフォーマンスを融合させた軍扇の芸術を専門とする演者の系譜から来ています。希少な宝石と特殊な反射材料で飾られた彼らの扇子は、相手を一時的に目くらましにしたり、特定の光源に当たると隠されたメッセージを明らかにしたりする眩しい光のディスプレイを作り出すことができます。派手なパフォーマンススタイルの背後には、誤った方向づけと幻想を使用して目標を達成する計算する心があります。気ままで劇的に見えますが、彼らは最大の効果を得るために各動きとジェスチャーを慎重に計画します。「雅」の探求において、燦扇のパフォーマンスは複数の目的を果たします—士気を高めるために仲間を楽しませ、重要な瞬間に敵の注意をそらし、仲間だけが解読できる彼らのダンスパターンに重要なメッセージを符号化します。伝統的な演技芸術に関する彼らの知識は、回収されたテキストに記述されている古代の儀式的なダンスを理解するのにもグループを助けます。"
+        }
+      ]
+      
+      // ギャラリーを生成する関数
+      function generateGallery() {
+        const galleryGrid = document.querySelector('.gallery-grid');
+        galleryGrid.innerHTML = ''; // 既存の内容をクリア
+        
+        // 各NFTアイテムをループして表示
+        nftData.forEach(nft => {
+          // ギャラリーアイテム要素を作成
+          const galleryItem = document.createElement('div');
+          galleryItem.className = 'gallery-item';
+          galleryItem.setAttribute('data-id', nft.id);
           
-          // 画像読み込み後、背景色抽出（Color Thief 利用例）
-          if(modalImg) {
-            modalImg.onload = function() {
-              try {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.width = modalImg.width;
-                canvas.height = modalImg.height;
-                ctx.drawImage(modalImg, 0, 0);
-                const imageData = ctx.getImageData(0, 0, 1, 1).data;
-                const bgColor = "rgb(" + imageData[0] + ", " + imageData[1] + ", " + imageData[2] + ")";
-                const modalBg = document.querySelector('.modal-background');
-                if (modalBg) {
-                    modalBg.style.backgroundColor = bgColor;
-                }
-                if (window.innerWidth <= 768) {
-                    const modalOverlay = document.querySelector('.modal-overlay');
-                    if (modalOverlay) {
-                        modalOverlay.style.backgroundColor = bgColor;
-                    }
-                }
-              } catch (e) {
-                console.error("Error extracting background color:", e);
-              }
-            };
-          }
-
-          // 画像クリックで動画表示（動画が存在する場合）
-          if(modalImg) {
-            modalImg.onclick = function() {
-              if(nft.video && modalVideo && modalVideo.src) {
-                modalImg.style.display = 'none';
-                modalVideo.style.display = 'block';
-                if(modalInfo) {
-                  modalInfo.style.display = 'none';
-                }
-                if(modalContent) {
-                  modalContent.classList.add('video-active');
-                }
-                modalVideo.play().catch(err => console.error("Video play error:", err));
-              }
-            };
-          }
-          // 動画クリックで画像＋詳細情報表示に戻す
-          if(modalVideo) {
-            modalVideo.onclick = function() {
-              modalVideo.pause();
-              modalVideo.style.display = 'none';
-              if(modalImg) {
-                modalImg.style.display = 'block';
-              }
-              if(modalInfo) {
-                modalInfo.style.display = '';
-              }
-              if(modalContent) {
-                modalContent.classList.remove('video-active');
-              }
-            };
-          }
-
-          modal.style.display = 'flex';
-          setTimeout(() => { modal.classList.add('active'); }, 10);
-          document.body.style.overflow = 'hidden';
-          setupModalEventListeners(modal);
-        } catch (error) {
-          console.error("Error in openModal:", error);
-        }
-      }
-
-      function updateTraits(nft) {
-        try {
-          const modalTraits = document.getElementById('modalTraits');
-          if (modalTraits && nft.traits) {
-              const keysToShow = ["personality", "specialty", "currentBase", "fourCharacterIdiom"];
-              let traitsHTML = '<h3>' + (translations[currentLang].traitsTitle || "Traits") + '</h3><div class="trait-list">';
-              keysToShow.forEach(key => {
-                  if(nft.traits[key + "_" + currentLang]){
-                    traitsHTML += 
-                      '<div class="trait-item">' +
-                          '<span class="trait-type">' + getTraitLabel(key) + ':</span> ' +
-                          '<span class="trait-value">' + nft.traits[key + "_" + currentLang] + '</span>' +
-                      '</div>';
-                  }
-              });
-              traitsHTML += '</div>';
-              modalTraits.innerHTML = traitsHTML;
-          } else if (modalTraits) {
-              modalTraits.innerHTML = '';
-          }
-        } catch (error) {
-          console.error("Error in updateTraits:", error);
-        }
-      }
-
-      function getTraitLabel(key) {
-          const labels = {
-              personality: currentLang === "ja" ? "性格" : "Personality",
-              specialty: currentLang === "ja" ? "専門" : "Specialty",
-              currentBase: currentLang === "ja" ? "活動拠点" : "Base",
-              fourCharacterIdiom: currentLang === "ja" ? "四字熟語" : "Idiom"
+          // NFT番号を表示
+          const nftNumber = document.createElement('div');
+          nftNumber.className = 'gallery-item-number';
+          nftNumber.textContent = `#${nft.id.toString().padStart(3, '0')}`;
+          
+          // 画像要素を作成
+          const img = document.createElement('img');
+          img.src = nft.image;
+          img.alt = nft.title;
+          img.onerror = function() {
+            console.error(`Failed to load image: ${nft.image}`);
+            // エラー時の代替画像を表示
+            this.src = 'assets/placeholder.jpg';
           };
-          return labels[key] || key;
+          
+          // 要素を追加
+          galleryItem.appendChild(nftNumber);
+          galleryItem.appendChild(img);
+          galleryGrid.appendChild(galleryItem);
+          
+          // クリックイベントを追加（モーダル表示用）
+          galleryItem.addEventListener('click', function() {
+            openModal(nft);
+          });
+        });
       }
-
-      function setupModalEventListeners(modal) {
-          try {
-            const closeButton = modal.querySelector('.modal-close');
-            if (closeButton) {
-                closeButton.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                });
-                closeButton.addEventListener('touchend', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    closeModal();
-                });
-                closeButton.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    closeModal();
-                });
-            }
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-            const escHandler = (e) => {
-                if (e.key === 'Escape') {
-                    closeModal();
-                }
-            };
-            document.addEventListener('keydown', escHandler);
-            modal._escHandler = escHandler;
-          } catch (error) {
-            console.error("Error in setupModalEventListeners:", error);
-          }
+      
+      // モーダルを開く関数
+      function openModal(nft) {
+        const modal = document.getElementById('nftModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalVideo = document.getElementById('modalVideo');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalCollection = document.getElementById('modalCollection');
+        const modalNumber = document.getElementById('modalNumber');
+        const modalStyle = document.getElementById('modalStyle');
+        const modalMethod = document.getElementById('modalMethod');
+        const modalAccessory = document.getElementById('modalAccessory');
+        const characterDescriptionContent = document.getElementById('characterDescriptionContent');
+        const characterIdiom = document.getElementById('characterIdiom');
+        const characterIdiomMeaning = document.getElementById('characterIdiomMeaning');
+        
+        // モーダルの内容を設定
+        modalImage.src = nft.image;
+        modalTitle.textContent = nft.title;
+        modalDescription.textContent = currentLang === 'en' ? nft.description_en : nft.description_ja;
+        modalCollection.textContent = nft.collection;
+        modalNumber.textContent = `#${nft.id.toString().padStart(3, '0')}`;
+        modalStyle.textContent = nft.style;
+        modalMethod.textContent = nft.method;
+        modalAccessory.textContent = nft.accessory;
+        
+        // キャラクター説明を設定
+        characterDescriptionContent.textContent = currentLang === 'en' ? nft.characterDescription_en : nft.characterDescription_ja;
+        
+        // 四字熟語を設定
+        characterIdiom.textContent = currentLang === 'en' ? nft.traits.fourCharacterIdiom.en : nft.traits.fourCharacterIdiom.ja;
+        characterIdiomMeaning.textContent = currentLang === 'en' ? nft.traits.fourCharacterIdiom.meaning_en : nft.traits.fourCharacterIdiom.meaning_ja;
+        
+        // モーダルを表示
+        modal.style.display = 'flex';
+        
+        // 動画がある場合は動画を表示、ない場合は画像を表示
+        if (nft.video && nft.video !== "") {
+          modalVideo.src = nft.video;
+          modalVideo.style.display = 'block';
+          modalImage.style.display = 'none';
+          modalVideo.play();
+        } else {
+          modalVideo.style.display = 'none';
+          modalImage.style.display = 'block';
+        }
       }
-
-      function closeModal() {
-          try {
-            const modal = document.getElementById('nftModal');
-            if (!modal) return;
-            if (modal._escHandler) {
-                document.removeEventListener('keydown', modal._escHandler);
-                delete modal._escHandler;
-            }
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.body.style.overflow = '';
-            }, 300);
-          } catch (error) {
-            console.error("Error in closeModal:", error);
-          }
-      }
-
-      function populateGallery() {
-          try {
-            const galleryGrid = document.querySelector('.gallery-grid');
-            if (!galleryGrid) return;
-            galleryGrid.innerHTML = '';
-            nftData.forEach(nft => {
-                const item = createGalleryItem(nft);
-                galleryGrid.appendChild(item);
-            });
-          } catch (error) {
-            console.error("Error in populateGallery:", error);
-          }
-      }
-
-      function createGalleryItem(nft) {
-          try {
-            const item = document.createElement('div');
-            item.className = 'gallery-item';
-            item.dataset.number = "#" + String(nft.id).padStart(4, '0');
-            item.dataset.title = nft.title;
-            const numberDiv = document.createElement('div');
-            numberDiv.className = 'gallery-item-number';
-            numberDiv.textContent = item.dataset.number;
-            const img = document.createElement('img');
-            img.src = nft.image;
-            img.alt = nft.title;
-            img.loading = 'lazy';
-            img.onerror = function() {
-                this.src = 'assets/placeholder.jpg';
-            };
-            item.appendChild(numberDiv);
-            item.appendChild(img);
-            item.addEventListener('click', () => {
-                openModal(nft);
-            });
-            return item;
-          } catch (error) {
-            console.error("Error in createGalleryItem:", error);
-          }
-      }
-
-      async function initializeWeb3() {
-          try {
-            if (typeof window.ethereum !== 'undefined') {
-                window.web3 = new Web3(window.ethereum);
-                const connectBtn = document.querySelector('.connect-btn');
-                if (connectBtn) {
-                    connectBtn.addEventListener('click', connectWallet);
-                }
-                window.ethereum.on('accountsChanged', handleAccountsChanged);
-            }
-          } catch (error) {
-            console.error("Error in initializeWeb3:", error);
-          }
-      }
-
-      async function connectWallet() {
-          try {
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            handleAccountsChanged(accounts);
-          } catch (error) {
-            console.error('Failed to connect wallet:', error);
-          }
-      }
-
-      function handleAccountsChanged(accounts) {
-          const connectBtn = document.querySelector('.connect-btn');
-          if (!connectBtn) return;
-          if (accounts.length === 0) {
-              connectBtn.textContent = translations[currentLang].connectWallet;
-          } else {
-              const shortAddress = accounts[0].substring(0, 6) + "..." + accounts[0].substring(accounts[0].length - 4);
-              connectBtn.textContent = shortAddress;
-          }
-      }
-
-      function initializeLanguageToggle() {
-          try {
-            const langSelect = document.querySelector('.lang-select');
-            if (langSelect) {
-                langSelect.addEventListener('change', (e) => {
-                    currentLang = e.target.value;
-                    updateLanguage();
-                });
-                langSelect.addEventListener('input', (e) => {
-                    currentLang = e.target.value;
-                    updateLanguage();
-                });
-            }
-            updateLanguage();
-          } catch (error) {
-            console.error("Error in initializeLanguageToggle:", error);
-          }
-      }
-
+      
+      // モーダルを閉じる処理
+      document.querySelector('.modal-close').addEventListener('click', function() {
+        const modal = document.getElementById('nftModal');
+        const modalVideo = document.getElementById('modalVideo');
+        
+        modal.style.display = 'none';
+        modalVideo.pause();
+      });
+      
+      document.querySelector('.modal-overlay').addEventListener('click', function() {
+        const modal = document.getElementById('nftModal');
+        const modalVideo = document.getElementById('modalVideo');
+        
+        modal.style.display = 'none';
+        modalVideo.pause();
+      });
+      
+      // 言語切り替え処理
+      document.querySelector('.lang-select').addEventListener('change', function(e) {
+        currentLang = e.target.value;
+        updateLanguage();
+      });
+      
       function updateLanguage() {
-          try {
-            // data-translate属性を持つ要素の更新
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.dataset.translate;
-                const translationPath = key.split('.');
-                let translation = translations[currentLang];
-                for (const path of translationPath) {
-                    translation = translation?.[path];
-                }
-                if (translation) {
-                    element.textContent = translation;
-                }
-            });
-            const searchInput = document.querySelector('.search-input');
-            if (searchInput) {
-                searchInput.placeholder = translations[currentLang].search;
+        // 翻訳要素を更新
+        document.querySelectorAll('[data-translate]').forEach(el => {
+          const key = el.getAttribute('data-translate');
+          const keys = key.split('.');
+          let translation = translations[currentLang];
+          
+          for (const k of keys) {
+            if (translation[k] !== undefined) {
+              translation = translation[k];
+            } else {
+              translation = key;
+              break;
             }
-            const connectBtn = document.querySelector('.connect-btn');
-            if (connectBtn && !connectBtn.textContent.includes('0x')) {
-                connectBtn.textContent = translations[currentLang].connectWallet;
-            }
-            // モーダル内表示中の場合、説明文・詳細情報および特性を更新
-            const modalTitle = document.getElementById('modalTitle');
-            if (modalTitle && modalTitle.textContent) {
-                const nft = nftData.find(nft => nft.title === modalTitle.textContent);
-                if (nft) {
-                    document.getElementById('modalDescription').textContent = nft["description_" + currentLang];
-                    document.getElementById('modalStyle').textContent = nft["style_" + currentLang] || nft.style;
-                    document.getElementById('modalMethod').textContent = nft["method_" + currentLang] || nft.method;
-                    document.getElementById('modalAccessory').textContent = nft["accessory_" + currentLang] || nft.accessory;
-                    updateTraits(nft);
-                }
-            }
-          } catch (error) {
-            console.error("Error in updateLanguage:", error);
           }
+          
+          el.textContent = translation;
+        });
+        
+        // ギャラリーを再生成
+        generateGallery();
       }
-
-      function isMobileDevice() {
-          return window.innerWidth <= 768;
-      }
-
-      function optimizeForMobile() {
-          try {
-            if (isMobileDevice()) {
-                const galleryGrid = document.querySelector('.gallery-grid');
-                if (galleryGrid) {
-                    // モバイル時は1列表示に変更
-                    galleryGrid.style.gridTemplateColumns = '1fr';
-                }
-                const modalContent = document.querySelector('.nft-modal .modal-content');
-                if (modalContent) {
-                    modalContent.style.gridTemplateColumns = '1fr';
-                }
-            }
-          } catch (error) {
-            console.error("Error in optimizeForMobile:", error);
-          }
-      }
-
-      function debounce(func, wait) {
-          let timeout;
-          return function(...args) {
-              clearTimeout(timeout);
-              timeout = setTimeout(() => func(...args), wait);
-          };
-      }
-
-      function lazyLoadImages() {
-          try {
-            const images = document.querySelectorAll('img[data-src]');
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                        observer.unobserve(img);
-                    }
-                });
-            });
-            images.forEach(img => imageObserver.observe(img));
-          } catch (error) {
-            console.error("Error in lazyLoadImages:", error);
-          }
-      }
-
-      function handleError(error, context) {
-          console.error("Error in " + context + ":", error);
-          const errorContainer = document.querySelector('.error-container');
-          if (errorContainer) {
-              errorContainer.textContent = (currentLang === "ja" ? "エラーが発生しました: " : "An error occurred: ") + error.message;
-              errorContainer.style.display = 'block';
-          }
-      }
-
-      try {
-          populateGallery();
-          initializeLanguageToggle();
-          initializeWeb3();
-          optimizeForMobile();
-          lazyLoadImages();
-          window.addEventListener('resize', debounce(() => {
-              optimizeForMobile();
-          }, 250));
-      } catch (error) {
-          handleError(error, 'application initialization');
-      }
+      
+      // 初期化処理
+      generateGallery();
+      updateLanguage();
     });
   </script>
 </body>
