@@ -1474,52 +1474,63 @@
         characterIdiom.textContent = currentLang === 'en' ? nft.traits.fourCharacterIdiom.en : nft.traits.fourCharacterIdiom.ja;
         characterIdiomMeaning.textContent = currentLang === 'en' ? nft.traits.fourCharacterIdiom.meaning_en : nft.traits.fourCharacterIdiom.meaning_ja;
         
-        // NFT IDに基づいて背景色を設定
-        const backgroundColors = {
-          1: { main: '#1a3a5f', info: '#2a4a6f', text: '#ffffff' }, // 青波 - 藍色
-          2: { main: '#4a4a4a', info: '#5a5a5a', text: '#ffffff' }, // 鶴雅 - 灰色
-          3: { main: '#7a5c3d', info: '#8a6c4d', text: '#ffffff' }, // 四季 - 茶色
-          4: { main: '#3f3f3f', info: '#4f4f4f', text: '#ffffff' }, // 楓墨 - 暗い灰色
-          5: { main: '#1e3a4c', info: '#2e4a5c', text: '#ffffff' }, // #5 - 暗い青緑色
-          6: { main: '#6b3e2e', info: '#7b4e3e', text: '#ffffff' }, // #6 - 赤茶色
-          7: { main: '#2d4a3e', info: '#3d5a4e', text: '#ffffff' }, // #7 - 深緑色
-          8: { main: '#FF8C00', info: '#E67E22', text: '#ffffff' }, // 白影 - オレンジ色
-          9: { main: '#8e44ad', info: '#9b59b6', text: '#ffffff' }, // #9 - 紫色
-          10: { main: '#c0392b', info: '#d0493b', text: '#ffffff' }, // 朱華 - 赤色
-          11: { main: '#27ae60', info: '#37be70', text: '#ffffff' }, // #11 - 緑色
-          12: { main: '#f1c40f', info: '#f39c12', text: '#000000' }, // 天貴 - 黄色
-          13: { main: '#34495e', info: '#445a6e', text: '#ffffff' }, // #13 - 紺色
-          14: { main: '#7f8c8d', info: '#8f9c9d', text: '#ffffff' }, // 千夜 - 灰青色
-          15: { main: '#16a085', info: '#26b095', text: '#ffffff' }, // #15 - ターコイズ
-          16: { main: '#d35400', info: '#e35410', text: '#ffffff' }, // 神楽 - 深いオレンジ色
-          17: { main: '#2980b9', info: '#3990c9', text: '#ffffff' }, // 葛葉 - 青色
-          18: { main: '#1abc9c', info: '#2acc9c', text: '#ffffff' }, // 水姫 - 水色
-          19: { main: '#2c3e50', info: '#3c4e60', text: '#ffffff' }, // 影虎 - 暗い青色
-          20: { main: '#8B0000', info: '#9B1010', text: '#ffffff' }, // 雪姫 - 深紅色
-          21: { main: '#FF69B4', info: '#FF79C4', text: '#000000' }, // 夜桜 - ピンク色
-          22: { main: '#FF4500', info: '#FF5510', text: '#ffffff' }, // 凛火 - 明るいオレンジ色
-          23: { main: '#4B0082', info: '#5B1092', text: '#ffffff' }, // 神崎 - インディゴ色
-          24: { main: '#FFD700', info: '#FFE710', text: '#000000' }, // 緋幻 - 金色
-          25: { main: '#006400', info: '#107410', text: '#ffffff' }, // 翠蘭 - 深緑色
-          26: { main: '#8B0000', info: '#9B1010', text: '#ffffff' }, // 紅葉 - 赤色
-          27: { main: '#000000', info: '#101010', text: '#ffffff' }, // 黒衣 - 黒色
-          28: { main: '#708090', info: '#8090A0', text: '#ffffff' }, // 霄笙 - スレートグレー
-          29: { main: '#483D8B', info: '#584D9B', text: '#ffffff' }, // 月影 - 暗い青紫色
-          30: { main: '#B8860B', info: '#C8961B', text: '#ffffff' }  // 燦扇 - 暗い金色
+        // 画像読み込み後、背景色抽出
+        modalImage.onload = function() {
+          try {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = modalImage.width;
+            canvas.height = modalImage.height;
+            ctx.drawImage(modalImage, 0, 0);
+            
+            // 画像の中央部分から色を抽出
+            const centerX = Math.floor(canvas.width / 2);
+            const centerY = Math.floor(canvas.height / 2);
+            const imageData = ctx.getImageData(centerX, centerY, 1, 1).data;
+            const bgColor = `rgb(${imageData[0]}, ${imageData[1]}, ${imageData[2]})`;
+            
+            // 背景色を設定
+            modalBackground.style.backgroundColor = bgColor;
+            
+            // 明るさを計算して、テキスト色を調整
+            const brightness = (imageData[0] * 299 + imageData[1] * 587 + imageData[2] * 114) / 1000;
+            const textColor = brightness > 128 ? '#000000' : '#ffffff';
+            
+            // 情報パネルの背景色を設定（少し暗くまたは明るく）
+            let infoR = imageData[0];
+            let infoG = imageData[1];
+            let infoB = imageData[2];
+            
+            // 明るさに応じて情報パネルの色を調整
+            if (brightness > 128) {
+              // 明るい色の場合は少し暗く
+              infoR = Math.max(0, infoR - 30);
+              infoG = Math.max(0, infoG - 30);
+              infoB = Math.max(0, infoB - 30);
+            } else {
+              // 暗い色の場合は少し明るく
+              infoR = Math.min(255, infoR + 30);
+              infoG = Math.min(255, infoG + 30);
+              infoB = Math.min(255, infoB + 30);
+            }
+            
+            modalInfo.style.backgroundColor = `rgba(${infoR}, ${infoG}, ${infoB}, 0.7)`;
+            modalInfo.style.color = textColor;
+            modalTitle.style.color = textColor;
+            
+            // モバイル表示の場合はオーバーレイの背景色も設定
+            if (window.innerWidth <= 768) {
+              const modalOverlay = document.querySelector('.modal-overlay');
+              if (modalOverlay) {
+                modalOverlay.style.backgroundColor = bgColor;
+              }
+            }
+            
+            console.log(`Background color: ${bgColor}`);
+          } catch (error) {
+            console.error('Error extracting background color:', error);
+          }
         };
-        
-        // デフォルトの色（IDに対応する色がない場合）
-        const defaultColor = { main: '#2c3e50', info: '#3c4e60', text: '#ffffff' };
-        
-        // NFT IDに対応する色を取得
-        const colorSet = backgroundColors[nft.id] || defaultColor;
-        
-        // 背景色を設定
-        modalBackground.style.backgroundColor = colorSet.main;
-        modalContent.style.backgroundColor = colorSet.main;
-        modalInfo.style.backgroundColor = colorSet.info;
-        modalInfo.style.color = colorSet.text;
-        modalTitle.style.color = colorSet.text;
         
         // モーダルを表示
         modal.style.display = 'flex';
