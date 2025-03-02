@@ -1311,7 +1311,7 @@
             }
           },
           characterDescription_en: "Kuroi is the last heir to a secretive clan that has protected Japan's most dangerous knowledge for centuries. Trained from childhood in both traditional ninja arts and modern infiltration techniques, they can move through shadows with supernatural grace. Their specialized tools allow them to bend light and sound around themselves, becoming nearly imperceptible to both human senses and electronic surveillance. Though intensely private, they possess a strong moral code and deep loyalty to their mission of keeping dangerous secrets from falling into the wrong hands. In the story, Kuroi serves as both scout and guardian, infiltrating secured locations to recover lost artifacts and protecting the group from those who would exploit the power for their own ends. Their ability to move between the physical and digital worlds makes them uniquely suited to tracking down information scattered across both ancient scrolls and modern databases.",
-          characterDescription_ja: "黒衣は何世紀にもわたって日本の最も危険な知識を保護してきた秘密の一族の最後の後継者です。幼少期から伝統的な忍術と現代の潜入技術の両方で訓練され、超自然的な優雅さで影を通り抜けることができます。彼らの特殊な道具は、自分の周りの光と音を曲げることを可能にし、人間の感覚と電子監視の両方にほとんど感知されなくなります。非常にプライベートですが、強い道徳的規範と、危険な秘密が間違った手に落ちないようにするという使命への深い忠誠心を持っています。物語の中では、黒衣は偵察者と守護者の両方として機能し、安全な場所に侵入して失われた遺物を回収し、力を自分の目的のために利用しようとする人々からグループを保護します。物理的な世界とデジタルの世界の間を移動する彼らの能力は、日本全国の特定の水域が忘れられた儀式の同期した記憶を含んでいることを発見したときに始まりました。"
+          characterDescription_ja: "黒衣は何世紀にもわたって日本の最も危険な知識を保護してきた秘密の一族の最後の後継者です。幼少期から伝統的な忍術と現代の潜入技術の両方で訓練され、超自然的な優雅さで影を通り抜けることができます。彼らの特殊な道具は、自分の周りの光と音を曲げることを可能にし、人間の感覚と電子監視の両方にほとんど感知されなくなります。非常にプライベートですが、強い道徳的規範と、危険な秘密が間違った手に落ちないようにするという使命への深い忠誠心を持っています。物語の中では、「白隠」の秘術を駆使し、闇勢力に狙われる仲間を守る影の護衛として、表舞台には立たず、縁の下の力持ちとして活躍します。"
         },
         {
           id: 28,
@@ -1475,62 +1475,66 @@
         characterIdiomMeaning.textContent = currentLang === 'en' ? nft.traits.fourCharacterIdiom.meaning_en : nft.traits.fourCharacterIdiom.meaning_ja;
         
         // 画像読み込み後、背景色抽出
-        modalImage.onload = function() {
-          try {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = modalImage.width;
-            canvas.height = modalImage.height;
-            ctx.drawImage(modalImage, 0, 0);
-            
-            // 画像の中央部分から色を抽出
-            const centerX = Math.floor(canvas.width / 2);
-            const centerY = Math.floor(canvas.height / 2);
-            const imageData = ctx.getImageData(centerX, centerY, 1, 1).data;
-            const bgColor = `rgb(${imageData[0]}, ${imageData[1]}, ${imageData[2]})`;
-            
-            // 背景色を設定
-            modalBackground.style.backgroundColor = bgColor;
-            
-            // 明るさを計算して、テキスト色を調整
-            const brightness = (imageData[0] * 299 + imageData[1] * 587 + imageData[2] * 114) / 1000;
-            const textColor = brightness > 128 ? '#000000' : '#ffffff';
-            
-            // 情報パネルの背景色を設定（少し暗くまたは明るく）
-            let infoR = imageData[0];
-            let infoG = imageData[1];
-            let infoB = imageData[2];
-            
-            // 明るさに応じて情報パネルの色を調整
-            if (brightness > 128) {
-              // 明るい色の場合は少し暗く
-              infoR = Math.max(0, infoR - 30);
-              infoG = Math.max(0, infoG - 30);
-              infoB = Math.max(0, infoB - 30);
-            } else {
-              // 暗い色の場合は少し明るく
-              infoR = Math.min(255, infoR + 30);
-              infoG = Math.min(255, infoG + 30);
-              infoB = Math.min(255, infoB + 30);
-            }
-            
-            modalInfo.style.backgroundColor = `rgba(${infoR}, ${infoG}, ${infoB}, 0.7)`;
-            modalInfo.style.color = textColor;
-            modalTitle.style.color = textColor;
-            
-            // モバイル表示の場合はオーバーレイの背景色も設定
-            if (window.innerWidth <= 768) {
-              const modalOverlay = document.querySelector('.modal-overlay');
-              if (modalOverlay) {
-                modalOverlay.style.backgroundColor = bgColor;
+        if(modalImage) {
+          modalImage.onload = function() {
+            try {
+              const canvas = document.createElement('canvas');
+              const ctx = canvas.getContext('2d');
+              canvas.width = modalImage.width;
+              canvas.height = modalImage.height;
+              ctx.drawImage(modalImage, 0, 0);
+              
+              // 画像の中央部分から色を抽出
+              const centerX = Math.floor(modalImage.width / 2);
+              const centerY = Math.floor(modalImage.height / 2);
+              const imageData = ctx.getImageData(centerX, centerY, 1, 1).data;
+              const r = imageData[0];
+              const g = imageData[1];
+              const b = imageData[2];
+              
+              // 背景色をRGBで設定
+              const bgColor = `rgb(${r}, ${g}, ${b})`;
+              
+              // 明るさを計算（標準的な輝度計算式）
+              const brightness = (r * 0.299 + g * 0.587 + b * 0.114) / 255;
+              
+              // モーダルの背景色を設定
+              const modalBg = document.querySelector('.modal-background');
+              if (modalBg) {
+                  modalBg.style.backgroundColor = bgColor;
               }
+              
+              // 情報パネルの背景色を調整（少し暗くまたは明るく）
+              const modalInfo = document.querySelector('.modal-info');
+              if (modalInfo) {
+                  // 明るい背景色の場合は少し暗く、暗い背景色の場合は少し明るく
+                  let infoPanelColor;
+                  if (brightness > 0.5) {
+                      // 明るい背景の場合、少し暗くする
+                      infoPanelColor = `rgba(${r * 0.8}, ${g * 0.8}, ${b * 0.8}, 0.8)`;
+                  } else {
+                      // 暗い背景の場合、少し明るくする
+                      infoPanelColor = `rgba(${Math.min(r * 1.2, 255)}, ${Math.min(g * 1.2, 255)}, ${Math.min(b * 1.2, 255)}, 0.8)`;
+                  }
+                  modalInfo.style.backgroundColor = infoPanelColor;
+                  
+                  // テキスト色も調整
+                  const textColor = brightness > 0.6 ? '#000' : '#fff';
+                  modalInfo.style.color = textColor;
+              }
+              
+              // モバイル表示の場合はオーバーレイの背景色も設定
+              if (window.innerWidth <= 768) {
+                  const modalOverlay = document.querySelector('.modal-overlay');
+                  if (modalOverlay) {
+                      modalOverlay.style.backgroundColor = bgColor;
+                  }
+              }
+            } catch (e) {
+              console.error("Error extracting background color:", e);
             }
-            
-            console.log(`Background color: ${bgColor}`);
-          } catch (error) {
-            console.error('Error extracting background color:', error);
-          }
-        };
+          };
+        }
         
         // モーダルを表示
         modal.style.display = 'flex';
