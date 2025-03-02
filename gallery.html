@@ -175,7 +175,7 @@
       overflow: hidden;
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
+      transition: all 0.3s ease, background-color 0.3s ease;
     }
     /* Fullscreen for video on mobile */
     @media (max-width: 768px) {
@@ -271,6 +271,7 @@
       backdrop-filter: blur(10px);
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
     .collection-row {
       font-family: 'Rajdhani', sans-serif;
@@ -1198,7 +1199,7 @@
             }
           },
           characterDescription_en: "Kanzaki combines ancient divination arts with modern strategic thinking, creating a unique system that has proven uncannily accurate in predicting outcomes and planning operations. Raised in a family that has served as advisors to powerful figures for generations, they were trained from childhood in both traditional arts and contemporary analytics. Their calm, measured demeanor masks a mind that constantly calculates probabilities and contingencies. Though some find their analytical approach cold, those who work closely with Kanzaki recognize the deep compassion that drives their desire to find optimal solutions that minimize harm. In the quest for 'Miyabi,' they serve as the group's chief strategist, using their divination compass to navigate through both physical and metaphysical challenges.",
-          characterDescription_ja: "神崎は古代の占術と現代の戦略的思考を組み合わせ、結果を予測し作戦を計画する上で不思議なほど正確であることが証明されたユニークなシステムを作り出しました。何世代にもわたって権力者の顧問を務めてきた家系で育った彼は、幼少期から伝統的な芸術と現代の分析の両方で訓練されました。彼の冷静で測定された態度は、常に確率と不測の事態を計算する心を隠しています。分析的なアプローチを冷たいと感じる人もいますが、神崎と密接に働く人々は、害を最小限に抑える最適な解決策を見つけたいという彼の願望を駆り立てる深い思いやりを認識しています。「雅」の探求において、彼はグループの主席戦略家として、占術コンパスを使用して物理的および形而上学的な課題を通じて導きます。"
+          characterDescription_ja: "神崎は古代の占術と現代の戦略的思考を組み合わせ、結果を予測し作戦を計画する上で不思議なほど正確であることが証明されたユニークなシステムを作り出しました。何世代にもわたって権力者の顧問を務めてきた家系で育った彼は、幼少期から伝統的な芸術と現代の分析の両方で訓練されました。彼の冷静で測定された態度は、常に確率と不測の事態を計算する心を隠しています。分析的なアプローチを冷たいと感じる人もいますが、神崎と密接に働く人々は、彼の願望を駆り立てる深い思いやりを認識しています。「雅」の探求において、彼はグループの主席戦略家として、占術コンパスを使用して物理的および形而上学的な課題を通じて導きます。"
         },
         {
           id: 24,
@@ -1452,6 +1453,9 @@
         const characterDescriptionContent = document.getElementById('characterDescriptionContent');
         const characterIdiom = document.getElementById('characterIdiom');
         const characterIdiomMeaning = document.getElementById('characterIdiomMeaning');
+        const modalBackground = document.querySelector('.modal-background');
+        const modalContent = document.querySelector('.modal-content');
+        const modalInfo = document.querySelector('.modal-info');
         
         // モーダルの内容を設定
         modalImage.src = nft.image;
@@ -1469,6 +1473,54 @@
         // 四字熟語を設定
         characterIdiom.textContent = currentLang === 'en' ? nft.traits.fourCharacterIdiom.en : nft.traits.fourCharacterIdiom.ja;
         characterIdiomMeaning.textContent = currentLang === 'en' ? nft.traits.fourCharacterIdiom.meaning_en : nft.traits.fourCharacterIdiom.meaning_ja;
+        
+        // 画像が読み込まれた後に色を抽出
+        modalImage.onload = function() {
+          try {
+            // Color Thiefを使用して画像から主要な色を抽出
+            const colorThief = new ColorThief();
+            const dominantColor = colorThief.getColor(modalImage);
+            
+            // RGBを16進数に変換
+            const dominantColorHex = rgbToHex(dominantColor[0], dominantColor[1], dominantColor[2]);
+            
+            // 抽出した色の明るさを計算
+            const brightness = (dominantColor[0] * 299 + dominantColor[1] * 587 + dominantColor[2] * 114) / 1000;
+            
+            // 明るさに応じてテキスト色を調整
+            const textColor = brightness > 128 ? '#000000' : '#ffffff';
+            
+            // 背景色を設定
+            modalBackground.style.backgroundColor = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
+            modalContent.style.backgroundColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]}, 0.7)`;
+            
+            // 情報パネルの背景色を設定（少し暗くまたは明るく）
+            let infoR = dominantColor[0];
+            let infoG = dominantColor[1];
+            let infoB = dominantColor[2];
+            
+            // 明るさに応じて情報パネルの色を調整
+            if (brightness > 128) {
+              // 明るい色の場合は少し暗く
+              infoR = Math.max(0, infoR - 30);
+              infoG = Math.max(0, infoG - 30);
+              infoB = Math.max(0, infoB - 30);
+            } else {
+              // 暗い色の場合は少し明るく
+              infoR = Math.min(255, infoR + 30);
+              infoG = Math.min(255, infoG + 30);
+              infoB = Math.min(255, infoB + 30);
+            }
+            
+            modalInfo.style.backgroundColor = `rgba(${infoR}, ${infoG}, ${infoB}, 0.7)`;
+            modalInfo.style.color = textColor;
+            modalTitle.style.color = textColor;
+            
+            console.log(`Dominant color: rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`);
+          } catch (error) {
+            console.error('Error extracting color:', error);
+          }
+        };
         
         // モーダルを表示
         modal.style.display = 'flex';
@@ -1529,6 +1581,11 @@
         
         // ギャラリーを再生成
         generateGallery();
+      }
+      
+      // RGBを16進数に変換する関数
+      function rgbToHex(r, g, b) {
+        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
       }
       
       // 初期化処理
