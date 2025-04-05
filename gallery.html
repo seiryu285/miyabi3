@@ -26,46 +26,77 @@
     /* Navigation (for gallery page) */
     .nav {
       position: fixed;
-      top: 30px;
-      right: 50px;
-      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4rem;
+      z-index: 3;
       display: flex;
+      justify-content: flex-end;
       align-items: center;
-      gap: 30px;
+      padding: 0 2rem;
+      gap: 2rem;
+      mix-blend-mode: difference;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
     }
-    .nav a {
-      color: white;
+    
+    .nav a, .nav button {
+      color: #fff;
       text-decoration: none;
-      font-size: 18px;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s ease;
-      font-family: 'Rajdhani', sans-serif;
-    }
-    .nav a:hover {
-      color: #FFD700;
-    }
-    /* 言語選択タブの背景・境界線 */
-    .nav .lang-select {
-      background-color: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      background: none;
+      border: none;
+      font-family: inherit;
       cursor: pointer;
+      padding: 0.5rem;
+      opacity: 0.7;
+      transition: all 0.5s ease;
+      position: relative;
+      white-space: nowrap;
     }
-    .nav .connect-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+    
+    .nav a::after, .nav button::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 1px;
+      background: #fff;
+      transition: all 0.5s ease;
+      transform: translateX(-50%);
+    }
+    
+    .nav a:hover::after, .nav button:hover::after {
+      width: 100%;
+    }
+    
+    .nav a:hover, .nav button:hover, .nav .active {
+      opacity: 1;
+    }
+    
+    /* 言語切り替えボタン */
+    .lang-btn {
+      background: none;
+      border: none;
       color: white;
-      padding: 8px 20px;
-      border-radius: 4px;
-      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
       cursor: pointer;
-      transition: all 0.3s ease;
+      opacity: 0.7;
+      transition: all 0.5s ease;
+      position: relative;
+      white-space: nowrap;
+      padding: 0.5rem;
     }
-    .nav .connect-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
+    
+    .lang-btn:hover {
+      opacity: 1;
+    }
+    
+    .lang-btn.active {
+      opacity: 1;
     }
     /* Gallery container */
     .gallery-container {
@@ -419,15 +450,10 @@
 <body>
   <!-- Navigation -->
   <nav class="nav">
-    <select class="lang-select">
-      <option value="ja">JP</option>
-      <option value="en" selected>EN</option>
-    </select>
-    <button class="connect-btn" data-translate="connectWallet">CONNECT</button>
-    <!-- 追加：没入体験へ移動するタブ -->
-    <a href="immersive.html" data-translate="enterWorld">ENTER</a>
-    <a href="gallery.html" class="gallery-link" data-translate="gallery">VIEW GALLERY</a>
-    <a href="about.html" data-translate="about">ABOUT</a>
+    <a href="index.html">HOME</a>
+    <a href="model-gallery.html">ITEMS</a>
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="jp">JP</button>
   </nav>
 
   <!-- Gallery Container -->
@@ -1544,9 +1570,13 @@
       });
       
       // 言語切り替え処理
-      document.querySelector('.lang-select').addEventListener('change', function(e) {
-        currentLang = e.target.value;
-        updateLanguage();
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          currentLang = this.getAttribute('data-lang');
+          updateLanguage();
+        });
       });
       
       function updateLanguage() {

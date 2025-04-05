@@ -33,53 +33,88 @@
       color: var(--main-color);
     }
     
-    .header {
+    /* ナビゲーション */
+    .nav {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
-      padding: 1rem;
-      background-color: rgba(250, 250, 250, 0.95);
-      z-index: 1000;
+      height: 4rem;
+      z-index: 3;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
-      backdrop-filter: blur(8px);
+      padding: 0 2rem;
+      gap: 2rem;
+      mix-blend-mode: difference;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
     }
     
-    .logo {
-      font-size: 2rem;
+    .nav a, .nav button {
+      color: #fff;
       text-decoration: none;
-      color: var(--main-color);
+      font-size: 0.9rem;
       letter-spacing: 0.2em;
+      background: none;
+      border: none;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 0.5rem;
+      opacity: 0.7;
+      transition: all 0.5s ease;
+      position: relative;
+      white-space: nowrap;
+    }
+    
+    .nav a::after, .nav button::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 1px;
+      background: #fff;
+      transition: all 0.5s ease;
+      transform: translateX(-50%);
+    }
+    
+    .nav a:hover::after, .nav button:hover::after {
+      width: 100%;
+    }
+    
+    .nav a:hover, .nav button:hover, .nav .active {
+      opacity: 1;
+    }
+    
+    /* 言語切り替えボタン */
+    .lang-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: all 0.5s ease;
+      position: relative;
+      white-space: nowrap;
+      padding: 0.5rem;
+    }
+    
+    .lang-btn:hover {
+      opacity: 1;
+    }
+    
+    .lang-btn.active {
+      opacity: 1;
+    }
+    
+    .header {
+      display: none;
     }
     
     .nav-links {
-      display: flex;
-      gap: 3rem;
-    }
-    
-    .nav-links a {
-      text-decoration: none;
-      color: var(--main-color);
-      font-size: 1rem;
-      letter-spacing: 0.1em;
-      position: relative;
-      padding: 0.5rem 0;
-    }
-    
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 1px;
-      bottom: 0;
-      left: 0;
-      background-color: var(--accent-color);
-      transition: width 0.3s ease;
-    }
-    
-    .nav-links a:hover::after {
-      width: 100%;
+      display: none;
     }
     
     .model-gallery {
@@ -100,15 +135,10 @@
       transition: all 0.3s ease;
       cursor: pointer;
       position: relative;
-      /* 豪華なフレーム（グラデーションボーダー） */
-      border: 3px solid;
-      border-image: linear-gradient(45deg, #B70033, #2D2D2D, #B70033) 1;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     
     .model-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
     }
     
     .model-viewer-container {
@@ -124,23 +154,6 @@
       height: 100%;
       --poster-color: transparent;
       will-change: transform;
-    }
-    
-    .model-info {
-      padding: 1rem;
-      transition: all 0.3s ease;
-    }
-    
-    .model-title {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: var(--main-color);
-    }
-    
-    .model-description {
-      font-size: 0.9rem;
-      color: #666;
-      display: none;
     }
     
     .loading-container {
@@ -213,25 +226,16 @@
       padding: 0.5rem;
       line-height: 1;
     }
-    
-    .modal-title {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      font-size: 1.5rem;
-      color: var(--main-color);
-    }
   </style>
 </head>
 <body>
-  <header class="header">
-    <a href="index.html" class="logo">雅</a>
-    <nav class="nav-links">
-      <a href="about.html">ABOUT</a>
-      <a href="gallery.html">GALLERY</a>
-      <a href="model-gallery.html">ITEMS</a>
-    </nav>
-  </header>
+  <nav class="nav">
+    <a href="index.html">HOME</a>
+    <a href="model-gallery.html" class="active">ITEMS</a>
+    <a href="gallery.html">GALLERY</a>
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="jp">JP</button>
+  </nav>
 
   <div class="model-gallery" id="modelGallery">
     <!-- 3Dモデルカードはスクリプトで動的に生成されます -->
@@ -243,7 +247,6 @@
 
   <div id="modal" class="modal">
     <div class="modal-content">
-      <h2 id="modalTitle" class="modal-title"></h2>
       <button class="close-button">&times;</button>
       <model-viewer id="modalViewer"
           camera-controls
@@ -314,10 +317,6 @@
               loading="lazy">
           </model-viewer>
         </div>
-        <div class="model-info">
-          <h3 class="model-title">${model.title}</h3>
-          <p class="model-description">${model.description}</p>
-        </div>
       `;
       gallery.appendChild(card);
       card.addEventListener('click', () => openModal(model));
@@ -357,13 +356,11 @@
 
     const modal = document.getElementById('modal');
     const modalViewer = document.getElementById('modalViewer');
-    const modalTitle = document.getElementById('modalTitle');
     const closeButton = document.querySelector('.close-button');
 
     function openModal(model) {
       modal.style.display = 'flex';
       modalViewer.src = model.src;
-      modalTitle.textContent = model.title;
       modalViewer.setAttribute('auto-rotate', '');
       modalViewer.setAttribute('camera-controls', '');
       modalViewer.setAttribute('rotation-per-second', '30deg');

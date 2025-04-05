@@ -218,19 +218,15 @@
   <button class="mobile-menu-btn">☰</button>
   
   <nav class="nav">
-    <a href="about.html">ABOUT</a>
+    <a href="model-gallery.html">ITEMS</a>
     <a href="gallery.html">GALLERY</a>
     <button class="lang-btn active" data-lang="en">EN</button>
-    <button class="lang-btn" data-lang="ja">JP</button>
+    <button class="lang-btn" data-lang="jp">JP</button>
   </nav>
 
   <div class="content">
     <h1 class="title">MIYABI</h1>
-    <p class="description" 
-       data-en="MIYABI: Where the bold energy of street aesthetics fuses with the refined grace of tradition, forging the balanced spirit that redefines modern 'wa'."
-       data-ja="MIYABI：ストリートのエネルギーと和の伝統美が融合し、相反する二つのエッセンスの中庸が新たな『和』の本質を創り出す.">
-      MIYABI: Where the bold energy of street aesthetics fuses with the refined grace of tradition, forging the balanced spirit that redefines modern 'wa'.
-    </p>
+    <p class="description" data-lang="en" data-en="MIYABIは有限性の美を追求する" data-jp="MIYABIは有限性の美を追求する">MIYABIは有限性の美を追求する</p>
   </div>
 
   <script>
@@ -285,7 +281,7 @@
         btn.classList.add('active');
         
         const lang = btn.dataset.lang;
-        const text = description.dataset[lang];
+        const text = description.getAttribute(`data-${lang}`);
         description.innerHTML = text;
       });
     });
