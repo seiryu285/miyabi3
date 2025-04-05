@@ -7,9 +7,12 @@
   <!-- 外部リソースへの接続を高速化 -->
   <link rel="preconnect" href="https://unpkg.com">
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <link rel="preload" as="fetch" href="assets/models1.glb" crossorigin="anonymous">
-  <link rel="preload" as="fetch" href="assets/models2.glb" crossorigin="anonymous">
-  <link rel="preload" as="fetch" href="assets/models3.glb" crossorigin="anonymous">
+  <link rel="preload" as="fetch" href="assets/models8.glb" crossorigin="anonymous">
+  <link rel="preload" as="fetch" href="assets/models10.glb" crossorigin="anonymous">
+  <link rel="preload" as="fetch" href="assets/models11.glb" crossorigin="anonymous">
+  <link rel="preload" as="fetch" href="assets/models12.glb" crossorigin="anonymous">
+  <link rel="preload" as="fetch" href="assets/models13.glb" crossorigin="anonymous">
+  <link rel="preload" as="fetch" href="assets/models14.glb" crossorigin="anonymous">
   <meta name="description" content="日本の伝統美をモダンに表現した3Dアートギャラリー">
   <style>
     :root {
@@ -254,20 +257,12 @@
   <script>
     const CACHE_NAME = 'miyabi-3d-models-v1';
     const modelData = [
-      { src: 'assets/models1.glb', title: '壱', description: '伝統と現代が融合した3Dアート作品' },
-      { src: 'assets/models2.glb', title: '弐', description: '日本の美意識を表現した立体作品' },
-      { src: 'assets/models3.glb', title: '参', description: '和のエッセンスを取り入れた現代アート' },
-      { src: 'assets/models4.glb', title: '四', description: '現代的な解釈による伝統美の表現' },
-      { src: 'assets/models5.glb', title: '五', description: '日本の四季を表現した立体アート' },
-      { src: 'assets/models6.glb', title: '六', description: '禅の思想を取り入れた3D作品' },
-      { src: 'assets/models7.glb', title: '七', description: '和の色彩が織りなす立体表現' },
-      { src: 'assets/models8.glb', title: '八', description: '伝統工芸からインスピレーションを得た作品' },
-      { src: 'assets/models9.glb', title: '九', description: '日本建築の美学を3Dで表現' },
-      { src: 'assets/models10.glb', title: '十', description: '和のミニマリズムを追求した作品' },
-      { src: 'assets/models11.glb', title: '十一', description: '現代アートと日本美術の融合' },
-      { src: 'assets/models12.glb', title: '十二', description: 'デジタルと伝統の調和' },
-      { src: 'assets/models13.glb', title: '十三', description: '侘び寂びの現代的解釈' },
-      { src: 'assets/models14.glb', title: '十四', description: '日本の精神性を表現した3Dアート' }
+      { src: 'assets/models8.glb', title: '日本の建築様式からインスピレーションを得た作品', description: '日本の建築様式からインスピレーションを得た作品' },
+      { src: 'assets/models10.glb', title: '日本の色彩感覚を表現した立体アート', description: '日本の色彩感覚を表現した立体アート' },
+      { src: 'assets/models11.glb', title: '自然と調和する日本の美意識', description: '自然と調和する日本の美意識' },
+      { src: 'assets/models12.glb', title: 'デジタルと伝統の調和', description: 'デジタルと伝統の調和' },
+      { src: 'assets/models13.glb', title: '侘び寂びの現代的解釈', description: '侘び寂びの現代的解釈' },
+      { src: 'assets/models14.glb', title: '日本の精神性を表現した3Dアート', description: '日本の精神性を表現した3Dアート' }
     ];
 
     // Service Worker 登録（キャッシュ用）
@@ -309,14 +304,13 @@
       card.innerHTML = `
         <div class="model-viewer-container">
           <model-viewer
-              data-src="${model.src}"
+              src="${model.src}"
               camera-controls
               auto-rotate
               shadow-intensity="1"
               exposure="1"
               alt="${model.title}"
-              loading="lazy"
-              reveal="interaction">
+              loading="lazy">
           </model-viewer>
         </div>
         <div class="model-info">
@@ -349,17 +343,14 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const viewer = entry.target;
-            if (!viewer.getAttribute('src')) {
-              viewer.setAttribute('src', viewer.dataset.src);
-              viewer.addEventListener('load', () => {
-                loadedModels++;
-                updateLoadingProgress();
-              });
-            }
+            viewer.addEventListener('load', () => {
+              loadedModels++;
+              updateLoadingProgress();
+            });
             observer.unobserve(viewer);
           }
         });
-      }, { rootMargin: '0px 0px 200px 0px' });
+      }, { rootMargin: '0px 0px 0px 0px' });
       modelViewers.forEach(viewer => observer.observe(viewer));
     });
 
