@@ -140,6 +140,7 @@
     .model-description {
       font-size: 0.9rem;
       color: #666;
+      display: none;
     }
     
     .loading-container {
@@ -257,12 +258,12 @@
   <script>
     const CACHE_NAME = 'miyabi-3d-models-v1';
     const modelData = [
-      { src: 'assets/models8.glb', title: '日本の建築様式からインスピレーションを得た作品', description: '日本の建築様式からインスピレーションを得た作品' },
-      { src: 'assets/models10.glb', title: '日本の色彩感覚を表現した立体アート', description: '日本の色彩感覚を表現した立体アート' },
-      { src: 'assets/models11.glb', title: '自然と調和する日本の美意識', description: '自然と調和する日本の美意識' },
-      { src: 'assets/models12.glb', title: 'デジタルと伝統の調和', description: 'デジタルと伝統の調和' },
-      { src: 'assets/models13.glb', title: '侘び寂びの現代的解釈', description: '侘び寂びの現代的解釈' },
-      { src: 'assets/models14.glb', title: '日本の精神性を表現した3Dアート', description: '日本の精神性を表現した3Dアート' }
+      { src: 'assets/models8.glb', title: '日本の建築様式からインスピレーションを得た作品', description: '' },
+      { src: 'assets/models10.glb', title: '日本の色彩感覚を表現した立体アート', description: '' },
+      { src: 'assets/models11.glb', title: '自然と調和する日本の美意識', description: '' },
+      { src: 'assets/models12.glb', title: 'デジタルと伝統の調和', description: '' },
+      { src: 'assets/models13.glb', title: '侘び寂びの現代的解釈', description: '' },
+      { src: 'assets/models14.glb', title: '日本の精神性を表現した3Dアート', description: '' }
     ];
 
     // Service Worker 登録（キャッシュ用）
