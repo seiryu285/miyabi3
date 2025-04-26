@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="assets/brand-logo.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>雅 -MIYABI- | 3Dモデルギャラリー</title>
   <!-- 外部リソースへの接続を高速化 -->
@@ -109,12 +110,65 @@
       opacity: 1;
     }
     
-    .header {
-      display: none;
+    /* MetaMask連携ボタン */
+    .connect-wallet-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 2rem;
+      padding: 0.5rem 1rem;
+      color: #fff;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
     
-    .nav-links {
-      display: none;
+    .connect-wallet-btn:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .wallet-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 2rem;
+      padding: 0.5rem 1rem;
+      color: #fff;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .wallet-info:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .wallet-address {
+      max-width: 8rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    /* 購入ボタン */
+    .buy-btn {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      background-color: rgba(183, 0, 51, 0.8);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      z-index: 2;
+      display: none; /* 非表示に変更 */
     }
     
     .model-gallery {
@@ -226,15 +280,157 @@
       padding: 0.5rem;
       line-height: 1;
     }
+    
+    /* 購入モーダル */
+    .purchase-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+    
+    .purchase-modal-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+    }
+    
+    .purchase-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #333;
+    }
+    
+    .purchase-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--main-color);
+    }
+    
+    .purchase-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-height: 60vh;
+      overflow-y: auto;
+      margin-bottom: 1.5rem;
+    }
+    
+    .purchase-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .purchase-item:hover {
+      border-color: var(--accent-color);
+      background-color: rgba(183, 0, 51, 0.05);
+    }
+    
+    .purchase-item-info h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--main-color);
+    }
+    
+    .purchase-item-info p {
+      font-size: 0.9rem;
+      color: var(--accent-color);
+    }
+    
+    .purchase-item-btn {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .purchase-item-btn:hover {
+      background-color: #940029;
+    }
+    
+    .purchase-status {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 5px;
+      display: none;
+    }
+    
+    .purchase-status.success {
+      background-color: rgba(0, 183, 74, 0.1);
+      color: #00b74a;
+      display: block;
+    }
+    
+    .purchase-status.error {
+      background-color: rgba(183, 0, 51, 0.1);
+      color: var(--accent-color);
+      display: block;
+    }
+    
+    .purchase-status.loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-top-color: var(--accent-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- ブランドロゴ（左上固定配置） -->
+  <a href="/" class="brand-logo">
+    <img src="assets/ChatGPT Image 2025年4月20日 18_46_40.png" alt="MIYABI ロゴ" />
+  </a>
   <nav class="nav">
     <a href="index.html">HOME</a>
     <a href="model-gallery.html" class="active">ITEMS</a>
     <a href="gallery.html">GALLERY</a>
     <button class="lang-btn active" data-lang="en">EN</button>
     <button class="lang-btn" data-lang="jp">JP</button>
+    <button id="connectWalletBtn" class="connect-wallet-btn">
+      <span>Connect Wallet</span>
+    </button>
+    <div id="walletInfo" class="wallet-info" style="display: none;">
+      <span class="wallet-address" id="walletAddress">0x0000...0000</span>
+      <button id="showItemsBtn">Items</button>
+    </div>
   </nav>
 
   <div class="model-gallery" id="modelGallery">
@@ -258,15 +454,27 @@
     </div>
   </div>
 
+  <!-- 購入モーダル -->
+  <div id="purchaseModal" class="purchase-modal">
+    <div class="purchase-modal-content">
+      <button class="purchase-close">&times;</button>
+      <h2 class="purchase-title">購入可能なアイテム</h2>
+      <div id="purchaseItemsList" class="purchase-items-list">
+        <!-- アイテムリストはJSで動的に生成 -->
+      </div>
+      <div id="purchaseStatus" class="purchase-status"></div>
+    </div>
+  </div>
+
   <script>
     const CACHE_NAME = 'miyabi-3d-models-v1';
     const modelData = [
-      { src: 'assets/models8.glb', title: '日本の建築様式からインスピレーションを得た作品', description: '' },
-      { src: 'assets/models10.glb', title: '日本の色彩感覚を表現した立体アート', description: '' },
-      { src: 'assets/models11.glb', title: '自然と調和する日本の美意識', description: '' },
-      { src: 'assets/models12.glb', title: 'デジタルと伝統の調和', description: '' },
-      { src: 'assets/models13.glb', title: '侘び寂びの現代的解釈', description: '' },
-      { src: 'assets/models14.glb', title: '日本の精神性を表現した3Dアート', description: '' }
+      { src: 'assets/models8.glb', title: '日本の建築様式からインスピレーションを得た作品', description: '', price: 0.05 },
+      { src: 'assets/models10.glb', title: '日本の色彩感覚を表現した立体アート', description: '', price: 0.06 },
+      { src: 'assets/models11.glb', title: '自然と調和する日本の美意識', description: '', price: 0.07 },
+      { src: 'assets/models12.glb', title: 'デジタルと伝統の調和', description: '', price: 0.08 },
+      { src: 'assets/models13.glb', title: '侘び寂びの現代的解釈', description: '', price: 0.09 },
+      { src: 'assets/models14.glb', title: '日本の精神性を表現した3Dアート', description: '', price: 0.1 }
     ];
 
     // Service Worker 登録（キャッシュ用）
@@ -314,8 +522,11 @@
               shadow-intensity="1"
               exposure="1"
               alt="${model.title}"
-              loading="lazy">
-          </model-viewer>
+              loading="lazy"></model-viewer>
+        </div>
+        <div class="sol-price-wrapper" style="display:flex;align-items:center;gap:0.3em;margin:0.5em 1em 1em 1em;">
+          <img src="assets/solana-logo.png" alt="Solana Logo" class="sol-logo" style="width:32px;height:32px;">
+          <span class="sol-price" style="font-weight:bold;">0.2 SOL</span>
         </div>
       `;
       gallery.appendChild(card);
@@ -397,7 +608,177 @@
       }
     }, 5000);
 
+    // Web3関連の変数
+    let web3;
+    let selectedModel;
+    let connectedAccount = null;
+    const connectWalletBtn = document.getElementById('connectWalletBtn');
+    const walletInfo = document.getElementById('walletInfo');
+    const walletAddress = document.getElementById('walletAddress');
+    const showItemsBtn = document.getElementById('showItemsBtn');
+    const purchaseModal = document.getElementById('purchaseModal');
+    const purchaseItemsList = document.getElementById('purchaseItemsList');
+    const purchaseCloseBtn = document.querySelector('.purchase-close');
+    const purchaseStatus = document.getElementById('purchaseStatus');
+    
+    // MetaMaskウォレット接続
+    connectWalletBtn.addEventListener('click', async function() {
+      try {
+        // MetaMaskが利用可能か確認
+        if (typeof window.ethereum === 'undefined') {
+          alert('MetaMaskがインストールされていません。インストールしてください。');
+          window.open('https://metamask.io/download.html', '_blank');
+          return;
+        }
+        
+        // Web3インスタンスを初期化
+        web3 = new Web3(window.ethereum);
+        
+        // アカウントへのアクセスをリクエスト
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        connectedAccount = accounts[0];
+        
+        // ウォレット情報を表示
+        walletAddress.textContent = `${connectedAccount.substring(0, 6)}...${connectedAccount.substring(connectedAccount.length - 4)}`;
+        connectWalletBtn.style.display = 'none';
+        walletInfo.style.display = 'flex';
+        
+        // アカウント変更イベントのリスナー
+        window.ethereum.on('accountsChanged', function (accounts) {
+          if (accounts.length === 0) {
+            // MetaMaskからログアウトした場合
+            connectedAccount = null;
+            connectWalletBtn.style.display = 'flex';
+            walletInfo.style.display = 'none';
+          } else {
+            // アカウントを切り替えた場合
+            connectedAccount = accounts[0];
+            walletAddress.textContent = `${connectedAccount.substring(0, 6)}...${connectedAccount.substring(connectedAccount.length - 4)}`;
+          }
+        });
+        
+      } catch (error) {
+        console.error('ウォレット接続エラー:', error);
+        alert('ウォレット接続に失敗しました: ' + error.message);
+      }
+    });
+    
+    // アイテム一覧を表示
+    showItemsBtn.addEventListener('click', function() {
+      if (!connectedAccount) {
+        alert('ウォレットを接続してください');
+        return;
+      }
+      
+      // アイテムリストを生成
+      purchaseItemsList.innerHTML = '';
+      modelData.forEach(model => {
+        const item = document.createElement('div');
+        item.className = 'purchase-item';
+        item.innerHTML = `
+          <div class="purchase-item-info">
+            <h3>${model.title}</h3>
+            <div class="sol-price-wrapper" style="display:flex;align-items:center;gap:0.3em;">
+              <img src="assets/solana-logo.png" alt="Solana Logo" class="sol-logo" style="width:28px;height:28px;">
+              <span class="sol-price" style="font-weight:bold;">0.2 SOL</span>
+            </div>
+          </div>
+          <button class="purchase-item-btn" data-src="${model.src}" data-price="${model.price}">購入</button>
+        `;
+        purchaseItemsList.appendChild(item);
+      });
+      
+      // モーダルを表示
+      purchaseModal.style.display = 'flex';
+      purchaseStatus.className = 'purchase-status';
+      purchaseStatus.textContent = '';
+    });
+    
+    // 購入モーダルを閉じる
+    purchaseCloseBtn.addEventListener('click', function() {
+      purchaseModal.style.display = 'none';
+      purchaseStatus.className = 'purchase-status';
+      purchaseStatus.textContent = '';
+    });
+    
+    // アイテム購入処理
+    purchaseItemsList.addEventListener('click', async function(e) {
+      if (e.target.classList.contains('purchase-item-btn')) {
+        const modelSrc = e.target.getAttribute('data-src');
+        const modelPrice = e.target.getAttribute('data-price');
+        selectedModel = modelData.find(model => model.src === modelSrc);
+        
+        if (!selectedModel) {
+          alert('モデルが見つかりません');
+          return;
+        }
+        
+        if (!connectedAccount) {
+          alert('ウォレットを接続してください');
+          return;
+        }
+        
+        try {
+          purchaseStatus.className = 'purchase-status loading';
+          purchaseStatus.innerHTML = '<div class="spinner"></div> 処理中...';
+          
+          // Web3が初期化されていない場合は初期化
+          if (!web3) {
+            web3 = new Web3(window.ethereum);
+          }
+          
+          // 送金処理
+          const priceInWei = web3.utils.toWei(modelPrice, 'ether');
+          const receiverAddress = '0xYourEthereumWalletAddressHere'; // 受け取り用のウォレットアドレスを設定
+          
+          const transactionParameters = {
+            from: connectedAccount,
+            to: receiverAddress,
+            value: web3.utils.toHex(priceInWei)
+          };
+          
+          // トランザクションを送信
+          const txHash = await window.ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [transactionParameters],
+          });
+          
+          purchaseStatus.className = 'purchase-status success';
+          purchaseStatus.textContent = '購入が完了しました！トランザクションハッシュ: ' + txHash;
+          
+        } catch (error) {
+          console.error('購入エラー:', error);
+          purchaseStatus.className = 'purchase-status error';
+          purchaseStatus.textContent = 'エラーが発生しました: ' + error.message;
+        }
+      }
+    });
+    
+    // 初期化時にMetaMaskが接続済みかチェック
+    async function checkWalletConnection() {
+      if (typeof window.ethereum !== 'undefined') {
+        try {
+          web3 = new Web3(window.ethereum);
+          const accounts = await web3.eth.getAccounts();
+          if (accounts.length > 0) {
+            connectedAccount = accounts[0];
+            walletAddress.textContent = `${connectedAccount.substring(0, 6)}...${connectedAccount.substring(connectedAccount.length - 4)}`;
+            connectWalletBtn.style.display = 'none';
+            walletInfo.style.display = 'flex';
+          }
+        } catch (error) {
+          console.error('ウォレット接続チェックエラー:', error);
+        }
+      }
+    }
+    
+    // ページ読み込み時にウォレット接続状態をチェック
+    document.addEventListener('DOMContentLoaded', checkWalletConnection);
+    
     preloadModels();
   </script>
+  
+  <!-- Web3.js -->
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
 </body>
 </html>

@@ -1,4 +1,26 @@
 /* Base Styles */
+
+/* SOLロゴ＋価格ラッパー */
+.sol-price-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-top: 0.5em;
+}
+.sol-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    border-radius: 4px;
+    background: #000;
+}
+.sol-price {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    color: #14f195;
+    font-size: 1.1em;
+    letter-spacing: 0.03em;
+}
 :root {
     --primary-color: #111;
     --background-color: #fff;

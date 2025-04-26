@@ -754,4 +754,55 @@
     initAll();
   </script>
 </body>
+  <div class="item">
+    <h2>サンプルアイテム</h2>
+    <img src="https://placehold.jp/150x150.png" alt="アイテム画像" style="border-radius:8px; margin-bottom:16px;">
+    <p>価格: <span id="item-price">0.5 SOL</span></p>
+    <button id="buy-btn">SOLで購入</button>
+    <div id="result-message"></div>
+  </div>
+
+  <script>
+    // ここに受取用のSolanaアドレスを記入してください（例: "3x7...abc"）
+    const recipient = "YOUR_SOL_RECEIVE_ADDRESS_HERE";
+    const priceSol = 0.5;
+    const buyBtn = document.getElementById('buy-btn');
+    const resultMsg = document.getElementById('result-message');
+
+    buyBtn.onclick = async function() {
+      resultMsg.textContent = '';
+      resultMsg.className = '';
+      // Phantomウォレットがあるかチェック
+      if (!window.solana || !window.solana.isPhantom) {
+        resultMsg.textContent = 'Phantomウォレットをインストールしてください。';
+        resultMsg.className = 'error';
+        return;
+      }
+      buyBtn.disabled = true;
+      try {
+        // ウォレット接続
+        await window.solana.connect();
+        // Solana mainnetへ接続
+        const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'));
+        // トランザクション作成
+        const transaction = new solanaWeb3.Transaction().add(
+          solanaWeb3.SystemProgram.transfer({
+            fromPubkey: window.solana.publicKey,
+            toPubkey: new solanaWeb3.PublicKey(recipient),
+            lamports: priceSol * solanaWeb3.LAMPORTS_PER_SOL,
+          })
+        );
+        // 署名＆送信
+        const { signature } = await window.solana.signAndSendTransaction(transaction);
+        await connection.confirmTransaction(signature);
+        resultMsg.textContent = '購入が完了しました！TX: ' + signature;
+        resultMsg.className = 'success';
+      } catch (e) {
+        resultMsg.textContent = '決済に失敗しました: ' + (e.message || e);
+        resultMsg.className = 'error';
+      }
+      buyBtn.disabled = false;
+    };
+  </script>
+</body>
 </html>

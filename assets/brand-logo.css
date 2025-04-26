@@ -1,0 +1,36 @@
+/* ブランドロゴ（左上固定配置） */
+.brand-logo {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  background: #FAFAFA !important;
+  padding: 0;
+  text-decoration: none;
+  box-shadow: none;
+}
+.brand-logo img {
+  height: 64px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  opacity: 1;
+  box-shadow: none;
+  background: #FAFAFA !important;
+  transition: none;
+}
+.brand-logo:hover img {
+  opacity: 1;
+}
+@media (max-width: 600px) {
+  .brand-logo {
+    top: 8px;
+    left: 8px;
+  }
+  .brand-logo img {
+    height: 40px;
+    max-width: 110px;
+  }
+}

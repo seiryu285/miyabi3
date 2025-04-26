@@ -7,14 +7,16 @@ const modelData = [
         name: "MIYABI Item #001",
         description: "伝統的な日本の装飾品",
         modelPath: "assets/models/item1.glb",
-        thumbnail: "assets/nft1.jpg"
+        thumbnail: "assets/nft1.jpg",
+        price: 0.21.2
     },
     {
         id: 2,
         name: "MIYABI Item #002",
         description: "現代的な解釈の和装アイテム",
         modelPath: "assets/models/item2.glb",
-        thumbnail: "assets/nft2.jpg"
+        thumbnail: "assets/nft2.jpg",
+        price: 0.20.85
     },
     // 3-30までのモデルデータを追加
     {
@@ -22,7 +24,8 @@ const modelData = [
         name: "MIYABI Item #003",
         description: "伝統工芸の技が光る装飾品",
         modelPath: "assets/models/item3.glb",
-        thumbnail: "assets/nft3.jpg"
+        thumbnail: "assets/nft3.jpg",
+        price: 0.22.5
     }
     // ... 続く
 ];
@@ -59,7 +62,25 @@ function createModelItem(model) {
     title.textContent = model.name;
     
     item.appendChild(img);
+    
+    // SOLロゴ＋価格表示用ラッパー
+    const solPriceWrapper = document.createElement('div');
+    solPriceWrapper.className = 'sol-price-wrapper';
+    
+    const solLogo = document.createElement('img');
+    solLogo.src = 'img/solana-logo.png'; // ロゴ画像パス
+    solLogo.alt = 'Solana Logo';
+    solLogo.className = 'sol-logo';
+    
+    const price = document.createElement('span');
+    price.className = 'sol-price';
+    price.textContent = model.price ? `${model.price} SOL` : '- SOL';
+    
+    solPriceWrapper.appendChild(solLogo);
+    solPriceWrapper.appendChild(price);
+    
     item.appendChild(title);
+    item.appendChild(solPriceWrapper);
     
     item.addEventListener('click', () => openModelViewer(model));
     
