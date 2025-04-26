@@ -16,6 +16,77 @@
   <link rel="preload" as="fetch" href="assets/models14.glb" crossorigin="anonymous">
   <meta name="description" content="日本の伝統美をモダンに表現した3Dアートギャラリー">
   <style>
+    /* --- Responsive Navbar & Layout --- */
+    @media (max-width: 900px) {
+      .nav {
+        flex-wrap: wrap;
+        padding: 0 1rem;
+        font-size: 1rem;
+      }
+      .nav a, .nav button {
+        font-size: 1.1rem;
+        padding: 0.7rem 0.7rem;
+      }
+      .model-gallery {
+        grid-template-columns: 1fr 1fr;
+        padding: 1rem;
+      }
+      .model-card {
+        margin: 0.5rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+        height: auto;
+        position: static;
+        background: #222;
+      }
+      .nav a, .nav button {
+        font-size: 1.2rem;
+        padding: 1rem 0.5rem;
+        width: 100%;
+        text-align: left;
+      }
+      .brand-logo img {
+        width: 90px;
+        height: auto;
+      }
+      .model-gallery {
+        grid-template-columns: 1fr;
+        padding: 0.5rem;
+      }
+      .model-card {
+        margin: 0.2rem 0;
+      }
+    }
+    /* ハンバーガーメニュー用の表示切替（必要なら追加JS） */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-left: auto;
+    }
+    .hamburger span {
+      display: block;
+      width: 30px;
+      height: 4px;
+      margin: 5px 0;
+      background: #fff;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    @media (max-width: 600px) {
+      .hamburger { display: flex; }
+      .nav { display: none; }
+      .nav.active { display: flex; }
+    }
     :root {
       --main-color: #2D2D2D;
       --accent-color: #B70033;
@@ -418,7 +489,10 @@
   <a href="/" class="brand-logo">
     <img src="assets/ChatGPT Image 2025年4月20日 18_46_40.png" alt="MIYABI ロゴ" />
   </a>
-  <nav class="nav">
+  <div class="hamburger" id="hamburgerMenu">
+    <span></span><span></span><span></span>
+  </div>
+  <nav class="nav" id="mainNav">
     <a href="index.html">HOME</a>
     <a href="model-gallery.html" class="active">ITEMS</a>
     <a href="gallery.html">GALLERY</a>
@@ -776,6 +850,12 @@
     document.addEventListener('DOMContentLoaded', checkWalletConnection);
     
     preloadModels();
+    // ハンバーガーメニュー制御
+    const hamburger = document.getElementById('hamburgerMenu');
+    const nav = document.getElementById('mainNav');
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
   </script>
   
   <!-- Web3.js -->

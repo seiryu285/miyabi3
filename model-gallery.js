@@ -8,7 +8,7 @@ const modelData = [
         description: "伝統的な日本の装飾品",
         modelPath: "assets/models/item1.glb",
         thumbnail: "assets/nft1.jpg",
-        price: 0.21.2
+        price: 0.2
     },
     {
         id: 2,
@@ -16,7 +16,7 @@ const modelData = [
         description: "現代的な解釈の和装アイテム",
         modelPath: "assets/models/item2.glb",
         thumbnail: "assets/nft2.jpg",
-        price: 0.20.85
+        price: 0.2
     },
     // 3-30までのモデルデータを追加
     {
@@ -25,7 +25,7 @@ const modelData = [
         description: "伝統工芸の技が光る装飾品",
         modelPath: "assets/models/item3.glb",
         thumbnail: "assets/nft3.jpg",
-        price: 0.22.5
+        price: 0.2
     }
     // ... 続く
 ];
